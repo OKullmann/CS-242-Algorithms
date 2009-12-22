@@ -23,7 +23,7 @@ namespace IntroAlgo {
     enum ExperimentErrors { parameter_error = 1 };
 
     /*!
-      \brief Converting string into type T
+      \brief Converting string x into type T
     */
     template <typename T>
     T lexical_cast(const std::string& x) {

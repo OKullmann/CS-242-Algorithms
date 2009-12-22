@@ -3,6 +3,9 @@
 /*!
   \file 200910/Week01/Experiment.cpp
   \brief Experiments with sorting algorithms
+
+  "Experiment N" calls the sorting algorithm N times; the statistics
+  are output to standard output.
 */
 
 #include <string>
@@ -34,7 +37,7 @@ int main(const int argc, const char* const argv[]) {
   for (int i = 0; i <= N; ++i) {
     std::vector<int> A = IntroAlgo::Week01::sorted(i);
     IntroAlgo::Week01::insertion_sort(A);
-    std::cout << cw(A) << "\n";
+    // std::cout << cw(A) << "\n";
   }
 
 }
