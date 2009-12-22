@@ -44,19 +44,22 @@ namespace IntroAlgo {
     class OutputMeasurement {
 
     public :
-      const std::string header_line;
       std::string sep;
       bool eol;
       bool flush;
 
-      OutputMeasurement(const std::string& header_line_ = " size value\n") :
-        header_line(header_line_), sep(" "), eol(false), flush(false) {
+      OutputMeasurement() :
+        sep(" "), eol(false), flush(false) {
         initialise();
       }
 
-      void set_output(std::ostream* new_out, const OutputHandling h = without_delete) {
+      static void set_output(std::ostream* new_out, const OutputHandling h = without_delete) {
         if (h == with_delete) delete out;
         out = new_out;
+      }
+
+      static void header_line(const std::string& header) {
+        *out << header;
       }
 
     template <typename Input>
@@ -79,7 +82,6 @@ namespace IntroAlgo {
 
       void initialise() {
         check_streams();
-        *out << header_line;
       }
       static void check_streams() {
         if (not out) throw std::runtime_error(error_output);
