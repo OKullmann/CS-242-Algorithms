@@ -42,13 +42,6 @@ namespace IntroAlgo {
       om << A.size() << counter_assignments << counter_comparisons;
     }
 
-    std::vector<int> sorted(const unsigned int n) {
-      std::vector<int> A(n);
-      for (std::vector<int>::size_type i = 1; i < n; ++i)
-        A[i] = i;
-      return A;
-    }
-
   }
 }
 
