@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include <200910/Framework/Measurement.hpp>
+#include <200910/Framework/Utilities.hpp>
 
 #include <200910/Week01/Sorting.hpp>
 #include <200910/Week01/Generators.hpp>

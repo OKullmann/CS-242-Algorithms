@@ -9,9 +9,7 @@
 #define MEASUREMENT_NNvTr4k
 
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <sstream>
 #include <stdexcept>
 
 namespace IntroAlgo {
@@ -22,19 +20,6 @@ namespace IntroAlgo {
     const std::string output_filename_ = "IntroAlgo_Measurements";
 
     enum OutputHandling { with_delete, without_delete };
-
-    enum ExperimentErrors { parameter_error = 1 };
-
-    template <typename T>
-    T lexical_cast(const std::string x) {
-      std::stringstream s;
-      s << x;
-      T result;
-      s >> result;
-      if (not s)
-        throw std::runtime_error("IntroAlgo::Framework::lexical_cast : Conversion error.");
-      return result;
-    }
 
     /*!
       \class OutputMeasurement
