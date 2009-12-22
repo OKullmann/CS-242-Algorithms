@@ -13,12 +13,20 @@
 namespace IntroAlgo {
   namespace Week01 {
 
-    std::vector<int> sorted(const unsigned int n) {
-      std::vector<int> A(n);
-      for (std::vector<int>::size_type i = 1; i < n; ++i)
-        A[i] = i;
-      return A;
-    }
+    /*!
+      \class ArrayGenerators
+      \brief Wrapper for various array generators
+    */
+    struct ArrayGenerators {
+      typedef unsigned int value_type;
+      typedef std::vector<value_type> vector_type;
+      static vector_type sorted(const value_type n) {
+        vector_type A(n);
+        for (value_type i = 1; i < n; ++i)
+          A[i] = i;
+        return A;
+      }
+    };
 
   }
 }

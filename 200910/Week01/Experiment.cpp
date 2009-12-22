@@ -35,7 +35,9 @@ int main(const int argc, const char* const argv[]) {
 
   OutputMeasurement::header_line(" size assignments comparisons\n");
   for (int i = 0; i <= N; ++i) {
-    std::vector<int> A = IntroAlgo::Week01::sorted(i);
+    using IntroAlgo::Week01::ArrayGenerators;
+    typedef ArrayGenerators::vector_type vector_type;
+    vector_type A = ArrayGenerators::sorted(i);
     IntroAlgo::Week01::insertion_sort(A);
     // std::cout << cw(A) << "\n";
   }
