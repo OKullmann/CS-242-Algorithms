@@ -18,7 +18,7 @@ namespace IntroAlgo {
     enum ExperimentErrors { parameter_error = 1 };
 
     template <typename T>
-    T lexical_cast(const std::string x) {
+    T lexical_cast(const std::string& x) {
       std::stringstream s;
       s << x;
       T result;
