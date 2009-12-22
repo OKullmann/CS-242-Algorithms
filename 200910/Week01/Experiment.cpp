@@ -22,18 +22,19 @@ namespace {
 }
 
 int main(const int argc, const char* const argv[]) {
+  using namespace IntroAlgo::Framework;
   if (argc != 2) {
     std::cerr << err << "Exactly one parameter is required, the number N of experiments.\n";
-    return IntroAlgo::Framework::parameter_error;
+    return parameter_error;
   }
 
-  const int N = IntroAlgo::Framework::lexical_cast<int>(argv[1]);
+  const int N = lexical_cast<int>(argv[1]);
 
-  IntroAlgo::Framework::OutputMeasurement::header_line(" size assignments comparisons\n");
+  OutputMeasurement::header_line(" size assignments comparisons\n");
   for (int i = 0; i <= N; ++i) {
     std::vector<int> A = IntroAlgo::Week01::sorted(i);
     IntroAlgo::Week01::insertion_sort(A);
-    std::cout << IntroAlgo::Framework::cw(A) << "\n";
+    std::cout << cw(A) << "\n";
   }
 
 }
