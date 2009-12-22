@@ -22,24 +22,24 @@ namespace IntroAlgo {
 
     template <typename value_type>
     void insertion_sort(std::vector<value_type>& A) {
-      IntroAlgo::Framework::OutputMeasurement om;
+      // IntroAlgo::Framework::OutputMeasurement om;
       typedef typename std::vector<value_type>::size_type size_type;
-      size_type counter_assignments = 0;
-      size_type counter_comparisons = 0;
+      // size_type counter_assignments = 0;
+      // size_type counter_comparisons = 0;
       for (size_type j = 1; j < A.size(); ++j) {
         const value_type key = A[j];
-        ++counter_assignments;
+        // ++counter_assignments;
         size_type i = j;
         for (; i > 0; --i) {
-          ++counter_comparisons;
+          // ++counter_comparisons;
           if (not (A[i-1] > key)) break;
           A[i] = A[i-1];
-          ++counter_assignments;
+          // ++counter_assignments;
         }
         A[i] = key;
-        ++counter_assignments;
+        // ++counter_assignments;
       }
-      om << A.size() << counter_assignments << counter_comparisons;
+      // om << A.size() << counter_assignments << counter_comparisons;
     }
 
   }
