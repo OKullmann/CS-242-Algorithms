@@ -27,4 +27,9 @@ int main(const int argc, const char* const argv[]) {
 
   const int N = IntroAlgo::Framework::lexical_cast<int>(argv[1]);
 
+  for (int i = 0; i < N; ++i) {
+    std::vector<int> A = IntroAlgo::Week01::sorted(i);
+    IntroAlgo::Week01::insertion_sort(A);
+  }
+
 }
