@@ -30,12 +30,10 @@ int main(const int argc, const char* const argv[]) {
   const int N = IntroAlgo::Framework::lexical_cast<int>(argv[1]);
 
   IntroAlgo::Framework::OutputMeasurement::header_line(" size assignments comparisons\n");
-  for (int i = 0; i < N; ++i) {
+  for (int i = 0; i <= N; ++i) {
     std::vector<int> A = IntroAlgo::Week01::sorted(i);
     IntroAlgo::Week01::insertion_sort(A);
-    // for (std::vector<int>::const_iterator j = A.begin(); j != A.end(); ++j)
-    //   std::cout << *j << " ";
-    // std::cout << "\n";
+    std::cout << IntroAlgo::Framework::cw(A) << "\n";
   }
 
 }
