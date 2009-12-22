@@ -26,6 +26,6 @@ cleanall :
 
 # ########################
 
-Experiment : Experiment.cpp Sorting.hpp
+Experiment : Experiment.cpp Sorting.hpp Generators.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
