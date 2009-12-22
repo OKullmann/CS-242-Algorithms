@@ -26,12 +26,14 @@ namespace IntroAlgo {
     enum ExperimentErrors { parameter_error = 1 };
 
     template <typename T>
-    std::string lexical_cast(const T& x) {
+    T lexical_cast(const std::string x) {
       std::stringstream s;
       s << x;
+      T result;
+      s >> result;
       if (not s)
         throw std::runtime_error("IntroAlgo::Framework::lexical_cast : Conversion error.");
-      return s.str();
+      return result;
     }
 
     /*!
