@@ -16,11 +16,6 @@ namespace IntroAlgo {
   namespace Week01 {
 
     template <typename value_type>
-    void selection_sort(std::vector<value_type>& V) {
-      
-    }
-
-    template <typename value_type>
     void insertion_sort(std::vector<value_type>& A) {
       // IntroAlgo::Framework::OutputMeasurement om;
       typedef typename std::vector<value_type>::size_type size_type;
