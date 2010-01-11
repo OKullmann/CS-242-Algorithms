@@ -20,12 +20,21 @@ namespace IntroAlgo {
     struct ArrayGenerators {
       typedef unsigned int value_type;
       typedef std::vector<value_type> vector_type;
+
       static vector_type sorted(const value_type n) {
         vector_type A(n);
         for (value_type i = 1; i < n; ++i)
           A[i] = i;
         return A;
       }
+
+      static vector_type sorted_r(const value_type n) {
+        vector_type A(n);
+        for (value_type i = 1; i < n; ++i)
+          A[i] = n-i;
+        return A;
+      }
+
     };
 
   }
