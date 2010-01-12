@@ -32,8 +32,8 @@ int main(const int argc, const char* const argv[]) {
   }
 
   const int N = lexical_cast<int>(argv[1]);
-
-  OutputMeasurement::header_line("\n  Sorted lists\n size assignments comparisons\n");
+  /*
+  OutputMeasurement::header_line("\n#  Sorted lists\n size assignments comparisons\n");
   for (int i = 0; i <= N; ++i) {
     using IntroAlgo::Week01::ArrayGenerators;
     typedef ArrayGenerators::vector_type vector_type;
@@ -41,8 +41,9 @@ int main(const int argc, const char* const argv[]) {
     IntroAlgo::Week01::insertion_sort(A);
     // std::cout << cw(A) << "\n";
   }
-
-  OutputMeasurement::header_line("\n\n  Sorted_r lists\n size assignments comparisons\n");
+  */
+  /*  
+  OutputMeasurement::header_line("\n\n#  Reversed sorted lists\n size assignments comparisons\n");
   for (int i = 0; i <= N; ++i) {
     using IntroAlgo::Week01::ArrayGenerators;
     typedef ArrayGenerators::vector_type vector_type;
@@ -50,5 +51,15 @@ int main(const int argc, const char* const argv[]) {
     IntroAlgo::Week01::insertion_sort(A);
     // std::cout << cw(A) << "\n";
   }
-
+  */
+  
+  OutputMeasurement::header_line("\n\n#  Random lists\n size assignments comparisons\n");
+  for (int i = 0; i <= N; ++i) {
+    using IntroAlgo::Week01::ArrayGenerators;
+    typedef ArrayGenerators::vector_type vector_type;
+    vector_type A = ArrayGenerators::random(i);
+    IntroAlgo::Week01::insertion_sort(A);
+    // std::cout << cw(A) << "\n";
+  }
+  
 }

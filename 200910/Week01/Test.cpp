@@ -11,8 +11,10 @@
 #include <vector>
 
 #include <200910/Week01/Sorting.hpp>
+#include <200910/Week01/Generators.hpp>
 
 using namespace std;
+using IntroAlgo::Week01::ArrayGenerators;
 
 namespace {
 
@@ -34,7 +36,10 @@ int main(const int argc, const char* const argv[]) {
 
   int Alist[] = {9,6,5,7,2,4,1,3,6,8};
   vector<int> A;
+  /*
   A.assign (Alist, Alist + 10 );
+  */
+  A = ArrayGenerators::random(10);
 
   cout << "\nPermutation Sort\n\nInput:   >";
   druck(A);
