@@ -32,3 +32,6 @@ Experiment : Experiment.cpp Sorting.hpp Generators.hpp
 Test : Test.cpp Sorting.hpp Generators.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
+gen : solutions/Sorting_1.hpp
+	solutions/gensolution Sorting
+
