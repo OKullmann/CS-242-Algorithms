@@ -100,6 +100,7 @@ for (size_type j = 1; j < A.size(); ++j) {
       typedef typename std::vector<value_type>::size_type size_type;
       for (size_type j = 1; j < A.size(); ++j) {
         const value_type key = A[j];
+        // Insert A[j] into sorted sequence A[0..j-1]
         size_type i = j;
         while (i > 0 and A[i-1] > key) {
           A[i] = A[i-1];
