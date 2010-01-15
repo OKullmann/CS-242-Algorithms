@@ -21,7 +21,7 @@ namespace IntroAlgo {
       The idea of this elementary algorithm is as follows:
       <ul>
        <li> Given an array A[0], ..., A[A.size()-1], starting with
-       i=1, the range A[0], ..., A[j-1] is given as sorted,
+       j=1, the range A[0], ..., A[j-1] is given as sorted,
        and after the execution of the main loop body the range 
        A[0], ..., A[j] is also sorted (internally). </li>
        <li> This is achieved by storing value A[j] in variable "key",
@@ -100,7 +100,6 @@ for (size_type j = 1; j < A.size(); ++j) {
       typedef typename std::vector<value_type>::size_type size_type;
       for (size_type j = 1; j < A.size(); ++j) {
         const value_type key = A[j];
-        // Insert A[j] into sorted sequence A[0..j-1]
         size_type i = j;
         while (i > 0 and A[i-1] > key) {
           A[i] = A[i-1];
