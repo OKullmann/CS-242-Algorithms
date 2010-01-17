@@ -29,7 +29,7 @@ cleanall :
 Experiment_down : Experiment_down.cpp Sorting.hpp Generators.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
-Experiment_up : Experiment_down.cpp Sorting.hpp Generators.hpp
+Experiment_up : Experiment_up.cpp Sorting.hpp Generators.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
 Experiment_rand : Experiment_rand.cpp Sorting.hpp Generators.hpp
