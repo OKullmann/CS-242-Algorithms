@@ -21,7 +21,7 @@ namespace IntroAlgo {
       The idea of this elementary algorithm is as follows:
       <ul>
        <li> Given an array A[0], ..., A[A.size()-1], starting with
-       i=1, the range A[0], ..., A[j-1] is given as sorted,
+       j=1, the range A[0], ..., A[j-1] is given as sorted,
        and after the execution of the main loop body the range 
        A[0], ..., A[j] is also sorted (internally). </li>
        <li> This is achieved by storing value A[j] in variable "key",
