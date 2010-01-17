@@ -32,7 +32,7 @@ int main(const int argc, const char* const argv[]) {
   }
 
   const int N = lexical_cast<int>(argv[1]);
-  OutputMeasurement::header_line("\n\n#  Reverse sorted lists\n size comparisons\n");
+  OutputMeasurement::header_line("\n#  Insertion-sort on reverse sorted lists\n size comparisons\n");
   for (int i = 0; i <= N; ++i) {
     using IntroAlgo::Week01::ArrayGenerators;
     typedef ArrayGenerators::vector_type vector_type;
