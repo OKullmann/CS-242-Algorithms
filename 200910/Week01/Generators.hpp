@@ -9,6 +9,7 @@
 #define GENERATORS_973TvF42O
 
 #include <vector>
+#include <stdlib.h>
 #include <time.h>
 
 namespace IntroAlgo {
