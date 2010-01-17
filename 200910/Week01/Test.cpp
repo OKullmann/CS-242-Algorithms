@@ -30,11 +30,11 @@ int main(const int argc, const char* const argv[]) {
   */
   A = ArrayGenerators::random(10);
 
-  cout << "\nInsertion Sort\n\nInput:   >" << cw(A) << "<\n\n";
+  cout << "\nTest Insertion-sort\n\nInput:   > " << cw(A) << "<\n\n";
 
   IntroAlgo::Week01::insertion_sort(A);
 
-  cout << "\nOutput:  >" << cw(A) << "<\n\n";
+  cout << "\nOutput:  > " << cw(A) << "<\n\n";
 
   return 0;
 }
