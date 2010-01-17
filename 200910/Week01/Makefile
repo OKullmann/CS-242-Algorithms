@@ -17,7 +17,7 @@ include_option = -I$(base_dir)
 
 ###
 
-programs = Experiment
+programs = Experiment_down
 
 all : $(programs)
 
@@ -26,7 +26,7 @@ cleanall :
 
 # ########################
 
-Experiment : Experiment.cpp Sorting.hpp Generators.hpp
+Experiment_down : Experiment_down.cpp Sorting.hpp Generators.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
 Test : Test.cpp Sorting.hpp Generators.hpp
