@@ -16,6 +16,8 @@ $outfile=">$file.hpp";
 open(WORKFILE,$infile);
 open(DESTFILE,$outfile);
 
+print DESTFILE "// This file has been generated from   $infile \n";
+
 until(eof(WORKFILE)){
     $A=<WORKFILE>;
     $A=~s|/// ||;
