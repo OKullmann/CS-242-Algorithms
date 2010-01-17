@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+
+$file=$ARGV[0];   #the file which should be converted
+unless ($file){die "\n\n\n
+usage:  gensolution <file>
+
+Effect: input the file
+   solution/<file>_1.hpp
+remove \"/// \" from each line and store the resulting file in
+   <file>.hpp
+\n\n"} 
+
+$infile="solutions/$file\_1.hpp";
+$outfile=">$file.hpp";
+
+open(WORKFILE,$infile);
+open(DESTFILE,$outfile);
+
+print DESTFILE "// This file has been generated from   $infile \n";
+
+until(eof(WORKFILE)){
+    $A=<WORKFILE>;
+    $A=~s|/// ||;
+    print DESTFILE $A;
+}
+
+close(DESTFILE);
+close(WORKFILE);
+

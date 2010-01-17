@@ -1,11 +1,11 @@
-// Oliver Kullmann, 22.12.2009 (Swansea)
+// Arnold Beckmann, 17.12.2009 (Swansea)
 
 /*!
-  \file 200910/Week01/Experiment.cpp
-  \brief Experiments with sorting algorithms
+  \file 200910/Week01/Experiment_down.cpp
+  \brief Experiments with sorting algorithms on reverse sorted inputs
 
-  "Experiment N" calls the sorting algorithm N times; the statistics
-  are output to standard output.
+  "Experiment_down N" calls the sorting algorithm N times with downwards
+  sorted inputs; the statistics are output to standard output.
 */
 
 #include <string>
@@ -32,14 +32,13 @@ int main(const int argc, const char* const argv[]) {
   }
 
   const int N = lexical_cast<int>(argv[1]);
-
-  OutputMeasurement::header_line(" size assignments comparisons\n");
+  OutputMeasurement::header_line("\n\n#  Reverse sorted lists\n size comparisons\n");
   for (int i = 0; i <= N; ++i) {
     using IntroAlgo::Week01::ArrayGenerators;
     typedef ArrayGenerators::vector_type vector_type;
-    vector_type A = ArrayGenerators::sorted(i);
+    vector_type A = ArrayGenerators::sorted_r(i);
     IntroAlgo::Week01::insertion_sort(A);
     // std::cout << cw(A) << "\n";
   }
-
+  
 }
