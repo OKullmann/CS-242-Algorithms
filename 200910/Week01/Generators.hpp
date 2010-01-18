@@ -41,10 +41,10 @@ namespace IntroAlgo {
       static vector_type random(const size_type n) {
         vector_type A(n);
 	int rnumb;
-	/* initialize random seed: */
+	// initialize random seed:
 	srand ( time(NULL) );
         for (size_type i = 1; i < n; ++i) {
-	  /* generate random number in [0..10n] */
+	  // generate random number in [-5..5n]
 	  rnumb = rand() % (10 * n) - 5 * n;
           A[i] = rnumb;
 	}

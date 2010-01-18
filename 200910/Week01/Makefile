@@ -17,7 +17,7 @@ include_option = -I$(base_dir)
 
 ###
 
-programs = Experiment_down Experiment_up Experiment_rand Test
+programs = Experiment_up Experiment_down Experiment_rand Test
 
 all : $(programs)
 
