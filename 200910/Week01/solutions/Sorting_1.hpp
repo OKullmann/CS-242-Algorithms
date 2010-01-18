@@ -16,18 +16,24 @@
 namespace IntroAlgo {
   namespace Week01 {
 
-    template <typename value_type>
-    void insertion_sort(std::vector<value_type>& A) {
+    void insertion_sort(std::vector<int>& A) {
       /// IntroAlgo::Framework::OutputMeasurement om;
-      typedef typename std::vector<value_type>::size_type size_type;
-      /// size_type counter_comparisons = 0;
-      for (size_type j = 1; j < A.size(); ++j) {
-        const value_type key = A[j];
-        size_type i = j;
-        for (; i > 0; --i) {
+      unsigned int i,j;
+      int key;
+      bool condition;
+      /// unsigned int counter_comparisons = 0;
+      for (j = 1; j < A.size(); j++) {
+        key = A[j];
+        i = j;
+	condition = true;
+	while (i > 0 and condition) {
           /// ++counter_comparisons;
-          if (not (A[i-1] > key)) break;
-          A[i] = A[i-1];
+          if (A[i-1] > key) {
+	    A[i] = A[i-1];
+	    i = i-1;
+	  } else {
+	    condition = false;
+	  }
         }
         A[i] = key;
       }
