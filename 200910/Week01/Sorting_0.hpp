@@ -47,17 +47,15 @@ namespace IntroAlgo {
        * That a variable (like "key") doesn't change it's value after
          definition is encoded in C/C++ by the "const" type-modifier (in Java
          this would be "final").
-       * For the first examples we assume that the values of A are of type
-         int - in the future we may abstract from this and use instead a
-         type-parameter.
-       * Finally, we set for now the type of the index i as unsigned int -
-         again we may abstract from this in the future.
     */
 
     void insertion_sort(std::vector<int>& A) {
-      for (unsigned int j = 1; j < A.size(); j++) {
-        const int key = A[j];
-        unsigned int i = j;
+	int key;
+	unsigned int i,j;
+
+      for (j = 1; j < A.size(); j++) {
+        key = A[j];
+        i = j;
         while (i > 0 and A[i-1] > key) {
           A[i] = A[i-1];
           i = i-1;
