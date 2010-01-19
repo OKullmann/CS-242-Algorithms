@@ -1,4 +1,4 @@
-# Oliver Kullmann, 22.12.2009 (Swansea)
+# Arnold Beckmann, 19.01.2010 (Swansea)
 
 SHELL = /bin/bash
 .SUFFIXES :
@@ -7,7 +7,7 @@ SHELL = /bin/bash
 
 ###
 
-programs =
+programs = Insertion_Sort.class ArrayGenerators.class Experiment_up.class Experiment_down.class Experiment_rand.class Test.class
 
 all : $(programs)
 
@@ -16,18 +16,18 @@ cleanall :
 
 #########################
 
-Experiment_down : Experiment_down.cpp Sorting.hpp Generators.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+ArrayGenerators.class : Generators.java
+	javac $<
 
-Experiment_up : Experiment_up.cpp Sorting.hpp Generators.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+Insertion_Sort.class : Sorting.java
+	javac $<
 
-Experiment_rand : Experiment_rand.cpp Sorting.hpp Generators.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+Experiment_up.class : Experiment.java ArrayGenerators.class Insertion_Sort.class
+	javac $<
 
-Test : Test.cpp Sorting.hpp Generators.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
+	javac $<
 
-gen : solutions/Sorting_1.hpp
+gen : solutions/Sorting_1.java
 	solutions/gensolution Sorting
 

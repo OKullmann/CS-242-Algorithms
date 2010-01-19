@@ -1,0 +1,21 @@
+# Session 1
+E=read.table("out.txt", header=TRUE)
+plot(E$size, E$comparisons)
+guess <- E$size^2
+plot(guess, E$comparisons)
+
+
+# Session 2
+E=read.table("out.txt", header=TRUE)
+plot(E$size, E$comparisons)
+guess <- E$size^2
+plot(guess, E$comparisons)
+abline(a=0, b=max(E$comparisons)/max(guess), col="red")
+
+# Session 2
+E=read.table("out.txt", header=TRUE)
+x=E$size
+y=E$comparisons
+plot(x,y)
+lines(x,x^2,col="red")
+lines(x,0.25*x^2,col="red")

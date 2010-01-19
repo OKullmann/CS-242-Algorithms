@@ -1,8 +1,5 @@
-Experiment_down
-Experiment_up
-Experiment_rand
-Test
-Sorting.hpp
+*.class
+Sorting.java
 out.txt
 .R*
 WEG

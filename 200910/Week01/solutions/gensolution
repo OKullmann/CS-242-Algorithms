@@ -10,8 +10,8 @@ remove \"/// \" from each line and store the resulting file in
    <file>.hpp
 \n\n"} 
 
-$infile="solutions/$file\_1.hpp";
-$outfile=">$file.hpp";
+$infile="solutions/$file\_1.java";
+$outfile=">$file.java";
 
 open(WORKFILE,$infile);
 open(DESTFILE,$outfile);
