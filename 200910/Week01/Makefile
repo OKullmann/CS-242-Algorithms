@@ -5,19 +5,9 @@ SHELL = /bin/bash
 
 .PHONY : all cleanall
 
-CXX = g++
-
-Standard_options := -ansi -pedantic
-Warning_options := -Wall
-Optimisation_options := -O3 -DNDEBUG
-
-base_dir = ../..
-
-include_option = -I$(base_dir)
-
 ###
 
-programs = Experiment_up Experiment_down Experiment_rand Test
+programs =
 
 all : $(programs)
 
