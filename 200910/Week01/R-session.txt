@@ -12,7 +12,10 @@ guess <- E$size^2
 plot(guess, E$comparisons)
 abline(a=0, b=max(E$comparisons)/max(guess), col="red")
 
-# Session 2
+# Session 3
+lm(formula = log(E$comparisons) ~ log(E$size))
+
+# Session 4
 E=read.table("out.txt", header=TRUE)
 x=E$size
 y=E$comparisons
