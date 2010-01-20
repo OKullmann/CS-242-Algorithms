@@ -8,10 +8,10 @@
 
 class Insertion_Sort {
 
-    public static void insertion_sort(int[] A) {
+    public static void insertion_sort(long[] A) {
 	/// int counter_comparisons = 0;
 	for (int j = 1; j < A.length; j++) {
-	    int key = A[j];
+	    long key = A[j];
 	    int i = j;
 	    while ((i > 0) && (A[i-1] > key)) {
 		/// ++counter_comparisons;

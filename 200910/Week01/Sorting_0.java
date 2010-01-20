@@ -29,14 +29,18 @@
     integral types.  Variable i in the original algorithm can now reach
     value -1, after making the array 0-based. Thus, the value of
     variable i is moved "one step up".
+  * To keep things simple at the moment, we use "long" for the type of
+    values of the input array, and "int" as the type for the indices.  
+    In general, the value type may be any type which has a total order
+    relation defined on it, and the index type may be any integral type.
 */
 
 
 class Insertion_Sort {
 
-    public static void insertion_sort(int[] A) {
+    public static void insertion_sort(long[] A) {
 	for (int j = 1; j < A.length; j++) {
-	    int key = A[j];
+	    long key = A[j];
 	    int i = j;
 	    while ((i > 0) && (A[i-1] > key)) {
 		A[i] = A[i-1];

@@ -27,7 +27,7 @@ class Experiment_up {
 
 	System.out.println("  size comparisons\n");
 	for (int i = 0; i <= N; i++) {
-	    int[] A = Array_Generators.sorted_up(i);
+	    long[] A = Array_Generators.sorted_up(i);
 	    Insertion_Sort.insertion_sort(A);
 	}
 
@@ -61,7 +61,7 @@ class Experiment_down {
 
 	System.out.println("  size comparisons\n");
 	for (int i = 0; i <= N; i++) {
-	    int[] A = Array_Generators.sorted_down(i);
+	    long[] A = Array_Generators.sorted_down(i);
 	    Insertion_Sort.insertion_sort(A);
 	}
 
@@ -95,7 +95,7 @@ class Experiment_rand {
 
 	System.out.println("  size comparisons\n");
 	for (int i = 0; i <= N; i++) {
-	    int[] A = Array_Generators.sorted_rand(i);
+	    long[] A = Array_Generators.sorted_rand(i);
 	    Insertion_Sort.insertion_sort(A);
 	}
 

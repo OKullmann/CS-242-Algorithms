@@ -11,7 +11,7 @@ class Test {
 
     public static void main(String[] args) {
 
-	int[] A = ArrayGenerators.sorted_rand(10);
+	long[] A = Array_Generators.sorted_rand(10);
 	System.out.println("\n\nTest Insertion-sort on random lists");
 	System.out.println("\nInput:   " + druck(A) + "\n");
 	Insertion_Sort.insertion_sort(A);
@@ -19,7 +19,7 @@ class Test {
 
     }
 
-    private static String druck(int[] A) {
+    private static String druck(long[] A) {
         String s = " " + A[0];
 	for (int j = 1; j < A.length; ++j) 
 	    s += ", " + A[j];
