@@ -10,6 +10,7 @@ class Insertion_Sort {
 
     public static void insertion_sort(long[] A) {
 	/// int counter_comparisons = 0;
+	/// long start = System.nanoTime();
 	for (int j = 1; j < A.length; j++) {
 	    long key = A[j];
 	    int i = j;
@@ -21,10 +22,9 @@ class Insertion_Sort {
 	    /// if (i > 0) ++counter_comparisons;
 	    A[i] = key;
 	}
- 	/// System.out.println(" " + A.length + " " + counter_comparisons);
+ 	/// System.out.println(" " + A.length + " " + counter_comparisons + " " + (System.nanoTime()-start) );
 
     }
 
 }
-
 
