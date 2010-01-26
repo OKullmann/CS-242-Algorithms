@@ -22,10 +22,13 @@ class Experiment_up {
 	    return;
 	}
 
+//	long end = System.currentTimeMillis()+2000;
+//	while (System.currentTimeMillis() < end) {};
+
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Insertion-sort on sorted lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_up(i);
 	    Insertion_Sort.insertion_sort(A);
@@ -59,7 +62,7 @@ class Experiment_down {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Insertion-sort on reverse sorted lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_down(i);
 	    Insertion_Sort.insertion_sort(A);
@@ -93,7 +96,7 @@ class Experiment_rand {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Insertion-sort on random lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_rand(i);
 	    Insertion_Sort.insertion_sort(A);
