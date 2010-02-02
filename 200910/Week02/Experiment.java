@@ -131,7 +131,8 @@ class Experiment_MergeSort_up {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Merge-sort on sorted lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	//System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_up(i);
 	    Merge_Sort.merge_sort(A);
@@ -165,7 +166,8 @@ class Experiment_MergeSort_down {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Merge-sort on reverse sorted lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	// System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_down(i);
 	    Merge_Sort.merge_sort(A);
@@ -199,7 +201,8 @@ class Experiment_MergeSort_rand {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Merge-sort on random lists\n");
 
-	System.out.println("  size comparisons executionTime\n");
+	System.out.println("  size executionTime\n");
+	//System.out.println("  size comparisons executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_rand(i);
 	    Merge_Sort.merge_sort(A);
@@ -210,30 +213,3 @@ class Experiment_MergeSort_rand {
 }
 
 
-
-/*
-
-class ExecutionTimer {
-  private static long start;
-  private static long end;
-
-  public static void start() {
-    start = System.nanoTime();
-  }
-
-  public static void end() {
-    end = System.nanoTime();
-  }
-
-  public static long duration(){
-    return (end-start);
-  }
-
-  public static void reset() {
-    start = 0;  
-    end   = 0;
-  }
-
-}
-
-*/
