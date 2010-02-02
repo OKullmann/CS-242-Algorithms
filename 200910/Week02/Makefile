@@ -22,7 +22,7 @@ ArrayGenerators.class : Generators.java
 Insertion_Sort.class : Sorting.java
 	javac $<
 
-Experiment_MergeSort_up.class : Experiment.java ArrayGenerators.class Insertion_Sort.class
+Experiment_InsertionSort_up.class : Experiment.java ArrayGenerators.class Insertion_Sort.class
 	javac $<
 
 Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
