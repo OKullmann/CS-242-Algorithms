@@ -7,6 +7,27 @@
 */
 
 
+class Insertion_Sort {
+
+    public static void insertion_sort(long[] A) {
+	ExecutionTimer.start();
+	for (int j = 1; j < A.length; j++) {
+	    long key = A[j];
+	    int i = j;
+	    while ((i > 0) && (A[i-1] > key)) {
+		A[i] = A[i-1];
+		i = i-1;
+	    }
+	    A[i] = key;
+	}
+	ExecutionTimer.end();
+	System.out.println(" " + A.length + " " + (ExecutionTimer.duration()) );
+
+    }
+
+}
+
+
 class Merge_Sort {
 
     static void merge(long[] A, int p, int r, int q) {
@@ -37,7 +58,7 @@ class Merge_Sort {
 
     static void merge_sort(long[] A, int p, int q) {
 	if (p<q) {
-	    int r = (int) ( Math.floor((p+q)/2.0) );
+	    int r = (int) ( Math.floor((p+q)/2) );
 	    merge_sort(A,p,r);
 	    merge_sort(A,r+1,q);
 	    merge(A,p,r,q);
@@ -50,27 +71,6 @@ class Merge_Sort {
 	    merge_sort(A,0,A.length-1);
 	/// ExecutionTimer.end();
  	/// System.out.println(" " + A.length + " " + ExecutionTimer.duration() );
-
-    }
-
-}
-
-
-class Insertion_Sort {
-
-    public static void insertion_sort(long[] A) {
-	/// ExecutionTimer.start();
-	for (int j = 1; j < A.length; j++) {
-	    long key = A[j];
-	    int i = j;
-	    while ((i > 0) && (A[i-1] > key)) {
-		A[i] = A[i-1];
-		i = i-1;
-	    }
-	    A[i] = key;
-	}
-	/// ExecutionTimer.end();
-	/// System.out.println(" " + A.length + " " + (ExecutionTimer.duration()) );
 
     }
 
