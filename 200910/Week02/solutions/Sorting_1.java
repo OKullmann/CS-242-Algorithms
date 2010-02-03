@@ -76,3 +76,53 @@ class Merge_Sort {
 
 }
 
+
+
+class Merge_Sort2 {
+
+    static void merge(long[] A, long[] L, long[] R, int p, int r, int q) {
+	int i,j;
+	int n1 = r-p+1;
+	int n2 = q-r;
+	for (i = 0; i < n1; i++) L[i] = A[p+i];
+	for (j = 0; j < n2; j++) R[j] = A[r+j+1];
+	long sentinel = Math.abs(A[r]) + Math.abs(A[q]);
+	L[n1] = sentinel;
+	R[n2] = sentinel;
+	i = 0;
+	j = 0;
+	for (int k = p; k <= q; k++) {
+	    if (L[i] <= R[j]) {
+		A[k] = L[i];
+		i++;
+	    } else {
+		A[k] = R[j];
+		j++;
+	    }
+	}
+
+    }
+
+
+    static void merge_sort(long[] A, long[] L, long[] R, int p, int q) {
+	if (p<q) {
+	    int r = (int) ( Math.floor((p+q)/2) );
+	    merge_sort(A,L,R,p,r);
+	    merge_sort(A,L,R,r+1,q);
+	    merge(A,L,R,p,r,q);
+	}
+    }
+
+    public static void merge_sort(long[] A) {
+	/// ExecutionTimer.start();
+	if (A.length>0) {
+	    long[] L = new long[A.length+1];
+	    long[] R = new long[A.length+1];
+	    merge_sort(A,L,R,0,A.length-1);
+	}
+	/// ExecutionTimer.end();
+ 	/// System.out.println(" " + A.length + " " + ExecutionTimer.duration() );
+    }
+
+}
+

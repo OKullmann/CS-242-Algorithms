@@ -135,7 +135,7 @@ class Experiment_MergeSort_up {
 	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_up(i);
-	    Merge_Sort.merge_sort(A);
+	    Merge_Sort2.merge_sort(A);
 	}
 
     }
@@ -170,7 +170,7 @@ class Experiment_MergeSort_down {
 	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_down(i);
-	    Merge_Sort.merge_sort(A);
+	    Merge_Sort2.merge_sort(A);
 	}
 
     }
@@ -205,7 +205,7 @@ class Experiment_MergeSort_rand {
 	//System.out.println("  size comparisons executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    long[] A = Array_Generators.sorted_rand(i);
-	    Merge_Sort.merge_sort(A);
+	    Merge_Sort2.merge_sort(A);
 	}
 
     }
