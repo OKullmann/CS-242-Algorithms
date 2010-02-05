@@ -28,6 +28,6 @@ Experiment_InsertionSort_up.class : Experiment.java ArrayGenerators.class Insert
 Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
 	javac $<
 
-gen : solutions/Recurrences_1.java
-	solutions/gensolution Recurrences
+gen : solutions/Recurrence_1.java
+	solutions/gensolution Recurrence
 

@@ -1,44 +1,16 @@
-// Arnold Beckmann, 19.01.2009 (Swansea)
+// Arnold Beckmann, 02.02.2010 (Swansea)
+
 
 /*
-  File:  200910/Week01/Sorting_0.java
+  File:  200910/Week02/Sorting_0.java
   Descr: Sorting algorithms
-*/
-
-/*
-  Sorting (in ascending order) by insertion
-  
-  The idea of this elementary algorithm is as follows:
-      
-  * Given an array A[0], ..., A[A.size()-1], starting with
-    j=1, the range A[0], ..., A[j-1] is given as sorted,
-    and after the execution of the main loop body the range 
-    A[0], ..., A[j] is also sorted (internally).
-  * This is achieved by storing value A[j] in variable "key",
-    and then moving all those elements A[i-1] in A[0], ..., A[j-1]
-    one place up (starting from the top, decrementing i) as long as
-    A[i-1] > key holds. The final value of i is then the index of the
-    free place where key can be inserted (i is as large as possible). 
-
-  This is algorithm "Insertion-Sort(A)" from [Cormen, Leiserson, Rivest,
-  Stein; 2009], page 18, with the following modifications:
-      
-  * Arrays in C-based languages (C, C++, Java, Perl, ...) are 0-based,
-    not 1-based (as in the book).
-  * Index types should in general be *unsigned*, that is non-negative,
-    integral types.  Variable i in the original algorithm can now reach
-    value -1, after making the array 0-based. Thus, the value of
-    variable i is moved "one step up".
-  * To keep things simple at the moment, we use "long" for the type of
-    values of the input array, and "int" as the type for the indices.  
-    In general, the value type may be any type which has a total order
-    relation defined on it, and the index type may be any integral type.
 */
 
 
 class Insertion_Sort {
 
     public static void insertion_sort(long[] A) {
+	ExecutionTimer.start();
 	for (int j = 1; j < A.length; j++) {
 	    long key = A[j];
 	    int i = j;
@@ -48,8 +20,55 @@ class Insertion_Sort {
 	    }
 	    A[i] = key;
 	}
+	ExecutionTimer.end();
+	System.out.println(" " + A.length + " " + (ExecutionTimer.duration()) );
+
     }
 
 }
 
+
+class Merge_Sort {
+
+    static void merge(long[] A, int p, int r, int q) {
+	int i,j;
+	int n1 = r-p+1;
+	int n2 = q-r;
+	long[] L = new long[n1+1];
+	long[] R = new long[n2+1];
+	for (i = 0; i < n1; i++) L[i] = A[p+i];
+	for (j = 0; j < n2; j++) R[j] = A[r+j+1];
+	long sentinel = Math.abs(A[r]) + Math.abs(A[q]);
+	L[n1] = sentinel;
+	R[n2] = sentinel;
+	i = 0;
+	j = 0;
+	for (int k = p; k <= q; k++) {
+	    if (L[i] <= R[j]) {
+		A[k] = L[i];
+		i++;
+	    } else {
+		A[k] = R[j];
+		j++;
+	    }
+	}
+
+    }
+
+
+    static void merge_sort(long[] A, int p, int q) {
+	if (p<q) {
+	    int r = (int) ( Math.floor((p+q)/2) );
+	    merge_sort(A,p,r);
+	    merge_sort(A,r+1,q);
+	    merge(A,p,r,q);
+	}
+    }
+
+    public static void merge_sort(long[] A) {
+	if (A.length>0)
+	    merge_sort(A,0,A.length-1);
+    }
+
+}
 
