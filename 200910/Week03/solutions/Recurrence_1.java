@@ -24,11 +24,11 @@ class Recurrence {
 	    int i = (int) Math.floor(n/2.0);
 	    int j = (int) Math.ceil(n/2.0);
 //	System.out.println("n,i,j:  " + n + " " + i + " " + j );
+	    T(i);
+	    T(i);
 	    T(j);
 	    T(j);
-	    T(j);
-	    T(j);
-	    for (j = 1; j < n; j++) 
+	    for (j = 1; j < n*n*n; j++) 
 		sleep();
 	}
     }
@@ -42,30 +42,18 @@ class Recurrence {
 
 class Recurrence2 {
 
-    static long counter;
-
     public static void recurrence(int n) {
-	counter = 0;
-	T((double) n);
-	System.out.println(" " + n + " " + counter );
+	System.out.println(" " + n + " " + T(n) );
     }
 
-    static void T(double n) {
-	if (n<2.0)
-	    sleep();
+    static long T(int n) {
+	if (n<2)
+	    return 1;
 	else {
-	    double r = n/2.0;
-	    T(r);
-	    T(r);
-	    T(r);
-	    T(r);
-	    for (int j = 1; j < (2*n); j++) 
-		sleep();
+	    int i = (int) Math.floor(n/2.0);
+	    int j = (int) Math.ceil(n/2.0);
+	    return (2*T(i)+2*T(j)+n*n*n);
 	}
-    }
-
-    static void sleep() {
-	counter++;
     }
 
 }

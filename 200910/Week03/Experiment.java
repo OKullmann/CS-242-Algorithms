@@ -28,7 +28,7 @@ class Experiment {
 
 	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
-	    Recurrence.recurrence(i);
+	    Recurrence2.recurrence(i);
 	}
 
     }
