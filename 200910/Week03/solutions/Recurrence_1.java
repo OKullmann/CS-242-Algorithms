@@ -47,12 +47,14 @@ class Recurrence2 {
     }
 
     static long T(int n) {
-	if (n<2)
+	if (n<4)
 	    return 1;
 	else {
 	    int i = (int) Math.floor(n/2.0);
 	    int j = (int) Math.ceil(n/2.0);
-	    return (2*T(i)+2*T(j)+n*n*n);
+//	    return (4*T(j)+n);
+//	    return (2*T(i)+2*T(j)+n);
+	    return (T(i-1)+T(i)+T(j)+T(j+1)+n);
 	}
     }
 
