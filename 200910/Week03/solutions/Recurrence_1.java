@@ -30,7 +30,7 @@ class Recurrence {
 	    T(i);
 	    T(j);
 	    T(j+1);
-	    for (j = 1; j < n*n*n; j++) 
+	    for (j = 1; j < n; j++) 
 		sleep();
 	}
     }
@@ -44,21 +44,24 @@ class Recurrence {
 
 class Recurrence2 {
 
+    static long[] M = { 1, 1, 6, 17, 28 };
+
     public static void recurrence(int n) {
 	System.out.println(" " + n + " " + T(n) );
     }
 
     static long T(int n) {
 	if (n<4)
-	    return 1;
+	    return M[n];
 	else {
 	    int i = (int) Math.floor(n/2.0);
 	    int j = (int) Math.ceil(n/2.0);
-//	    return (4*T(j)+n);
+//	    return (4*T(i)+n);
 //	    return (2*T(i)+2*T(j)+n);
 //	    return (T(i-2)+T(i-1)+T(i)+T(i+1)+n);
-	    return (T(i-1)+2*T(i)+T(i+1)+n);
-//	    return (T(i-1)+T(i)+T(j)+T(j+1)+n);
+//	    return (2*(T(i-1)+T(i+1))+n);
+//	    return (T(i-1)+2*T(i)+T(i+1)+n);
+	    return (T(i-1)+T(i)+T(j)+T(j+1)+n);
 	}
     }
 
