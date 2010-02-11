@@ -26,11 +26,11 @@ class Experiment {
 	int N = (Integer.valueOf(args[0]) ).intValue();
 	System.out.println("\n#  Experience Recurrences \n");
 
-	System.out.println("  size executionTime\n");
+	System.out.println("  size count\n");
 	for (int i = 0; i <= N; i++) {
 	    Recurrence.recurrence(i);
 	}
-
+	System.out.println("\n");
     }
 
 }

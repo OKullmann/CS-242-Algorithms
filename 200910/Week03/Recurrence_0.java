@@ -2,8 +2,9 @@
 
 
 /*
-  File:  200910/Week03/solutions/Recurrence_1.java
+  File:  200910/Week03/Recurrence_0.java
   Descr: Experience the Master Theorem
+         Computing recurrence T_1
 */
 
 
