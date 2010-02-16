@@ -107,8 +107,22 @@ namespace BinaryTrees {
     /* Remark: Since insert returns a reference to Tree, we can chain inserts,
     for example "T.insert(10,1).insert(-11,2)". */
 
+    // like inorder_walk, but now outputting all data
+    friend std::ostream& operator <<(std::ostream& out, Tree T) {
+      T.inorder_walk_internal(out, T.root);
+      return out;
+    }
+
   private :
     public_node_type root;
+
+    void inorder_walk_internal(std::ostream& out, const public_node_type x) const {
+      if (x == 0) return;
+      inorder_walk_internal(out, x->left);
+      out << "(" << x->p << "," << x->left << "," << x->right << "," << x->key << "," << x->s << ")";
+      inorder_walk_internal(out, x->right);
+    }
+
   };
 
 }
