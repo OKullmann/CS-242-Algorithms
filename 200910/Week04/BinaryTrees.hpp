@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <ostream>
 #include <cassert>
+#include <iomanip>
 
 namespace BinaryTrees {
 
@@ -40,7 +41,7 @@ namespace BinaryTrees {
     void inorder_walk(std::ostream& out, const public_node_type x) const {
       if (x == 0) return;
       inorder_walk(out, x->left);
-      out << "(" << x->key << ", " << x->s << ")"; // print key and s
+      out << "(" << x->key << ", " << x->s << ") "; // print key and s
       inorder_walk(out, x->right);
     }
 
@@ -119,7 +120,8 @@ namespace BinaryTrees {
     void inorder_walk_internal(std::ostream& out, const public_node_type x) const {
       if (x == 0) return;
       inorder_walk_internal(out, x->left);
-      out << "(" << x->p << "," << x->left << "," << x->right << "," << x->key << "," << x->s << ")";
+      using std::setw;
+      out << x << ": " << setw(10) << x->p << " " << setw(10) << x->left << " " << setw(10) << x->right << " " << setw(5) << x->key << " " << setw(5) << x->s << "\n";
       inorder_walk_internal(out, x->right);
     }
 
