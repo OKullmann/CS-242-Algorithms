@@ -1,7 +1,7 @@
 // Oliver Kullmann, 15.2.2010 (Swansea)
 
 /*!
-  \file BinaryTree.cpp
+  \file BinaryTree_Output.cpp
   \brief Reading data into a binary search tree, printing data on the tree, and then waiting for queries
 
   Data from standard input is put into a binary search tree, and data about
@@ -11,7 +11,6 @@
 */
 
 #include <iostream>
-#include <string>
 
 #include "BinaryTrees.hpp"
 
