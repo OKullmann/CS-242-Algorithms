@@ -17,7 +17,7 @@ include_option = -I$(base_dir)
 
 ###
 
-programs = BinaryTrees_Output BinaryTrees_Search
+programs = BinaryTrees_Output BinaryTrees_Search BinaryTrees_Statistics
 
 all : $(programs)
 
