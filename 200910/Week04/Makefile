@@ -17,7 +17,7 @@ include_option = -I$(base_dir)
 
 ###
 
-programs = BinaryTrees_Output
+programs = BinaryTrees_Output BinaryTrees_Search
 
 all : $(programs)
 
@@ -26,5 +26,5 @@ cleanall :
 
 # ########################
 
-BinaryTrees_Output : BinaryTrees_Output.cpp BinaryTrees.hpp
+$(programs) : % : %.cpp BinaryTrees.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
