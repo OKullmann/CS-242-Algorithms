@@ -9,6 +9,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <iomanip>
+#include <algorithm>
 
 #include "BinaryTrees.hpp"
 
@@ -21,6 +22,8 @@ namespace {
   const std::string err = "ERROR[" + program + "]: ";
 
   typedef unsigned int uint_type;
+
+  const uint_type number_intervals = 200;
 
 }
 
@@ -55,7 +58,8 @@ int main(const int argc, const char* const argv[]) {
 
   std::cout << " n h\n";
   uint_type total_count = 0;
-  for (uint_type i = 1; i <= N; ++i) {
+  const uint_type step_size = std::max(N / number_intervals, (uint_type) 1);
+  for (uint_type i = 1; i <= N; i += step_size) {
     for (uint_type j = 1; j <= t; ++j) {
       BinaryTrees::Tree T; ++total_count;
       for (uint_type k = 1; k <= i; ++k) {
