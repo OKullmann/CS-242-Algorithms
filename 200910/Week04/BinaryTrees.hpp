@@ -1,5 +1,14 @@
 // Oliver Kullmann, 15.2.2010 (Swansea)
 
+/*!
+  \file BinaryTrees.hpp
+  \brief Provides class BinaryTrees::Tree, an implementation according to
+  CLRS of binary search trees
+
+  The code is not up to the standard of modern C++, however it is also
+  not unreasonable. Especially care has been taken regarding const-correctness.
+*/
+
 #ifndef BINARYTREES_jB4eR
 #define BINARYTREES_jB4eR
 
@@ -10,8 +19,15 @@
 
 namespace BinaryTrees {
 
+  //! the type of keys in nodes:
   typedef int key_type;
+  //! the type of the satellite data in nodes:
   typedef int satellite_type;
+
+  /*!
+    \class Tree
+    \brief A binary search tree
+  */
 
   class Tree {
 
