@@ -114,6 +114,8 @@ namespace BinaryTrees {
       return out;
     }
 
+    ~Tree() { del(root); }
+
   private :
     public_node_type root;
 
@@ -123,6 +125,14 @@ namespace BinaryTrees {
       using std::setw;
       out << x << ": " << setw(10) << x->p << " " << setw(10) << x->left << " " << setw(10) << x->right << " " << setw(5) << x->key << " " << setw(5) << x->s << "\n";
       inorder_walk_internal(out, x->right);
+    }
+
+    void del(const public_node_type x) {
+      if (x == 0) return;
+      const public_node_type left = x->left;
+      const public_node_type right = x->right;
+      delete x;
+      del(left); del(right);
     }
 
   };
