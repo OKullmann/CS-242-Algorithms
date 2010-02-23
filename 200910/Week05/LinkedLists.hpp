@@ -14,6 +14,11 @@
 
 namespace DisjointSets {
 
+  /*!
+    \class LinkedLists
+    \brief Simple implementations
+  */
+
   template <typename Element>
   class LinkedLists {
 
@@ -58,6 +63,11 @@ namespace DisjointSets {
     }
   };
 
+
+  /*!
+    \class LinkedListsH
+    \brief Implementations with size heuristics
+  */
 
   template <typename Element, typename Count = unsigned int>
   class LinkedListsH {

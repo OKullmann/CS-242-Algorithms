@@ -3,6 +3,12 @@
 /*!
   \file LinkedLists.cpp
   \brief Application for testing and running LinkedLists.hpp
+
+  The command-line parameter is N, and cells 0 to N-1 with elements
+  1 to N are created, for the simple linked-list implementation as well
+  as for the version with the size heuristics. Then in a loop cell-indices
+  v1, v2 are read, and the cell-contents is printed, and if their sets
+  differ, then union is performed (everything for both implementations).
 */
 
 #include <iostream>
