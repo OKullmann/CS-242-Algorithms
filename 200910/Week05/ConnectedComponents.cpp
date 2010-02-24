@@ -7,9 +7,10 @@
 
 #include <iostream>
 #include <sstream>
-#include <ctime>
 #include <iomanip>
 #include <string>
+
+#include <Utilities/Timing.hpp>
 
 #include "LinkedLists.hpp"
 #include "RootedTrees.hpp"
@@ -25,19 +26,18 @@ namespace {
   const std::string program = "ConnectedComponents";
   const std::string err = "ERROR[" + program + "]: ";
 
-  static const long eps = CLOCKS_PER_SEC;
-
   typedef DisjointSets::RandomGraph graph_type;
   typedef graph_type::size_type size_type;
   typedef graph_type::probability_type probability_type;
 
   template <template <typename Element> class DSets>
-  void measure_and_output(const graph_type& G, const std::string& text) {
-    std::cout << std::setw(15) << text << ": " << std::flush;
-    const std::clock_t old_time = std::clock();
-    std::cout << std::setw(7) << DisjointSets::Number_connected_components<DSets>()(G);
-    const std::clock_t used_time = std::clock() - old_time;
-    std::cout << "; " << std::scientific << std::showpoint << std::setprecision(3) << ((double) used_time) / eps << "s\n";
+  void measure_and_output(
+      const graph_type& G,
+      const std::string& text,
+      Utilities::SystemTime& T) {
+    std::cout << std::setw(15) << text << ": " << std::flush; 
+    std::cout << std::setw(7) << DisjointSets::Number_connected_components<DSets>()(G)
+      << "; " << Utilities::TimingOutput(T(),3,7) << "\n";
   }
 
 }
@@ -78,14 +78,17 @@ int main(const int argc, const char* const argv[]) {
   const probability_type p = dummy2;
 
   std::cout << "Creating the graph with " << N << " vertices: " << std::flush;
+  using namespace Utilities;
+  SystemTime T;
   const graph_type G(N,p);
-  std::cout << G.edge_list.size() << " edges created.\n";
+  std::cout << G.edge_list.size() << " edges created in "
+    << TimingOutput(T()) << ".\n";
 
   using namespace DisjointSets;
-  measure_and_output<LinkedLists>(G, "LinkedLists");
-  measure_and_output<LinkedListsH>(G, "LinkedListsH");
-  measure_and_output<RootedTrees>(G, "RootedTrees");
-  measure_and_output<RootedTreesHS>(G, "RootedTreesHS");
-  measure_and_output<RootedTreesHP>(G, "RootedTreesHP");
-  measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP");
+  measure_and_output<LinkedLists>(G, "LinkedLists", T);
+  measure_and_output<LinkedListsH>(G, "LinkedListsH", T);
+  measure_and_output<RootedTrees>(G, "RootedTrees", T);
+  measure_and_output<RootedTreesHS>(G, "RootedTreesHS", T);
+  measure_and_output<RootedTreesHP>(G, "RootedTreesHP", T);
+  measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP", T);
 }
