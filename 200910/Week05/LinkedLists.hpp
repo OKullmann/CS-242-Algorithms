@@ -121,7 +121,7 @@ namespace DisjointSets {
         Node* const new_rep = x->rep;
         new_rep->last->next = y->rep;
         new_rep->last = y->rep->last;
-        new_rep->s = new_rep->s + y->rep->s;
+        new_rep->s += y->rep->s;
         for (Node* p = y->rep; p != 0; p = p->next)
           p->rep = new_rep;
       }
