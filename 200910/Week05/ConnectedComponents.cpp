@@ -85,5 +85,6 @@ int main(const int argc, const char* const argv[]) {
   measure_and_output<LinkedLists>(G, "LinkedLists");
   measure_and_output<LinkedListsH>(G, "LinkedListsH");
   measure_and_output<RootedTrees>(G, "RootedTrees");
+  measure_and_output<RootedTreesHS>(G, "RootedTreesHS");
 
 }
