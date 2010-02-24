@@ -29,13 +29,6 @@ namespace DisjointSets {
       Node* last;
     };
 
-    // output the whole node together with its address
-    friend std::ostream& operator <<(std::ostream& out, const Node* const p) {
-      using std::setw;
-      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last;
-      return out;
-    }
-
   public :
     typedef Element value_type;
     typedef const Node* pointer_type;
@@ -61,6 +54,13 @@ namespace DisjointSets {
       for (Node* p = x->rep; p != 0; p = p->next)
         p->rep = new_rep;
     }
+
+    // output the whole node together with its address
+    static void output(std::ostream& out, pointer_type p) {
+      using std::setw;
+      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last;
+    }
+
   };
 
 
@@ -81,13 +81,6 @@ namespace DisjointSets {
       Node* last;
       size_type s;
     };
-
-    // output the whole node together with its address
-    friend std::ostream& operator <<(std::ostream& out, const Node* const p) {
-      using std::setw;
-      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last << " " << setw(7) << p->s;
-      return out;
-    }
 
   public :
     typedef Element value_type;
@@ -126,6 +119,13 @@ namespace DisjointSets {
           p->rep = new_rep;
       }
     }
+
+    // output the whole node together with its address
+    static void output(std::ostream& out, pointer_type p) {
+      using std::setw;
+      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last << " " << setw(7) << p->s;
+    }
+
   };
 
 }

@@ -44,8 +44,11 @@ namespace DisjointSets {
     friend std::ostream& operator <<(std::ostream& out, const Framework& F) {
       typedef typename vector_type::const_iterator iterator;
       size_type i = 0;
-      for (iterator it = F.V.begin(); it != F.V.end(); ++it, ++i)
-        out << i << ": " << *it << "\n";
+      for (iterator it = F.V.begin(); it != F.V.end(); ++it, ++i) {
+        out << i << ": ";
+        disjoint_sets_type::output(out, *it);
+        out << "\n";
+      }
       return out;
     }
 
