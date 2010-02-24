@@ -44,8 +44,9 @@ namespace {
 
 int main(const int argc, const char* const argv[]) {
   
-  if (argc != 3) {
-    std::cerr << err << "Exactly two parameters are needed, N and p.\n";
+  if (argc != 3 and argc != 4) {
+    std::cerr << err << "Two or three parameters are needed: N and p, while "
+      "a third parameter indicates that only fast algorithms are used.\n";
     return errcode_parameter;
   }
 
@@ -85,9 +86,11 @@ int main(const int argc, const char* const argv[]) {
     << TimingOutput(T()) << ".\n";
 
   using namespace DisjointSets;
-  measure_and_output<LinkedLists>(G, "LinkedLists", T);
+  if (argc == 3)
+    measure_and_output<LinkedLists>(G, "LinkedLists", T);
   measure_and_output<LinkedListsH>(G, "LinkedListsH", T);
-  measure_and_output<RootedTrees>(G, "RootedTrees", T);
+  if (argc == 3)
+    measure_and_output<RootedTrees>(G, "RootedTrees", T);
   measure_and_output<RootedTreesHS>(G, "RootedTreesHS", T);
   measure_and_output<RootedTreesHP>(G, "RootedTreesHP", T);
   measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP", T);
