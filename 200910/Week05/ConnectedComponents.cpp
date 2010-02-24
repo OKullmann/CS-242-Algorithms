@@ -83,9 +83,9 @@ int main(const int argc, const char* const argv[]) {
 
   using namespace DisjointSets;
   measure_and_output<LinkedLists>(G, "LinkedLists");
-  //measure_and_output<LinkedListsH>(G, "LinkedListsH");
+  measure_and_output<LinkedListsH>(G, "LinkedListsH");
   measure_and_output<RootedTrees>(G, "RootedTrees");
-  //measure_and_output<RootedTreesHS>(G, "RootedTreesHS");
+  measure_and_output<RootedTreesHS>(G, "RootedTreesHS");
   measure_and_output<RootedTreesHP>(G, "RootedTreesHP");
-  //measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP");
+  measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP");
 }

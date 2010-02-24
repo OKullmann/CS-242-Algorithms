@@ -69,10 +69,10 @@ namespace DisjointSets {
     \brief Implementations with size heuristics
   */
 
-  template <typename Element, typename Count = unsigned int>
+  template <typename Element>
   class LinkedListsH {
 
-    typedef Count size_type;
+    typedef unsigned int size_type;
 
     struct Node {
       Element x;

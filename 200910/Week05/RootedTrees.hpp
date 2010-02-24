@@ -39,9 +39,9 @@ namespace DisjointSets {
     }
   };
 
-  template <typename Element, typename Count = unsigned int>
+  template <typename Element>
   class RootedTreesHS {
-    typedef Count size_type;
+    typedef unsigned int size_type;
     struct Node {
       Element x;
       Node* p;
@@ -108,9 +108,9 @@ namespace DisjointSets {
     }
   };
 
-  template <typename Element, typename Count = unsigned int>
+  template <typename Element>
   class RootedTreesHSP {
-    typedef Count size_type;
+    typedef unsigned int size_type;
     struct Node {
       Element x;
       Node* p;
