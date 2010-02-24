@@ -87,5 +87,5 @@ int main(const int argc, const char* const argv[]) {
   measure_and_output<RootedTrees>(G, "RootedTrees");
   measure_and_output<RootedTreesHS>(G, "RootedTreesHS");
   measure_and_output<RootedTreesHP>(G, "RootedTreesHP");
-
+  measure_and_output<RootedTreesHSP>(G, "RootedTreesHSP");
 }
