@@ -14,8 +14,8 @@
 
 namespace DisjointSets {
 
-  inline bool random_bit(const double p) {
-    return ((double) std::rand()) / RAND_MAX < p;
+  inline bool random_bit(const float p) {
+    return ((float) std::rand()) / RAND_MAX < p;
   }
 
   struct RandomGraph {

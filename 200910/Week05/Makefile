@@ -9,7 +9,7 @@ CXX = g++
 
 Standard_options := -ansi -pedantic
 Warning_options := -Wall
-Optimisation_options := -O3 -DNDEBUG
+Optimisation_options := -O3 -DNDEBUG -ffast-math
 
 base_dir = ../..
 
