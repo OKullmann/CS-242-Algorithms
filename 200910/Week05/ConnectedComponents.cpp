@@ -37,7 +37,7 @@ namespace {
     const std::clock_t old_time = std::clock();
     std::cout << std::setw(7) << DisjointSets::Number_connected_components<DSets>()(G);
     const std::clock_t used_time = std::clock() - old_time;
-    std::cout << "; " << std::scientific << std::showpoint << std::setprecision(2) << ((double) used_time) / eps << "s\n";
+    std::cout << "; " << std::scientific << std::showpoint << std::setprecision(3) << ((double) used_time) / eps << "s\n";
   }
 
 }
