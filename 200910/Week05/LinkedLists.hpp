@@ -32,7 +32,7 @@ namespace DisjointSets {
     // output the whole node together with its address
     friend std::ostream& operator <<(std::ostream& out, const Node* const p) {
       using std::setw;
-      out << (void*) p << ": " << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last;
+      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last;
       return out;
     }
 
@@ -85,7 +85,7 @@ namespace DisjointSets {
     // output the whole node together with its address
     friend std::ostream& operator <<(std::ostream& out, const Node* const p) {
       using std::setw;
-      out << (void*) p << ": " << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last << " " << setw(7) << p->s;
+      out << (void*) p << "->" << setw(5) << p->x << " " << setw(10) << (void*) p->rep << " " << setw(10) << (void*) p->next << " " << setw(10) << (void*) p->last << " " << setw(7) << p->s;
       return out;
     }
 
