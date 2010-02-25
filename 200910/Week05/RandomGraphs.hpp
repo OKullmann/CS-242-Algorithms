@@ -22,7 +22,7 @@ namespace DisjointSets {
   /*!
     \class RandomGraph
     \brief Computes a random graph with vertices 0,...,N-1, where every
-    possible edge has probability p.
+    possible edge occurs with probability p.
   */
   struct RandomGraph {
     typedef unsigned int vertex_type;
@@ -59,7 +59,7 @@ namespace DisjointSets {
   /*!
     \class RandomGraphE
     \brief Computes a random graph with vertices 0,...,N-1 and with K edges
-    (where all edges are equally likely)
+    (where all edges are equally likely).
   */
   struct RandomGraphE {
     typedef unsigned int vertex_type;

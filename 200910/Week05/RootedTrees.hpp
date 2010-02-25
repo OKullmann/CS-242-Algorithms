@@ -4,6 +4,9 @@
   \file RootedTrees.hpp
   \brief Implementing the disjoint-sets data-structure via rooted trees
   according to CLRS
+
+  See LinkedLists.hpp for further implementations of the DisjointSets concept,
+  and also for explanations regarding this concept.
 */
 
 #ifndef ROOTEDTREES_jHeqPo8r3
@@ -13,6 +16,11 @@
 #include <iomanip>
 
 namespace DisjointSets {
+
+  /*!
+    \class RootedTrees
+    \brief Simple implementation using rooted trees
+  */
 
   template <typename Element>
   class RootedTrees {
@@ -42,6 +50,11 @@ namespace DisjointSets {
       const_cast<Node*>(find_set(x))->p = const_cast<Node*>(find_set(y));
     }
   };
+
+  /*!
+    \class RootedTreesHS
+    \brief Using the size heuristics.
+  */
 
   template <typename Element>
   class RootedTreesHS {
@@ -84,6 +97,11 @@ namespace DisjointSets {
     }
   };
 
+  /*!
+    \class RootedTreesHP
+    \brief Using path compression
+  */
+
   template <typename Element>
   class RootedTreesHP {
     struct Node {
@@ -119,6 +137,11 @@ namespace DisjointSets {
       const_cast<Node*>(find_set(x))->p = const_cast<Node*>(find_set(y));
     }
   };
+
+  /*!
+    \class RootedTreesHSP
+    \brief Using the size heuristics and path compression
+  */
 
   template <typename Element>
   class RootedTreesHSP {

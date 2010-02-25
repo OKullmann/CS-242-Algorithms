@@ -4,6 +4,13 @@
   \file LinkedLists.hpp
   \brief Implementing the disjoint-sets data-structure via linked lists
   according to CLRS
+
+  General remarks on the concept of DisjointSets:
+   - when using the version of make_set which creates the node, then the
+     client becomes the owner of this node, and needs to delete it
+     appropriately (via the returned pointer)
+   - other implementations are in RootedTrees.hpp.
+
 */
 
 #ifndef LINKEDLISTS_jBVCCr43W
@@ -16,7 +23,7 @@ namespace DisjointSets {
 
   /*!
     \class LinkedLists
-    \brief Simple implementations
+    \brief Simple implementation using linked lists
   */
 
   template <typename Element>
@@ -71,7 +78,7 @@ namespace DisjointSets {
 
   /*!
     \class LinkedListsH
-    \brief Implementations with size heuristics
+    \brief Implementation with size heuristics
   */
 
   template <typename Element>

@@ -12,6 +12,14 @@
 
 namespace DisjointSets {
 
+  /*!
+    \class Number_connected_components
+    \brief Functor class for computing the number of connected components in
+    a graph
+
+    Using a DisjointSets data-structure.
+  */
+
   template <template <typename Element> class DisjointSets>
   struct Number_connected_components {
     template <class Graph>
