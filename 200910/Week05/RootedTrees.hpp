@@ -22,13 +22,17 @@ namespace DisjointSets {
     };
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
     static value_type value(const pointer_type x) { return x->x; }
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->p = 0;
-      return p;
     }
     static pointer_type find_set(pointer_type x) {
       while (x->p != 0) x = x->p;
@@ -49,14 +53,18 @@ namespace DisjointSets {
     };
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
     static value_type value(const pointer_type x) { return x->x; }
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->p = 0;
       p->s = 1;
-      return p;
     }
     static pointer_type find_set(pointer_type x) {
       while (x->p != 0) x = x->p;
@@ -84,13 +92,17 @@ namespace DisjointSets {
     };
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
     static value_type value(const pointer_type x) { return x->x; }
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->p = 0;
-      return p;
     }
     static pointer_type find_set(const pointer_type x) {
       Node* y = const_cast<Node*>(x);
@@ -118,14 +130,18 @@ namespace DisjointSets {
     };
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
     static value_type value(const pointer_type x) { return x->x; }
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->p = 0;
       p->s = 1;
-      return p;
     }
     static pointer_type find_set(const pointer_type x) {
       Node* y = const_cast<Node*>(x);

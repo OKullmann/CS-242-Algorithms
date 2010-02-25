@@ -31,6 +31,7 @@ namespace DisjointSets {
 
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
 
     static value_type value(const pointer_type x) { return x->x; }
@@ -38,11 +39,15 @@ namespace DisjointSets {
     // returns the pointer to the node of x
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->rep = p;
       p->next = 0;
       p->last = p;
-      return p;
+
     }
 
     static pointer_type find_set(const pointer_type x) { return x->rep; }
@@ -84,6 +89,7 @@ namespace DisjointSets {
 
   public :
     typedef Element value_type;
+    typedef Node node_type;
     typedef const Node* pointer_type;
 
     static value_type value(const pointer_type x) { return x->x; }
@@ -91,12 +97,15 @@ namespace DisjointSets {
     // returns the pointer to the node of x
     static pointer_type make_set(const value_type x) {
       Node* p = new Node;
+      make_set(x, p);
+      return p;
+    }
+    static void make_set(const value_type x, node_type* const p) {
       p->x = x;
       p->rep = p;
       p->next = 0;
       p->last = p;
       p->s = 1;
-      return p;
     }
 
     static pointer_type find_set(const pointer_type x) { return x->rep; }
