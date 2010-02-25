@@ -20,18 +20,22 @@ namespace DisjointSets {
       typedef DisjointSets<vertex_type> disjoint_sets_type;
       typedef typename Graph::size_type size_type;
       typedef typename Graph::const_iterator const_iterator;
+      typedef typename disjoint_sets_type::node_type node_type;
       typedef typename disjoint_sets_type::pointer_type pointer_type;
-      typedef std::vector<pointer_type> vector_type;
-      vector_type V;
-      V.reserve(G.N);
+      typedef std::vector<node_type> vector_type;
+      vector_type V(G.N);
+      node_type* const p0 = &V[0];
       for (vertex_type v = 0; (size_type) v < G.N; ++v)
-        V.push_back(disjoint_sets_type::make_set(v));
+        disjoint_sets_type::make_set(v, p0 + v);
       size_type components_count = G.N;
-      for (const_iterator i = G.edge_list.begin(); i != G.edge_list.end(); ++i)
-        if (disjoint_sets_type::find_set(V[i->first]) != disjoint_sets_type::find_set(V[i->second])) {
-          disjoint_sets_type::union_sets(V[i->first], V[i->second]);
+      for (const_iterator i = G.edge_list.begin(); i != G.edge_list.end(); ++i) {
+        const pointer_type pu = p0 + i->first;
+        const pointer_type pv = p0 + i->second;
+        if (disjoint_sets_type::find_set(pu) != disjoint_sets_type::find_set(pv)) {
+          disjoint_sets_type::union_sets(pu, pv);
           --components_count;
         }
+      }
       return components_count;
     }
     
