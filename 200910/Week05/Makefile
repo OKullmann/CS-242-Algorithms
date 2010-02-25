@@ -29,6 +29,6 @@ cleanall :
 LinkedLists : % : %.cpp LinkedLists.hpp Framework.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
-ConnectedComponents, ConnectedComponentsE : % : %.cpp LinkedLists.hpp RootedTrees.hpp RandomGraphs.hpp ConnectedComponents.hpp ../../Utilities/Timing.hpp
+ConnectedComponents ConnectedComponentsE : % : %.cpp LinkedLists.hpp RootedTrees.hpp RandomGraphs.hpp ConnectedComponents.hpp ../../Utilities/Timing.hpp
 	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
