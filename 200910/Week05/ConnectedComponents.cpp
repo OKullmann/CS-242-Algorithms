@@ -2,7 +2,7 @@
 
 /*!
   \file ConnectedComponents.cpp
-  \brief Applying the computation of connected components by disjoint-sets data structures for random graphs
+  \brief Applying the computation of connected components by disjoint-sets data structures for random graphs (using the model of given edge-probability)
 */
 
 #include <iostream>
