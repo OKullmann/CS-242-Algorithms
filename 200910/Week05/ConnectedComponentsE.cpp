@@ -35,8 +35,8 @@ namespace {
       const std::string& text,
       Utilities::SystemTime& T) {
     std::cout << std::setw(15) << text << ": " << std::flush; 
-    std::cout << std::setw(7) << DisjointSets::Number_connected_components<DSets>()(G)
-      << "; " << Utilities::TimingOutput(T(),3,7) << "\n";
+    std::cout << std::setw(7) << DisjointSets::Number_connected_components<DSets>()(G) << "; ";
+    std::cout << Utilities::TimingOutput(T(),3,7) << "\n";
   }
 
 }
