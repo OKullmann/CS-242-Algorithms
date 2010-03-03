@@ -15,6 +15,11 @@
 
 namespace Graphs {
 
+  /*!
+    \class DepthFirstSearch
+    \brief Functor class for computing depth-first search forests for direct graphs
+  */
+
   template <class AdjacencyListGraph>
   struct DepthFirstSearch {
     typedef AdjacencyListGraph adjacencylist_graph_type;
@@ -63,6 +68,7 @@ namespace Graphs {
     result_vector_type R;
     size_type time;
 
+    //! the recursive procedure for visiting nodes
     void visit(const vertex_type u, const adjacencylist_graph_type& G) {
       R[u].d = ++time;
       const neighbour_iterator nend = G[u].end();

@@ -16,7 +16,16 @@ namespace Graphs {
 
   /*!
     \class AdjacencyList
-    \brief Representing graphs and digraphs via adjacency lists
+    \brief Representing digraphs via adjacency lists
+
+    Undirected graphs are represented via symmetric digraphs.
+    The main functionality:
+     - AdjacencyList(N) creates a graph with N vertices and zero edges.
+     - G.add_edges(begin,end, directed=false) adds edges (as vertex-pairs)
+       to graph G.
+     - G[v] returns the adjacency-vector of vertex v.
+
+    Vertices are represented by natural numbers 0, ..., N-1.
   */
 
   struct AdjacencyList {

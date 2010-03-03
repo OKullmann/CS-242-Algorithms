@@ -4,6 +4,18 @@
   \file DepthFirstSearch_forest.cpp
   \brief Application for exploring depth-first search forests on
   directed or undirected graphs
+
+  Use by
+  \verbatim
+BreadthFirstSearch N
+  \endverbatim
+  for directed graphs, and by
+  \verbatim
+BreadthFirstSearch N u
+  \endverbatim
+  for undirected graphs (where the second parameter can be any string).
+  The program then reads directed resp. undirected edges from standard input,
+  where an edge is a pair of vertices, separated by spaces.
 */
 
 #include <iostream>

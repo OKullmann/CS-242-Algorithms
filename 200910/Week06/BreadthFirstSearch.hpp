@@ -15,6 +15,14 @@
 
 namespace Graphs {
 
+  /*!
+    \class BreadthFirstSearch
+    \brief Functor class for computing depth-first search trees
+
+    BFS-trees can be computed for a given source s. And also BFS-forests
+    can be computed, which is sensible for undirected graphs.
+  */
+
   template <class AdjacencyListGraph>
   struct BreadthFirstSearch {
     typedef AdjacencyListGraph adjacencylist_graph_type;

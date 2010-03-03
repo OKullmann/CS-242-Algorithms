@@ -4,6 +4,14 @@
   \file BreadthFirstSearch_forest.cpp
   \brief Application for exploring breadth-first search forests on
   (undirected) graphs
+
+  Use by
+  \verbatim
+BreadthFirstSearch_forest N
+  \endverbatim
+  where N is the number of vertices. The program then reads (undirected) edges
+  from standard input, where an edge is a pair of vertices, separated by
+  spaces.
 */
 
 #include <iostream>

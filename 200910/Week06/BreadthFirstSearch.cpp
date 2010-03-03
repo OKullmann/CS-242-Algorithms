@@ -3,6 +3,14 @@
 /*!
   \file BreadthFirstSearch.cpp
   \brief Application for exploring breadth-first search on directed graphs
+
+  Use by
+  \verbatim
+BreadthFirstSearch N s
+  \endverbatim
+  where N is the number of vertices, and 0 <= s < N is the root of the BFS
+  to be computed. The program then reads directed edges from standard input,
+  where an edge is a pair of vertices, separated by spaces.
 */
 
 #include <iostream>
