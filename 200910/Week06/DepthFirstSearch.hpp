@@ -43,7 +43,7 @@ namespace Graphs {
     typedef std::vector<Node> result_vector_type;
     
 
-    //! Compute the DFS-spanning tree, visiting the vertices in the given
+    //! Compute the DFS-spanning forest, visiting the vertices in the given
     //! order.
     const result_vector_type& operator() (const adjacencylist_graph_type& G) {
       assert(2*max_N < infinity);
