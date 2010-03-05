@@ -1,4 +1,4 @@
-// Arnold Beckmann, 19.10.2010 (Swansea)
+// Arnold Beckmann, 19.01.2010 (Swansea)
 
 /*
   File:  200910/Week02/Experiment.java
