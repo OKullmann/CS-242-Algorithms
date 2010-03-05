@@ -13,16 +13,20 @@
   for implementing Huffman codes.
 */
 
-class Huffman { 
+import java.util.Hashtable;
 
 
-static class Node {
+class Node {
 
     char c;      // the symbol to be stored
     int f;       // the frequency
-    Node l; Node r;
+    String h;    // Huffman code;
+    Node l;      // left  child in Huffman code (for "0")
+    Node r;      // right child in Huff man code (for "1")
     Node (char c, int f, Node l, Node r)
-	{ this.c = c; this.f = f; this.l = l; this.r =r; }
+	{ this.c = c; this.f = f; this.h = ""; this.l = l; this.r =r; }
+    Node (int f, Node l, Node r)
+	{ this.c = ' '; this.f = f; this.h = ""; this.l = l; this.r =r; }
     boolean larger(Node i) {
 	return this.f > i.f;
     }
@@ -31,10 +35,10 @@ static class Node {
 
 
 /*
-  We now give an implementation of a min priority queue for ITEMs 
-  keyed on frequencies ITEM.f
+  We now give an implementation of a min priority queue for Nodes 
+  keyed on frequencies Node.f
  */
-static class PQ {
+class PQ {
 
     private boolean larger(int i, int j)
 	{ return pq[i].larger(pq[j]); }
@@ -68,25 +72,83 @@ static class PQ {
 }
 
 
-    public static Node Huffman(ITEM[] C) {
+
+class Huffman { 
+
+    static private Hashtable M = new Hashtable();
+
+    public static Node generate(Node[] C) {
 	Node x,y,z;
-	ITEM v;
+	int f;
 	int n = C.length;
 
 	PQ Q = new PQ(n);
 	for (int i = 0; i < n; i++) {
-	    z = new Node(C[i],null,null);
-	    Q.insert(z);
+	    Q.insert(C[i]);
+	    M.put(C[i].c, C[i]);
 	}
 
 	for (int i = 1; i < n; i++) {
 	    x = Q.getmin();
 	    y = Q.getmin();
-	    v.f = x.item.f + y.item.f;
-	    z = new Node(v,x,y);
+	    f = x.f + y.f;
+	    z = new Node(f,x,y);
 	    Q.insert(z);
 	}
-	return Q.getmin();
+	z = Q.getmin();
+	hc("",z);
+	return z;
+    }
+
+// Generate the Huffman code based on the binary
+    private static void hc(String s, Node H) {
+	boolean leaf = true;
+	if (H.l != null) { leaf = false; hc(s+"0",H.l); }
+	if (H.r != null) { leaf = false; hc(s+"1",H.r); }
+	if (leaf) H.h = s;
+    }
+
+    public static void out(Node[] C) {
+	int l = 0;
+	System.out.println("\n\nThe generated Huffman code\n");
+	for (int i = 0; i < C.length; i++) {
+	    System.out.println(    "  char: " + C[i].c
+			       + "    freq: " + C[i].f
+			       + "    code: " + C[i].h);
+	    l += C[i].f * C[i].h.length();
+	}
+	System.out.println("\nOverall length of code:  " + l + "\n");
+    }
+
+    public static String encode(String s) {
+	String o = "";
+	for (int i = 0; i < s.length(); i++) {
+	    char k = s.charAt(i);
+	    o = o + ((Node)M.get(k)).h;
+	}
+	return o;
+    }
+
+    public static String decode(Node H, String s) {
+	String o = "";
+	Node w = H;
+	for (int i = 0; i < s.length(); i++) {
+	    if (s.charAt(i) == '0') {
+		if (w.l == null) {
+		    o = o + w.c;
+		    w = H.l;
+		} else
+		    w = w.l;
+	    } else {
+		if (w.r == null) {
+		    o  = o + w.c;
+		    w = H.r;
+		} else
+		    w = w.r;
+	    }
+	}
+	o = o + w.c;
+	return o;
     }
 
 }		

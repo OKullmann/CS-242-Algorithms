@@ -1,8 +1,8 @@
 // Arnold Beckmann, 05.03.2010 (Swansea)
 
 /*
-  File:  200910/Week02/Experiment.java
-  Descr: Experiments with sorting algorithms on sorted inputs
+  File:  200910/Week07/Experiment.java
+  Descr: Experiments with Huffman codes
 
   "Experiment_InsertionSort_up N" calls the sorting algorithm N times with upwards
   sorted inputs; the statistics are output to standard output.
@@ -10,9 +10,9 @@
 
 
 
-class Experiment_InsertionSort_up {
+class Experiment {
 
-    protected static String program = "Experiment_InsertionSort_up";
+    protected static String program = "Experiment";
     protected static String err = "ERROR[" + program + "]: ";
 
     public static void main(String[] args) {
@@ -23,191 +23,26 @@ class Experiment_InsertionSort_up {
 	    return;
 	}
 
-//	long end = System.currentTimeMillis()+2000;
-//	while (System.currentTimeMillis() < end) {};
 
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Insertion-sort on sorted lists\n");
+	int[][] T = {
+	    {'a',1}, {'b',1}, {'c',0}, {'d',3}, {'e',2}, {'f',4},
+	    {'g',3}, {'h',2}, {'i',6}, {'j',4}, {'k',2}, {'l',1}
+	};
+	
 
-	System.out.println("  size executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_up(i);
-	    Insertion_Sort.insertion_sort(A);
+	int n = T.length;
+	Node C[] = new Node[n];
+	for (int i = 0; i < n; i++) {
+	    C[i] = new Node((char)T[i][0],T[i][1],null,null);
 	}
+	Node H = Huffman.generate(C);
+	Huffman.out(C);
 
-    }
-
-}
-
-
-
-/*
-  "Experiment_InsertionSort_down N" calls the sorting algorithm N times with downwards
-  sorted inputs; the statistics are output to standard output.
-*/
-
-
-class Experiment_InsertionSort_down {
-
-    protected static String program = "Experiment_InsertionSort_down";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.println(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Insertion-sort on reverse sorted lists\n");
-
-	System.out.println("  size executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_down(i);
-	    Insertion_Sort.insertion_sort(A);
-	}
-
-    }
-
-}
-
-
-
-/*
-  "Experiment_InsertionSort_rand N" calls the sorting algorithm N times with randomly
-  sorted inputs; the statistics are output to standard output.
-*/
-
-
-class Experiment_InsertionSort_rand {
-
-    protected static String program = "Experiment_InsertionSort_rand";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.println(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Insertion-sort on random lists\n");
-
-	System.out.println("  size executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_rand(i);
-	    Insertion_Sort.insertion_sort(A);
-	}
-
-    }
-
-}
-
-
-
-/*
-  "Experiment_MergeSort_up N" calls the sorting algorithm N times with upwards
-  sorted inputs; the statistics are output to standard output.
-*/
-
-
-class Experiment_MergeSort_up {
-
-    protected static String program = "Experiment_MergeSort_up";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.println(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Merge-sort on sorted lists\n");
-
-	//System.out.println("  size comparisons executionTime\n");
-	System.out.println("  size executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_up(i);
-	    Merge_Sort2.merge_sort(A);
-	}
-
-    }
-
-}
-
-
-
-/*
-  "Experiment_MergeSort_down N" calls the sorting algorithm N times with downwards
-  sorted inputs; the statistics are output to standard output.
-*/
-
-
-class Experiment_MergeSort_down {
-
-    protected static String program = "Experiment_MergeSort_down";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.println(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Merge-sort on reverse sorted lists\n");
-
-	// System.out.println("  size comparisons executionTime\n");
-	System.out.println("  size executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_down(i);
-	    Merge_Sort2.merge_sort(A);
-	}
-
-    }
-
-}
-
-
-
-/*
-  "Experiment_MergeSort_rand N" calls the sorting algorithm N times with randomly
-  sorted inputs; the statistics are output to standard output.
-*/
-
-
-class Experiment_MergeSort_rand {
-
-    protected static String program = "Experiment_MergeSort_rand";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.println(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Merge-sort on random lists\n");
-
-	System.out.println("  size executionTime\n");
-	//System.out.println("  size comparisons executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    long[] A = Array_Generators.sorted_rand(i);
-	    Merge_Sort2.merge_sort(A);
-	}
-
+	String a = "badffdeeffd";
+	System.out.println("Text:      " + a);
+	String s = Huffman.encode(a);
+	System.out.println("Encoding:  " + s);
+	System.out.println("Decoding:  " + Huffman.decode(H,s) + "\n\n");
     }
 
 }
