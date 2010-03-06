@@ -7,7 +7,7 @@ SHELL = /bin/bash
 
 ###
 
-programs = Insertion_Sort.class Array_Generators.class Experiment_InsertionSort_up.class Experiment_InsertionSort_down.class Experiment_InsertionSort_rand.class Experiment_MergeSort_up.class Experiment_MergeSort_down.class Experiment_MergeSort_rand.class Test.class
+programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class ExperimentD.class ExperimentE.class
 
 all : $(programs)
 
@@ -19,10 +19,10 @@ cleanall :
 Array_Generators.class : Generators.java
 	javac $<
 
-Insertion_Sort.class : Sorting.java
+Huffman.class : Huffman.java
 	javac $<
 
-Experiment_InsertionSort_up.class : Experiment.java ArrayGenerators.class Insertion_Sort.class
+Experiment.class : Experiment.java Huffman.class
 	javac $<
 
 Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
