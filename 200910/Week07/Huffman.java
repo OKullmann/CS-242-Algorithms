@@ -85,7 +85,6 @@ class Huffman {
 	PQ Q = new PQ(n);
 	for (int i = 0; i < n; i++) {
 	    Q.insert(C[i]);
-	    M.put(C[i].c, C[i]);
 	}
 
 	for (int i = 1; i < n; i++) {
@@ -101,20 +100,23 @@ class Huffman {
     }
 
 // Generate the Huffman code based on the binary
+
+    public static void hc(Node H) {
+	hc("",H);
+    }
     private static void hc(String s, Node H) {
 	boolean leaf = true;
 	if (H.l != null) { leaf = false; hc(s+"0",H.l); }
 	if (H.r != null) { leaf = false; hc(s+"1",H.r); }
-	if (leaf) H.h = s;
+	if (leaf) { H.h = s; M.put(H.c, H); }
     }
 
     public static void out(Node[] C) {
 	int l = 0;
-	System.out.println("\n\nThe generated Huffman code\n");
+	System.out.println("\n\nHuffman code\n");
 	for (int i = 0; i < C.length; i++) {
-	    System.out.println(    "  char: " + C[i].c
-			       + "    freq: " + C[i].f
-			       + "    code: " + C[i].h);
+	    System.out.printf("  char: %c   freq: %2d   code: %8s \n",
+			      C[i].c, C[i].f, C[i].h);
 	    l += C[i].f * C[i].h.length();
 	}
 	System.out.println("\nOverall length of code:  " + l + "\n");
