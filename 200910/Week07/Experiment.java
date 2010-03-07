@@ -178,14 +178,14 @@ class ExperimentE {
 	    return;
 	}
 
-	Node a = new Node('a',0,null,null);
-    	Node b = new Node('b',1,null,null);
-    	Node c = new Node('c',2,null,null);
-    	Node d = new Node('d',4,null,null);
-    	Node e = new Node('e',8,null,null);
-    	Node f = new Node('f',16,null,null);
-    	Node g = new Node('g',32,null,null);
-    	Node h = new Node('h',64,null,null);
+	Node a = new Node('a', 1,null,null);
+    	Node b = new Node('b', 2,null,null);
+    	Node c = new Node('c', 3,null,null);
+    	Node d = new Node('d', 4,null,null);
+    	Node e = new Node('e', 5,null,null);
+    	Node f = new Node('f', 6,null,null);
+    	Node g = new Node('g', 7,null,null);
+    	Node h = new Node('h', 8,null,null);
     	Node[] C = {a,b,c,d,e,f,g,h};
 
 	Node H = Huffman.generate(C);
