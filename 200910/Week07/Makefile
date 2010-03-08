@@ -7,7 +7,7 @@ SHELL = /bin/bash
 
 ###
 
-programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class ExperimentD.class ExperimentE.class
+programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class ExperimentD.class
 
 all : $(programs)
 
@@ -28,6 +28,6 @@ Experiment.class : Experiment.java Huffman.class
 Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
 	javac $<
 
-gen : solutions/Sorting_1.java
-	solutions/gensolution Sorting
+gen : solutions/Experiment_1.java
+	solutions/gensolution Experiment
 
