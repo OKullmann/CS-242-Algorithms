@@ -7,8 +7,8 @@
 
 
 /*
-  "Experiment" stores the frequencies of letters in the plain text
-  "adeedbede"
+  "Experiment" stores the frequencies of the letters
+   occurring in the plain text "adeedbede"
 */
 
 class Experiment {
@@ -24,7 +24,9 @@ class Experiment {
 
 /*
   "ExperimentA" implements a non optimal prefix code for text in
-  "Experiment" and applies it to the text.
+  "Experiment" and applies it to the text.  You will have to 
+  change this to an optimal prefix code, i.e. one such that the
+  encoded text has minimal length.
 */
 
 class ExperimentA extends Experiment {
@@ -49,9 +51,8 @@ class ExperimentA extends Experiment {
 	Huffman.hc(H);
 
 	Huffman.out(C);
-	String s_plain = "adeedbede";
-	System.out.println("Text:      " + s_plain);
-	String s_code = Huffman.encode(s_plain);
+	System.out.println("Text:      " + plaintext);
+	String s_code = Huffman.encode(plaintext);
 	System.out.println("Encoding:  " + s_code);
 	System.out.println("Decoding:  " + Huffman.decode(H,s_code) + "\n\n");
     }
@@ -64,7 +65,8 @@ class ExperimentA extends Experiment {
 
 /*
   "ExperimentB" applies Huffman's algorithm to compute an optimal prefix code
-  for text in "Experiment", and applies the computed prefix code to the text.
+  for plaintext in "Experiment", and applies the computed prefix code 
+  to the text.
 */
 
 class ExperimentB extends Experiment {

@@ -1,19 +1,19 @@
-// This file has been generated from   solutions/Sorting_1.java 
-// Arnold Beckmann, 19.12.2009 (Swansea)
+// Arnold Beckmann, 09.03.2010 (Swansea)
 
 
 /*
-  File:  200910/Week01/solutions/Sorting_1.hpp
-  Descr: Sorting algorithms
+  File:  200910/Week07/Huffman.java
+  Descr: Huffman codes
 */
+
+
+import java.util.Hashtable;
 
 
 /*
   The next class defines a basic compound data structure suitable
   for implementing Huffman codes.
 */
-
-import java.util.Hashtable;
 
 
 class Node {
@@ -22,7 +22,7 @@ class Node {
     int f;       // the frequency
     String h;    // Huffman code;
     Node l;      // left  child in Huffman code (for "0")
-    Node r;      // right child in Huff man code (for "1")
+    Node r;      // right child in Huffman code (for "1")
     Node (char c, int f, Node l, Node r)
 	{ this.c = c; this.f = f; this.h = ""; this.l = l; this.r =r; }
     Node (int f, Node l, Node r)
@@ -72,11 +72,17 @@ class PQ {
 }
 
 
+/*
+  "Huffman" implements methods to compute and make use of 
+  Huffman codes.
+ */
 
 class Huffman { 
 
     static private Hashtable M = new Hashtable();
 
+// "generate" implements the greedy algorithm for computing Huffman codes
+// from the lecture
     public static Node generate(Node[] C) {
 	Node x,y,z;
 	int f;
@@ -99,7 +105,11 @@ class Huffman {
 	return z;
     }
 
-// Generate the Huffman code based on the binary
+/*
+   "hc" computes the Huffman code based on the Node structure
+   and stores the result in the leafes of the Node structure,
+   and also in the hashtable M keyed on the char stored in the leafes.
+*/
 
     public static void hc(Node H) {
 	hc("",H);
@@ -111,6 +121,8 @@ class Huffman {
 	if (leaf) { H.h = s; M.put(H.c, H); }
     }
 
+
+// "out" outputs the stored Huffman codes
     public static void out(Node[] C) {
 	int l = 0;
 	System.out.println("\n\nHuffman code\n");
@@ -122,6 +134,9 @@ class Huffman {
 	System.out.println("\nOverall length of code:  " + l + "\n");
     }
 
+
+// "encode" encodes a string based on the Huffman code stored in the
+// hashtable M
     public static String encode(String s) {
 	String o = "";
 	for (int i = 0; i < s.length(); i++) {
@@ -131,6 +146,8 @@ class Huffman {
 	return o;
     }
 
+// "decode" decodes a binary string based on the Huffman code stored
+// in the given Node structure
     public static String decode(Node H, String s) {
 	String o = "";
 	Node w = H;

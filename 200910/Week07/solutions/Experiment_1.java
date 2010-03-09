@@ -49,9 +49,8 @@ class ExperimentA extends Experiment {
 	Huffman.hc(H);
 
 	Huffman.out(C);
-	String s_plain = "adeedbede";
-	System.out.println("Text:      " + s_plain);
-	String s_code = Huffman.encode(s_plain);
+	System.out.println("Text:      " + plaintext);
+	String s_code = Huffman.encode(plaintext);
 	System.out.println("Encoding:  " + s_code);
 	System.out.println("Decoding:  " + Huffman.decode(H,s_code) + "\n\n");
     }
@@ -87,9 +86,8 @@ class ExperimentA1 extends Experiment {
 	Huffman.hc(H);
 
 	Huffman.out(C);
-	String s_plain = "adeedbede";
-	System.out.println("Text:      " + s_plain);
-	String s_code = Huffman.encode(s_plain);
+	System.out.println("Text:      " + plaintext);
+	String s_code = Huffman.encode(plaintext);
 	System.out.println("Encoding:  " + s_code);
 	System.out.println("Decoding:  " + Huffman.decode(H,s_code) + "\n\n");
     }
