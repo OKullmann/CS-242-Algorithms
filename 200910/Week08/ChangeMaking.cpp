@@ -42,7 +42,7 @@ namespace {
 
 }
 
-int main(const unsigned int argc, const char* const argv[]) {
+int main(const int argc, const char* const argv[]) {
 
   if (argc < 2) {
     std::cerr << err << "At least one parameter is needed, the amount N to be returned.\n";
@@ -69,7 +69,7 @@ int main(const unsigned int argc, const char* const argv[]) {
     return 0;
   }
   vector_type d;
-  for (size_type i = 2; i < argc; ++i) {
+  for (size_type i = 2; i < (size_type) argc; ++i) {
     std::stringstream parameters;
     parameters << argv[i];
     parameters >> dummy;
