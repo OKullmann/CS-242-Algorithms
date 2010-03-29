@@ -7,7 +7,7 @@ SHELL = /bin/bash
 
 ###
 
-programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class ExperimentD.class
+programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class
 
 all : $(programs)
 
