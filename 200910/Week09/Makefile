@@ -19,9 +19,6 @@ cleanall :
 Array_Generators.class : Generators.java
 	javac $<
 
-Huffman.class : Huffman.java
-	javac $<
-
 Experiment.class : Experiment.java Huffman.class
 	javac $<
 
