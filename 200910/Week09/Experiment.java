@@ -12,14 +12,14 @@
 */
 
 class Experiment {
-    public static Edge e1 = new Edge(1,2);
-    public static Edge e2 = new Edge(1,3);
-    public static Edge e3 = new Edge(1,4);
-    public static Edge e4 = new Edge(2,3);
-    public static Edge e5 = new Edge(3,4);
-    public static Edge e6 = new Edge(3,1);
-    public static Edge e7 = new Edge(4,2);
-    public static Edge e8 = new Edge(4,5);
+    public static Edge e1 = new Edge(1,2,5);
+    public static Edge e2 = new Edge(1,3,4);
+    public static Edge e3 = new Edge(1,4,3);
+    public static Edge e4 = new Edge(2,3,7);
+    public static Edge e5 = new Edge(3,4,1);
+    public static Edge e6 = new Edge(3,1,5);
+    public static Edge e7 = new Edge(4,2,3);
+    public static Edge e8 = new Edge(4,0,8);
     public static Edge[] edges = {e1,e2,e3,e4,e5,e6,e7,e8};
 }
 
@@ -33,9 +33,12 @@ class Experiment {
 
 class ExperimentA extends Experiment {
 
-    static void outp(int[] vs) {
-	for (int i = 1; i <= vs[0]; i++) {
-	    System.out.printf("  %2d", vs[i]);
+    static void outp(FlowNode[] vs) {
+	int i = 0;
+	while (vs[i] != null) {
+	    System.out.printf("  %2d (c:%2d  f:%2d  rc:%2d)",
+			      vs[i].v, vs[i].c, vs[i].f, vs[i].rc);
+	    i++;
 	}
 	System.out.print("\n");
     }
@@ -51,28 +54,20 @@ class ExperimentA extends Experiment {
 	    return;
 	}
 
-	AdjacencyList G = new AdjacencyList(5);
+	FlowAdjacencyList G = new FlowAdjacencyList(5);
 	G.add_edges(edges);
-	System.out.print(" 1 -> ");
-	int[] vs = G.neighb(1);
-	outp( vs );
-
-	/*
-	Node H,x,y;
-	y = new Node(7,d,e);
-	y = new Node(7,c,y);
-	y = new Node(8,b,y);
-	H = new Node(9,a,y);
-	Huffman.hc(H);
-
-	Huffman.out(C);
-	System.out.println("Text:      " + plaintext);
-	String s_code = Huffman.encode(plaintext);
-	System.out.println("Encoding:  " + s_code);
-	System.out.println("Decoding:  " + Huffman.decode(H,s_code) + "\n\n");
-	*/
-
-    }
+	for (int i=0; i<5; i++) {
+	    System.out.printf(" %d -> ",i);
+	    FlowNode[] vs = G.neighb(i);
+	    outp( vs );
+	}
+	G.residual_network();
+ 	for (int i=0; i<5; i++) {
+	    System.out.printf(" %d -> ",i);
+	    FlowNode[] vs = G.neighb(i);
+	    outp( vs );
+	}
+   }
 
 }
 

@@ -7,7 +7,7 @@ SHELL = /bin/bash
 
 ###
 
-programs = Huffman.class Experiment.class ExperimentA.class ExperimentB.class ExperimentC.class ExperimentD.class
+programs = FlowAdjacencyList.class Experiment.class
 
 all : $(programs)
 
@@ -16,10 +16,10 @@ cleanall :
 
 #########################
 
-Array_Generators.class : Generators.java
+FlowAdjacencyList.class : FlowNetworks.java
 	javac $<
 
-Experiment.class : Experiment.java Huffman.class
+Experiment.class : Experiment.java FlowAdjacencyList.class
 	javac $<
 
 Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
