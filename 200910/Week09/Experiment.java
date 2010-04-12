@@ -5,6 +5,7 @@
   Descr: Experiments with network flows
 */
 
+import java.util.LinkedList;
 
 /*
   "Experiment" stores the frequencies of the letters
@@ -21,6 +22,7 @@ class Experiment {
     public static Edge e7 = new Edge(4,2,3);
     public static Edge e8 = new Edge(4,0,8);
     public static Edge[] edges = {e1,e2,e3,e4,e5,e6,e7,e8};
+//    public static Edge[] edges = {e2,e6};
 }
 
 
@@ -33,12 +35,29 @@ class Experiment {
 
 class ExperimentA extends Experiment {
 
-    static void outp(FlowNode[] vs) {
+    static void outp(LinkedList<FlowNode> vs) {
 	int i = 0;
-	while (vs[i] != null) {
+	for (FlowNode fn : vs) {
+	    if (++i == 4) {
+		System.out.print("\n      ");
+		i = 0;
+	    }
 	    System.out.printf("  %2d (c:%2d  f:%2d  rc:%2d)",
-			      vs[i].v, vs[i].c, vs[i].f, vs[i].rc);
-	    i++;
+			      fn.v, fn.c, fn.f, fn.rc);
+	}
+	System.out.print("\n");
+    }
+
+    static void flow_outp(LinkedList<FlowNode> vs) {
+	int i = 0;
+	for (FlowNode fn : vs) {
+	    if (++i == 4) {
+		System.out.print("\n      ");
+		i = 0;
+	    }
+	    if (fn.f > 0)
+		System.out.printf("  %2d (c:%2d  f:%2d)",
+				  fn.v, fn.c, fn.f);
 	}
 	System.out.print("\n");
     }
@@ -54,19 +73,55 @@ class ExperimentA extends Experiment {
 	    return;
 	}
 
-	FlowAdjacencyList G = new FlowAdjacencyList(5);
+	FlowAdjacencyList G = new FlowAdjacencyList(5,1,4);
 	G.add_edges(edges);
+	G.FordFulkerson();
 	for (int i=0; i<5; i++) {
 	    System.out.printf(" %d -> ",i);
-	    FlowNode[] vs = G.neighb(i);
-	    outp( vs );
+	    LinkedList<FlowNode> vs = G.neighb(i);
+	    flow_outp( vs );
 	}
+	return;
+
+/*
 	G.residual_network();
  	for (int i=0; i<5; i++) {
 	    System.out.printf(" %d -> ",i);
-	    FlowNode[] vs = G.neighb(i);
+	    LinkedList<FlowNode> vs = G.neighb(i);
 	    outp( vs );
 	}
+
+	int[] R = G.augmenting_path();
+	int cf = G.residual_capacity(R);
+	System.out.printf("\n\nresidual capacity:  %d \n",cf);
+	G.adjust_residual_capacity(R,cf);
+	G.residual_network();
+ 	for (int i=0; i<5; i++) {
+	    System.out.printf(" %d -> ",i);
+	    LinkedList<FlowNode> vs = G.neighb(i);
+	    outp( vs );
+	}
+
+	R = G.augmenting_path();
+	cf = G.residual_capacity(R);
+	System.out.printf("\n\nresidual capacity:  %d \n",cf);
+	G.adjust_residual_capacity(R,cf);
+	G.residual_network();
+ 	for (int i=0; i<5; i++) {
+	    System.out.printf(" %d -> ",i);
+	    LinkedList<FlowNode> vs = G.neighb(i);
+	    outp( vs );
+	}
+
+	R = G.augmenting_path();
+	cf = G.residual_capacity(R);
+	if (R[G.target]<0) {
+	    System.out.printf("\n\nNo augmenting path exists. \n");
+	} else {
+	    cf = G.residual_capacity(R);
+	    System.out.printf("\n\nresidual capacity:  %d \n",cf);
+	}
+*/
    }
 
 }

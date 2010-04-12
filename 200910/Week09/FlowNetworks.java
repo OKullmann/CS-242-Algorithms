@@ -6,9 +6,9 @@
   Descr: Simple representation of directed graphs via adjacency lists
 */
 
-
-// import java.util.Hashtable;
-
+import java.util.Iterator;
+import java.util.Queue;
+import java.util.LinkedList;
 
 /*
   The next class defines a basic compound data structure suitable
@@ -38,7 +38,7 @@ class Edge {
 }
 
 
-class FlowNode {
+class FlowNode implements Comparable<FlowNode> {
     int v;     // vertex
     int c;     // capacity
     int f;     // flow to this vertex
@@ -50,71 +50,89 @@ class FlowNode {
     void rc() {
 	this.rc = this.c - this.f;
     }
+
+    public int compareTo(FlowNode n) {
+	return (this.v - n.v);
+    }
+    public boolean equals(FlowNode n) {
+	return (this.v == n.v);
+    }
+
 }
  
 
 class FlowAdjacencyList {
 
-    // For each vertex, a FlowadjacencyList will store the list
-    // of adjacent vertices in increasing order (stored in FlowNodes)
-
     int N;       // number of vertices
     // vertices are 0, .. ,N-1,
 
-    FlowNode[][] A;
+    // For each vertex, a FlowAdjacencyList will store the list
+    // of adjacent vertices in increasing order (stored in FlowNodes)
 
-    FlowAdjacencyList (int N) {
+
+    // Due to a flaw/ feature of java generics we cannot use
+    // generic array creation. i.e. something of the form
+    //    new LinkedList<FlowNode>[N]
+    // Here is a workaround
+    class AdjList {
+	private LinkedList<FlowNode> ll;
+    }
+
+    AdjList [] A;
+    int source;
+    int target;
+
+    FlowAdjacencyList (int N, int s, int t) {
 	this.N = N;
-	A = new FlowNode[N][N+1];
+	source = s;  // one should check that s,t are in the right range
+	target = t;  // 0,..,N-1 and through exception otherwise.
+
+	A = new AdjList [N];
 	for (int i = 0; i < N; i++) {
-	    for (int j = 0; j < N+1; j++)
-		A[i][j] = null;
+	    A[i] = new AdjList();
+	    A[i].ll = new LinkedList<FlowNode>();
 	}
     }
+
+
+    int indexOf(LinkedList<FlowNode> fnll, FlowNode fn) {
+//  There seems to be a bug with the indexOf method, therefore I have
+//  written my own method computing the index of an occurrence
+	Iterator<FlowNode> itr = fnll.iterator(); 
+	int i=-1;
+	int j=0;
+	while(itr.hasNext()) {
+	    if (fn.equals(itr.next()))
+		i=j;
+	    j++;
+	}
+//  i  is an index of an element in the linked list with vertex v,
+//  if it exists, o/w i=-1
+	return i;
+    }
+
 
     void add_edge(Edge edge) {
 	int u = edge.l;
 	int v = edge.r;
 	int c = edge.c;
 
-	int i = 0;
-	int j;
-	// try to find v in u's adjacency list
-	while (A[u][i] != null  &&  A[u][i].v < v)  i++;
-	if (A[u][i] != null  &&  A[u][i].v == v) {
-	    // v is in u's adjacency list, just update capacity.
-	    A[u][i].c = c;
-	    return;
-	}
-	if (A[u][i] == null) {
-	    // v not in u's adjacency list
-	    // and all elements in u's adjacency list are smaller than v
-	    A[u][i] = new FlowNode(v,c);
+	FlowNode fn = new FlowNode(v,c);
+	LinkedList<FlowNode> fnll = A[u].ll;
+	int i = indexOf(fnll,fn);
+	if (i>=0) {
+	    // v in u's adjacency list: 
+	    // update capacity
+	    fnll.remove(i);
+	    fnll.add(fn);	    
 	} else {
-	    // v is not in u's adjacency list, and some elements are bigger
-	    // than v - we make space for v by shifting elements
-	    j = i+1;
-	    while (A[u][j] != null)  j++;
-	    while (j > i)  A[u][j] = A[u][--j];
-	    A[u][i] = new FlowNode(v,c);
+	    // v not in u's adjacency list: 
+	    // add v with capacity c to u's list
+	    fnll.add(fn);
+	    // and u with capacity 0 to v's list
+	    FlowNode fnr = new FlowNode(u,0);
+	    A[v].ll.add(fnr);
 	}
-
-	// We also add u to v's adjacency list with 0 capacity.
-	// We know that u is not in v's adjacency list.
-	i = 0;
-	while (A[v][i] != null  &&  A[v][i].v < u)  i++;
-	if (A[v][i] == null) {
-	    // all elements in v's adjacency list are smaller than u
-	    A[v][i] = new FlowNode(u,0);
-	} else {
-	    // some elements in v's adjacency list are bigger
-	    // than u - we make space for u by shifting elements
-	    j = i+1;
-	    while (A[v][j] != null)  j++;
-	    while (j > i)  A[v][j] = A[v][--j];
-	    A[v][i] = new FlowNode(u,0);
-	}
-
     }
 
     void add_edges(Edge[] edges) {
@@ -122,18 +140,95 @@ class FlowAdjacencyList {
 	    add_edge( edges[i] );       
     }
 
-    FlowNode[] neighb (int u) {
-	return A[u];
+     LinkedList<FlowNode> neighb (int u) {
+	return A[u].ll;
     }
 
     void residual_network () {
-	//	System.out.printf("<rn> start \n");
 	for (int u=0; u<N; u++) {
-	    //  System.out.printf("<rn> %d \n",u);
-	    for (int j=0; A[u][j] != null; j++)
-		A[u][j].rc();
+	    for (FlowNode fn : A[u].ll) 
+		fn.rc();
 	}
     }
 
+
+    int[] augmenting_path () {
+	int[] R = new int[N];   // result vector of parent nodes
+	for (int i = 1; i < N; i++)  R[i] = -1;
+
+	Queue<Integer> Q = new LinkedList<Integer>();   // queue for bfs
+	Q.add(source);
+
+	while (Q.peek() != null) {
+	    int u = Q.poll();
+	    LinkedList<FlowNode> fnll = A[u].ll;
+	    Iterator<FlowNode> itr = fnll.iterator(); 
+	    while(itr.hasNext()) {
+		FlowNode fn = itr.next();
+		int v = fn.v;
+		if (R[v]<0 && fn.rc>0) {
+		    R[v] = u;
+		    Q.offer(v);
+		}
+	    }
+	}
+
+	return R;
+    }
+
+
+    int residual_capacity (int[] R) {
+	int cf = Integer.MAX_VALUE;
+	if (R[target]<0) return cf;
+
+	int v = target;
+	while (v != source) {
+	    int u = R[v];
+	    FlowNode fn = new FlowNode(v,0);
+	    LinkedList<FlowNode> fnll = A[u].ll;
+	    int i = indexOf(fnll,fn);
+	    cf = Math.min(cf, fnll.get(i).rc);
+	    v = u;
+	}
+	return cf;
+    }
+
+
+    void adjust_residual_capacity (int[] R, int cf) {
+	int v = target;
+	if (R[target]<0) return;
+	while (v != source) {
+	    int u = R[v];
+
+	    FlowNode fn = new FlowNode(v,0);
+	    LinkedList<FlowNode> fnll = A[u].ll;
+	    int i = indexOf(fnll,fn);
+	    fn = fnll.get(i);
+	    fn.f += cf;
+	    fnll.set(i,fn);
+
+	    fn = new FlowNode(u,0);
+	    fnll = A[v].ll;
+	    i = indexOf(fnll,fn);
+	    fn = fnll.get(i);
+	    fn.f -= cf;
+	    fnll.set(i,fn);
+
+	    v = u;
+	}
+
+    }
+
+
+    void FordFulkerson () {
+	residual_network();
+	int[] R = augmenting_path();
+	while (R[target]>=0) {
+	    int cf = residual_capacity(R);
+	    adjust_residual_capacity(R,cf);
+	    residual_network();
+	    R = augmenting_path();
+	}
+    }
 }
 
