@@ -51,13 +51,15 @@ class ExperimentA extends Experiment {
     static void flow_outp(LinkedList<FlowNode> vs) {
 	int i = 0;
 	for (FlowNode fn : vs) {
-	    if (++i == 4) {
+	    if (i == 3) {
 		System.out.print("\n      ");
 		i = 0;
 	    }
-	    if (fn.f > 0)
+	    if (fn.c > 0) {
 		System.out.printf("  %2d (c:%2d  f:%2d)",
 				  fn.v, fn.c, fn.f);
+		i++;
+	    }
 	}
 	System.out.print("\n");
     }
@@ -73,6 +75,7 @@ class ExperimentA extends Experiment {
 	    return;
 	}
 
+	System.out.println("");
 	FlowAdjacencyList G = new FlowAdjacencyList(5,1,4);
 	G.add_edges(edges);
 	G.FordFulkerson();
@@ -81,6 +84,7 @@ class ExperimentA extends Experiment {
 	    LinkedList<FlowNode> vs = G.neighb(i);
 	    flow_outp( vs );
 	}
+	System.out.println("");
 	return;
 
 /*
