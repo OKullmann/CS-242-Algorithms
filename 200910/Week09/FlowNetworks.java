@@ -95,9 +95,11 @@ class FlowAdjacencyList {
     }
 
 
+//  There seems to be a bug with the indexOf method for linked lists,
+//  therefore I had to write my own method computing the index
+//  of an occurrence 
+
     int indexOf(LinkedList<FlowNode> fnll, FlowNode fn) {
-//  There seems to be a bug with the indexOf method, therefore I have
-//  written my own method computing the index of an occurrence
 	Iterator<FlowNode> itr = fnll.iterator(); 
 	int i=-1;
 	int j=0;
@@ -106,9 +108,9 @@ class FlowAdjacencyList {
 		i=j;
 	    j++;
 	}
+	return i;
 //  i  is an index of an element in the linked list with vertex v,
 //  if it exists, o/w i=-1
-	return i;
     }
 
 
@@ -119,14 +121,16 @@ class FlowAdjacencyList {
 
 	FlowNode fn = new FlowNode(v,c);
 	LinkedList<FlowNode> fnll = A[u].ll;
-	int i = indexOf(fnll,fn);
+	int i = indexOf(fnll,fn);  // computes index of occurrence of fn
+	                           // in fnll
+
 	if (i>=0) {
-	    // v in u's adjacency list: 
+	    // v occurs in u's adjacency list: 
 	    // update capacity
 	    fnll.remove(i);
 	    fnll.add(fn);	    
 	} else {
-	    // v not in u's adjacency list: 
+	    // v does not occur in u's adjacency list: 
 	    // add v with capacity c to u's list
 	    fnll.add(fn);
 	    // and u with capacity 0 to v's list
@@ -140,9 +144,11 @@ class FlowAdjacencyList {
 	    add_edge( edges[i] );       
     }
 
-     LinkedList<FlowNode> neighb (int u) {
+
+    LinkedList<FlowNode> neighb (int u) {
 	return A[u].ll;
     }
+
 
     void residual_network () {
 	for (int u=0; u<N; u++) {
@@ -230,5 +236,6 @@ class FlowAdjacencyList {
 	    R = augmenting_path();
 	}
     }
+
 }
 

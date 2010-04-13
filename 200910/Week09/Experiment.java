@@ -8,8 +8,8 @@
 import java.util.LinkedList;
 
 /*
-  "Experiment" stores the frequencies of the letters
-   occurring in the plain text "adeedbede"
+  "Experiment" stores some edges with capacities in a directed graph
+  with 5 nodes.
 */
 
 class Experiment {
@@ -22,15 +22,11 @@ class Experiment {
     public static Edge e7 = new Edge(4,2,3);
     public static Edge e8 = new Edge(4,0,8);
     public static Edge[] edges = {e1,e2,e3,e4,e5,e6,e7,e8};
-//    public static Edge[] edges = {e2,e6};
 }
 
 
 /*
-  "ExperimentA" implements a non optimal prefix code for text in
-  "Experiment" and applies it to the text.  You will have to 
-  change this to an optimal prefix code, i.e. one such that the
-  encoded text has minimal length.
+  "ExperimentA"
 */
 
 class ExperimentA extends Experiment {
@@ -76,9 +72,11 @@ class ExperimentA extends Experiment {
 	}
 
 	System.out.println("");
+
 	FlowAdjacencyList G = new FlowAdjacencyList(5,1,4);
 	G.add_edges(edges);
 	G.FordFulkerson();
+
 	for (int i=0; i<5; i++) {
 	    System.out.printf(" %d -> ",i);
 	    LinkedList<FlowNode> vs = G.neighb(i);
