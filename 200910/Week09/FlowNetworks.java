@@ -10,21 +10,6 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.LinkedList;
 
-/*
-  The next class defines a basic compound data structure suitable
-  for implementing Huffman codes.
-
-
-    Undirected graphs are represented via symmetric digraphs.
-    The main functionality:
-     - AdjacencyList(N) creates a graph with N vertices and zero edges.
-     - G.add_edges(begin,end, directed=false) adds edges (as vertex-pairs)
-       to graph G.
-     - G[v] returns the adjacency-vector of vertex v.
-
-    Vertices are represented by natural numbers 0, ..., N-1.
-
-*/
 
 class Edge {
 
@@ -85,7 +70,7 @@ class FlowAdjacencyList {
     FlowAdjacencyList (int N, int s, int t) {
 	this.N = N;
 	source = s;  // one should check that s,t are in the right range
-	target = t;  // 0,..,N-1 and through exception otherwise.
+	target = t;  // 0,..,N-1 and throw an exception otherwise.
 
 	A = new AdjList [N];
 	for (int i = 0; i < N; i++) {
@@ -115,6 +100,12 @@ class FlowAdjacencyList {
 
 
     void add_edge(Edge edge) {
+  /*
+      adds edge with capacity
+      if (u,v) with capacity c has to be added, we also add
+      (v,u) with capacity 0  (this is beneficial later when
+      computing residual graphs)
+  */
 	int u = edge.l;
 	int v = edge.r;
 	int c = edge.c;
@@ -151,6 +142,10 @@ class FlowAdjacencyList {
 
 
     void residual_network () {
+/*
+     For each edga in the flow network, we compute the residual 
+     capacity.
+*/
 	for (int u=0; u<N; u++) {
 	    for (FlowNode fn : A[u].ll) 
 		fn.rc();
@@ -159,6 +154,12 @@ class FlowAdjacencyList {
 
 
     int[] augmenting_path () {
+/*
+    Try to find augmenting path using bfs.
+    We return a vector  R  which stores for each node  v   either a
+    parent on a path from  source  to  v,  or  -1  if no such exists.
+    Thus,  target  is reachable from  source  iff  R[target]>=0.
+*/
 	int[] R = new int[N];   // result vector of parent nodes
 	for (int i = 1; i < N; i++)  R[i] = -1;
 
@@ -184,6 +185,9 @@ class FlowAdjacencyList {
 
 
     int residual_capacity (int[] R) {
+/*
+    Compute residual capacity of an augmenting path given by  R
+*/
 	int cf = Integer.MAX_VALUE;
 	if (R[target]<0) return cf;
 
@@ -201,6 +205,10 @@ class FlowAdjacencyList {
 
 
     void adjust_residual_capacity (int[] R, int cf) {
+/*
+    Given an augmenting path by R with residual capacity cf
+    we update flow by induced flow along this path.
+*/
 	int v = target;
 	if (R[target]<0) return;
 	while (v != source) {
@@ -236,6 +244,37 @@ class FlowAdjacencyList {
 	    R = augmenting_path();
 	}
     }
+
+
+    static void outp(LinkedList<FlowNode> vs) {
+	int i = 0;
+	for (FlowNode fn : vs) {
+	    if (++i == 4) {
+		System.out.print("\n      ");
+		i = 0;
+	    }
+	    System.out.printf("  %2d (c:%2d  f:%2d  rc:%2d)",
+			      fn.v, fn.c, fn.f, fn.rc);
+	}
+	System.out.print("\n");
+    }
+
+    static void flow_outp(LinkedList<FlowNode> vs) {
+	int i = 0;
+	for (FlowNode fn : vs) {
+	    if (i == 3) {
+		System.out.print("\n      ");
+		i = 0;
+	    }
+	    if (fn.c > 0) {
+		System.out.printf("  %2d (c:%2d  f:%2d)",
+				  fn.v, fn.c, fn.f);
+		i++;
+	    }
+	}
+	System.out.print("\n");
+    }
+
 
 }
 
