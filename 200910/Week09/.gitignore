@@ -1,4 +1,4 @@
-*.class
+Experiment*.class
 out.txt
 .R*
 WEG
