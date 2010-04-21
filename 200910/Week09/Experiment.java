@@ -104,6 +104,8 @@ class ExperimentB {
 	FlowAdjacencyList G = new FlowAdjacencyList(5,0,4);
 	G.add_edges(edges);
 
+	System.out.println("\n\n     Some intermediate step in computing "
+	    + "maximum flow in a flow network:\n");
 
 	G.residual_network();
 	int[] R = G.augmenting_path();
@@ -112,7 +114,7 @@ class ExperimentB {
 
 
 
-	System.out.println("\nA flow network and some flow:");
+	System.out.println("\nThe flow network with some flow:");
  	for (int i=0; i<5; i++) {
 	    System.out.printf(" %d -> ",i);
 	    LinkedList<FlowNode> vs = G.neighb(i);
@@ -127,17 +129,17 @@ class ExperimentB {
 	    G.outp( vs );
 	}
 
-	System.out.println("\nFind augmenting path with BFS:");
+	System.out.println("\nFind augmenting path using BFS:");
 	R = G.augmenting_path();
 	for (int i=0; i<5; i++) {
-	    if ((i % 4) == 0) System.out.println();
 	    System.out.printf(" %d has parent %d    ",i,R[i]);
+	    if ((i % 4) == 3) System.out.println();
 	}
 
 
 	cf = G.residual_capacity(R);
-	System.out.printf("\n\nResidual capacity along augmenting path:  %d\n\n",
-			  cf);
+	System.out.printf("\n\nResidual capacity "
+	      + "along augmenting path:  %d\n\n", cf);
 
 
 
