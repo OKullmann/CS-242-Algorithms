@@ -23,11 +23,12 @@ class Edge {
 }
 
 
-class FlowNode implements Comparable<FlowNode> {
-    int v;     // vertex
-    int c;     // capacity
-    int f;     // flow to this vertex
-    int rc;    // residual capacity to v
+//class FlowNode implements Comparable<FlowNode> {
+class FlowNode {
+    public final int v;     // vertex
+    public final int c;     // capacity
+    public int f;     // flow to this vertex
+    public int rc;    // residual capacity to v
 
     FlowNode (int v, int c)
     { this.v = v; this.c = c; this.f = 0;}
@@ -43,6 +44,9 @@ class FlowNode implements Comparable<FlowNode> {
 	return (this.v == n.v);
     }
 
+    public String toString() {
+	return "" + v + ", " + c + ", " + f + ", " + rc;
+    }
 }
  
 
@@ -84,16 +88,26 @@ class FlowAdjacencyList {
 //  therefore I had to write my own method computing the index
 //  of an occurrence 
 
-    int indexOf(LinkedList<FlowNode> fnll, FlowNode fn) {
+    int indexOf(final LinkedList<FlowNode> fnll, final FlowNode fn) {
+	
+	assert fnll != null;
+	assert fn != null;
 	Iterator<FlowNode> itr = fnll.iterator(); 
 	int i=-1;
 	int j=0;
 	while(itr.hasNext()) {
-	    if (fn.equals(itr.next()))
+	    final FlowNode fni = itr.next();
+//System.err.println(fni);
+	    if (fn.equals(fni)) {
 		i=j;
+		break;
+	    }
 	    j++;
 	}
+//System.err.println();
 	return i;
+	
+        // return fnll.indexOf(fn);
 //  i  is an index of an element in the linked list with vertex v,
 //  if it exists, o/w i=-1
     }
@@ -184,7 +198,7 @@ class FlowAdjacencyList {
     }
 
 
-    int residual_capacity (int[] R) {
+    int residual_capacity (final int[] R) {
 /*
     Compute residual capacity of an augmenting path given by  R
 */
@@ -197,6 +211,7 @@ class FlowAdjacencyList {
 	    FlowNode fn = new FlowNode(v,0);
 	    LinkedList<FlowNode> fnll = A[u].ll;
 	    int i = indexOf(fnll,fn);
+	    assert i>=0;
 	    cf = Math.min(cf, fnll.get(i).rc);
 	    v = u;
 	}
