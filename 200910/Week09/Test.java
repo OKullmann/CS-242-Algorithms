@@ -1,13 +1,33 @@
-// Arnold Beckmann, 30.03.2010 (Swansea)
+// Arnold Beckmann, 22.04.2010 (Swansea)
 
 
 /*
-  File:  200910/Week09/FlowNetworks.java
-  Descr: Simple representation of directed graphs via adjacency lists
+  File:  200910/Week09/Test.java
+  Descr: Testing indexOf for LinkedLists
 */
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+
+class TestClass {
+	public final int v;     // vertex
+	public final int c;     // capacity
+
+	TestClass (int v, int c)
+	    { this.v = v; this.c = c; }
+
+	public boolean equals(Object o) {
+	    TestClass n = (TestClass) o;
+	    System.err.println("Used TestClass equals method.");
+	    return (this.v == n.v);
+	}
+
+	public String toString() {
+	    return "" + v + ", " + c;
+	}
+    }
+
 
 
 public class Test {
@@ -24,30 +44,32 @@ public class Test {
 	    return;
 	}
 
+
 	TestClass fn1 = new TestClass(1,5);
 	TestClass fn2 = new TestClass(2,5);
 	TestClass fn3 = new TestClass(1,4);
 	LinkedList<TestClass> fnll = new LinkedList<TestClass>();
 	fnll.add(fn1);
-	
+
+	// first use the indexOf method of a LinkedList object
 	int i = fnll.indexOf(fn1);
-	System.err.println("\n" + fn1 + "\n" + i + "\n\n");
-
+	System.err.println("" + fn1 + "\n" + i + "\n\n");
 	i = fnll.indexOf(fn2);
-	System.err.println("\n" + fn2 + "\n" + i + "\n\n");
-
+	System.err.println("" + fn2 + "\n" + i + "\n\n");
 	i = fnll.indexOf(fn3);
-	System.err.println("\n" + fn3 + "\n" + i + "\n\n");
+	System.err.println("" + fn3 + "\n" + i + "\n\n");
 
-	
+
+	// now use my own indexOf method below, constructed after
+	// the official java  
 	i = indexOf(fnll,fn1);
-	System.err.println("\n" + fn1 + "\n" + i + "\n\n");
+	System.err.println("" + fn1 + "\n" + i + "\n\n");
 
 	i = indexOf(fnll,fn2);
-	System.err.println("\n" + fn2 + "\n" + i + "\n\n");
+	System.err.println("" + fn2 + "\n" + i + "\n\n");
 
 	i = indexOf(fnll,fn3);
-	System.err.println("\n" + fn3 + "\n" + i + "\n\n");
+	System.err.println("" + fn3 + "\n" + i + "\n\n");
 
     }
 
