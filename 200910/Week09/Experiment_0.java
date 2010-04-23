@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 class ExperimentA {
 
-    protected static String program = "Experiment";
+    protected static String program = "ExperimentA";
     protected static String err = "ERROR[" + program + "]: ";
 
     public static void main(String[] args) {
@@ -25,7 +25,6 @@ class ExperimentA {
 	    System.err.println(err + "Exactly zero parameters are required.\n");
 	    return;
 	}
-
 
 	Edge e1 = new Edge(0,2,5);
 	Edge e2 = new Edge(1,2,3);
@@ -40,34 +39,16 @@ class ExperimentA {
 	FlowAdjacencyList G = new FlowAdjacencyList(5,0,4);
 	G.add_edges(edges);
 
-
-
 	G.FordFulkerson();
 
-
-
-	System.out.println();
+	System.out.println("\n" + G + "\n");
 	for (int i=0; i<5; i++) {
-	    System.out.printf(" %d -> ",i);
-	    LinkedList<FlowNode> vs = G.neighb(i);
-	    G.flow_outp( vs );
+	    System.out.printf("Net flow out of vertex %d:  %d\n",i,G.value(i));
 	}
 	System.out.println();
-
-	for (int i=0; i<5; i++) {
-	    LinkedList<FlowNode> vs = G.neighb(i);
-	    int f = 0;
-	    for (FlowNode fn : vs) {
-		f += fn.f;
-	    }
-	    System.out.printf("Flow out of node %d:  %d\n",i,f);
-	}
-	System.out.println();
-
    }
 
 }
-
 
 
 
@@ -79,7 +60,7 @@ class ExperimentA {
 
 class ExperimentB {
 
-    protected static String program = "Experiment";
+    protected static String program = "ExperimentB";
     protected static String err = "ERROR[" + program + "]: ";
 
     public static void main(String[] args) {
@@ -89,7 +70,6 @@ class ExperimentB {
 	    System.err.println(err + "Exactly zero parameters are required.\n");
 	    return;
 	}
-
 
 	Edge e1 = new Edge(0,2,5);
 	Edge e2 = new Edge(1,2,3);
@@ -112,22 +92,10 @@ class ExperimentB {
 	int cf = G.residual_capacity(R);
 	G.adjust_residual_capacity(R,cf);
 
-
-
-	System.out.println("\nThe flow network with some flow:");
- 	for (int i=0; i<5; i++) {
-	    System.out.printf(" %d -> ",i);
-	    LinkedList<FlowNode> vs = G.neighb(i);
-	    G.flow_outp( vs );
-	}
-
-	System.out.println("\nCompute the residual network:");
 	G.residual_network();
- 	for (int i=0; i<5; i++) {
-	    System.out.printf(" %d -> ",i);
-	    LinkedList<FlowNode> vs = G.neighb(i);
-	    G.outp( vs );
-	}
+	System.out.println("\nThe flow network with some flow "
+			   + "and residual capacities:\n");
+	System.out.println(G);
 
 	System.out.println("\nFind augmenting path using BFS:");
 	R = G.augmenting_path();
@@ -136,15 +104,12 @@ class ExperimentB {
 	    if ((i % 4) == 3) System.out.println();
 	}
 
-
 	cf = G.residual_capacity(R);
 	System.out.printf("\n\nResidual capacity "
 	      + "along augmenting path:  %d\n\n", cf);
 
-
-
    }
 
-
 }
+
 

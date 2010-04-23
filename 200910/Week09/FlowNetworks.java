@@ -13,9 +13,9 @@ import java.util.LinkedList;
 
 class Edge {
 
-    int l;     // left vertex
-    int r;     // right vertex
-    int c;     // capacity along this edge
+    public final int l;     // left vertex
+    public final int r;     // right vertex
+    public final int c;     // capacity along this edge
 
     Edge (int l, int r, int c)
     { this.l = l; this.r = r; this.c = c; }
@@ -37,15 +37,17 @@ class FlowNode {
 	this.rc = this.c - this.f;
     }
 
-    public int compareTo(FlowNode n) {
+    public int compareTo(Object o) {
+	FlowNode n = (FlowNode) o;
 	return (this.v - n.v);
     }
-    public boolean equals(FlowNode n) {
+    public boolean equals(Object o) {
+	FlowNode n = (FlowNode) o;
 	return (this.v == n.v);
     }
 
     public String toString() {
-	return "" + v + ", " + c + ", " + f + ", " + rc;
+	return "" + v + " (f: " + f + ", c:" + c + ", rc:" + rc + ") ";
     }
 }
  
@@ -73,43 +75,16 @@ class FlowAdjacencyList {
 
     FlowAdjacencyList (int N, int s, int t) {
 	this.N = N;
-	source = s;  // one should check that s,t are in the right range
-	target = t;  // 0,..,N-1 and throw an exception otherwise.
+	source = s;
+	target = t;
+	assert (0<=s && s<N);
+	assert (0<=t && t<N);
 
 	A = new AdjList [N];
 	for (int i = 0; i < N; i++) {
 	    A[i] = new AdjList();
 	    A[i].ll = new LinkedList<FlowNode>();
 	}
-    }
-
-
-//  There seems to be a bug with the indexOf method for linked lists,
-//  therefore I had to write my own method computing the index
-//  of an occurrence 
-
-    int indexOf(final LinkedList<FlowNode> fnll, final FlowNode fn) {
-	
-	assert fnll != null;
-	assert fn != null;
-	Iterator<FlowNode> itr = fnll.iterator(); 
-	int i=-1;
-	int j=0;
-	while(itr.hasNext()) {
-	    final FlowNode fni = itr.next();
-//System.err.println(fni);
-	    if (fn.equals(fni)) {
-		i=j;
-		break;
-	    }
-	    j++;
-	}
-//System.err.println();
-	return i;
-	
-        // return fnll.indexOf(fn);
-//  i  is an index of an element in the linked list with vertex v,
-//  if it exists, o/w i=-1
     }
 
 
@@ -126,13 +101,11 @@ class FlowAdjacencyList {
 
 	FlowNode fn = new FlowNode(v,c);
 	LinkedList<FlowNode> fnll = A[u].ll;
-	int i = indexOf(fnll,fn);  // computes index of occurrence of fn
-	                           // in fnll
 
-	if (i>=0) {
+	if (fnll.contains(fn)) {
 	    // v occurs in u's adjacency list: 
 	    // update capacity
-	    fnll.remove(i);
+	    fnll.remove(fn);
 	    fnll.add(fn);	    
 	} else {
 	    // v does not occur in u's adjacency list: 
@@ -203,14 +176,15 @@ class FlowAdjacencyList {
     Compute residual capacity of an augmenting path given by  R
 */
 	int cf = Integer.MAX_VALUE;
-	if (R[target]<0) return cf;
+	assert R[target]>=0;  // augmenting path does not exists as target
+	                      // is not reachable
 
 	int v = target;
 	while (v != source) {
 	    int u = R[v];
 	    FlowNode fn = new FlowNode(v,0);
 	    LinkedList<FlowNode> fnll = A[u].ll;
-	    int i = indexOf(fnll,fn);
+	    int i = fnll.indexOf(fn);
 	    assert i>=0;
 	    cf = Math.min(cf, fnll.get(i).rc);
 	    v = u;
@@ -225,20 +199,21 @@ class FlowAdjacencyList {
     we update flow by induced flow along this path.
 */
 	int v = target;
-	if (R[target]<0) return;
+	assert R[target]>=0;  // augmenting path does not exists as target
+	                      // is not reachable
 	while (v != source) {
 	    int u = R[v];
 
 	    FlowNode fn = new FlowNode(v,0);
 	    LinkedList<FlowNode> fnll = A[u].ll;
-	    int i = indexOf(fnll,fn);
+	    int i = fnll.indexOf(fn);
 	    fn = fnll.get(i);
 	    fn.f += cf;
 	    fnll.set(i,fn);
 
 	    fn = new FlowNode(u,0);
 	    fnll = A[v].ll;
-	    i = indexOf(fnll,fn);
+	    i = fnll.indexOf(fn);
 	    fn = fnll.get(i);
 	    fn.f -= cf;
 	    fnll.set(i,fn);
@@ -248,6 +223,16 @@ class FlowAdjacencyList {
 
     }
 
+    int value() {
+	return value(source);
+    }
+    int value(int u) {
+	int f = 0;
+	for (FlowNode fn : neighb(u)) {
+	    f += fn.f;
+	}
+	return f;
+    }
 
     void FordFulkerson () {
 	residual_network();
@@ -260,34 +245,30 @@ class FlowAdjacencyList {
 	}
     }
 
-
-    static void outp(LinkedList<FlowNode> vs) {
+    private static String full_outp(LinkedList<FlowNode> vs) {
+	String s="";
 	int i = 0;
 	for (FlowNode fn : vs) {
 	    if (++i == 4) {
-		System.out.print("\n      ");
+		s += "\n      ";
 		i = 0;
 	    }
-	    System.out.printf("  %2d (c:%2d  f:%2d  rc:%2d)",
+	    s += String.format("  %2d (c:%2d  f:%2d  rc:%2d)",
 			      fn.v, fn.c, fn.f, fn.rc);
 	}
-	System.out.print("\n");
+	return s;
     }
 
-    static void flow_outp(LinkedList<FlowNode> vs) {
-	int i = 0;
-	for (FlowNode fn : vs) {
-	    if (i == 3) {
-		System.out.print("\n      ");
-		i = 0;
-	    }
-	    if (fn.c > 0) {
-		System.out.printf("  %2d (c:%2d  f:%2d)",
-				  fn.v, fn.c, fn.f);
-		i++;
-	    }
+    public String toString() {
+	String s = "";
+    	for (int i=0; i<N; i++) {
+	    if (i>0) s += "\n";
+	    s += String.format(" %d -> ",i);
+	    LinkedList<FlowNode> vs = neighb(i);
+	    s += full_outp( vs );
 	}
-	System.out.print("\n");
+
+	return s;
     }
 
 
