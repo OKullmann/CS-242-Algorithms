@@ -54,7 +54,7 @@ class FlowNode {
 
 class FlowAdjacencyList {
 
-    int N;       // number of vertices
+    final int N;       // number of vertices
     // vertices are 0, .. ,N-1,
 
     // For each vertex, a FlowAdjacencyList will store the list
@@ -65,13 +65,13 @@ class FlowAdjacencyList {
     // generic array creation. i.e. something of the form
     //    new LinkedList<FlowNode>[N]
     // Here is a workaround
-    class AdjList {
+    private class AdjList {
 	private LinkedList<FlowNode> ll;
     }
 
-    AdjList [] A;
-    int source;
-    int target;
+    private AdjList [] A;
+    private final int source;
+    private final int target;
 
     FlowAdjacencyList (int N, int s, int t) {
 	this.N = N;
@@ -88,18 +88,18 @@ class FlowAdjacencyList {
     }
 
 
-    void add_edge(Edge edge) {
+    public void add_edge(final Edge edge) {
   /*
       adds edge with capacity
       if (u,v) with capacity c has to be added, we also add
       (v,u) with capacity 0  (this is beneficial later when
       computing residual graphs)
   */
-	int u = edge.l;
-	int v = edge.r;
-	int c = edge.c;
+	final int u = edge.l;
+	final int v = edge.r;
+	final int c = edge.c;
 
-	FlowNode fn = new FlowNode(v,c);
+	final FlowNode fn = new FlowNode(v,c);
 	LinkedList<FlowNode> fnll = A[u].ll;
 
 	if (fnll.contains(fn)) {
@@ -112,23 +112,23 @@ class FlowAdjacencyList {
 	    // add v with capacity c to u's list
 	    fnll.add(fn);
 	    // and u with capacity 0 to v's list
-	    FlowNode fnr = new FlowNode(u,0);
+	    final FlowNode fnr = new FlowNode(u,0);
 	    A[v].ll.add(fnr);
 	}
     }
 
-    void add_edges(Edge[] edges) {
+    public void add_edges(final Edge[] edges) {
 	for (int i = 0; i < edges.length; i++)
 	    add_edge( edges[i] );       
     }
 
 
-    LinkedList<FlowNode> neighb (int u) {
+    public LinkedList<FlowNode> neighb (int u) {
 	return A[u].ll;
     }
 
 
-    void residual_network () {
+    public void residual_network () {
 /*
      For each edga in the flow network, we compute the residual 
      capacity.
@@ -140,7 +140,7 @@ class FlowAdjacencyList {
     }
 
 
-    int[] augmenting_path () {
+    public int[] augmenting_path () {
 /*
     Try to find augmenting path using bfs.
     We return a vector  R  which stores for each node  v   either a
@@ -171,7 +171,7 @@ class FlowAdjacencyList {
     }
 
 
-    int residual_capacity (final int[] R) {
+    public int residual_capacity (final int[] R) {
 /*
     Compute residual capacity of an augmenting path given by  R
 */
@@ -193,7 +193,7 @@ class FlowAdjacencyList {
     }
 
 
-    void adjust_residual_capacity (int[] R, int cf) {
+    public void adjust_residual_capacity (final int[] R, final int cf) {
 /*
     Given an augmenting path by R with residual capacity cf
     we update flow by induced flow along this path.
@@ -223,10 +223,10 @@ class FlowAdjacencyList {
 
     }
 
-    int value() {
+    public int value() {
 	return value(source);
     }
-    int value(int u) {
+    public int value(final int u) {
 	int f = 0;
 	for (FlowNode fn : neighb(u)) {
 	    f += fn.f;
@@ -234,7 +234,7 @@ class FlowAdjacencyList {
 	return f;
     }
 
-    void FordFulkerson () {
+    public void FordFulkerson () {
 	residual_network();
 	int[] R = augmenting_path();
 	while (R[target]>=0) {
@@ -245,7 +245,7 @@ class FlowAdjacencyList {
 	}
     }
 
-    private static String full_outp(LinkedList<FlowNode> vs) {
+    private static String full_outp(final LinkedList<FlowNode> vs) {
 	String s="";
 	int i = 0;
 	for (FlowNode fn : vs) {
