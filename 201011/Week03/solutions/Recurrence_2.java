@@ -18,7 +18,7 @@ class Recurrence {
 	if (n<2)
 	    return 1;
 	else
-	    return (4*T(n/2)+n*n*n);
+	    return 4*T(n/2)+n*n*n;
     }
 
 }
