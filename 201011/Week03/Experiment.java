@@ -1,7 +1,7 @@
 // Arnold Beckmann, 05.02.2010 (Swansea)
 
 /*
-  File:  200910/Week03/Experiment.java
+  File:  201011/Week03/Experiment.java
   Descr: Experiments with recurrences
 
   "Experiment N" calls the recurrence N times;
@@ -15,7 +15,7 @@ class Experiment {
     protected static String program = "Experiment";
     protected static String err = "ERROR[" + program + "]: ";
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
 	//  this program requires one argument on the command line  
         if (args.length != 1) {
@@ -23,13 +23,12 @@ class Experiment {
 	    return;
 	}
 
-	int N = (Integer.valueOf(args[0]) ).intValue();
-	System.out.println("\n#  Experience Recurrences \n");
+	final int N = Integer.parseInt(args[0]);
+	System.out.println("\n#  Experience Recurrences\n");
 
-	System.out.println("  size count\n");
-	for (int i = 0; i <= N; i++) {
+	System.out.println(" size count\n");
+	for (int i = 0; i <= N; ++i)
 	    Recurrence.recurrence(i);
-	}
 	System.out.println("\n");
     }
 
