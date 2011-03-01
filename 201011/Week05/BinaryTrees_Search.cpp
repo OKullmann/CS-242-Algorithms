@@ -41,7 +41,7 @@ namespace {
 int main(const int argc, const char* const argv[]) {
 
   if (argc != 3) {
-    std::cerr << err << "Exactly two parameters are needed, the number of items, and the generator-type (\"1\" or \"2\").\n";
+    std::cerr << err << "Exactly two parameters are needed, the number of items, and the generator-type (\"0\" or \"1\").\n";
     return errcode_parameter;
   }
 
