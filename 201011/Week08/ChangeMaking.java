@@ -9,9 +9,10 @@
 
 class ChangeMaking { 
 
-    public final static int infinity = java.lang.Integer.MAX_VALUE;
+    public final static int infinity = java.lang.Integer.MAX_VALUE-10;
 
     public static int[][] making_change(final int N, final int[] d) {
+        ExecutionTimer.start();
 	final int n = d.length;
 	int[][] c = new int[n + 1][N + 1];
 	if (n == 0) return c;
@@ -25,27 +26,48 @@ class ChangeMaking {
 		    c[i][j] = c[i-1][j];
 		else
 		    c[i][j] = java.lang.Math.min(c[i-1][j], 1+c[i][j-d[i-1]]);
+	ExecutionTimer.end();
+	System.out.println(" " + N + " " + (ExecutionTimer.duration()) );
 
 	return c;
     }
 
 
-   public static String pay_out(final int[][] c, final int[] d) {
-       String out = "";
-       final int n = d.length;
-       if (n == 0) return out;
-       final int N = c[0].length - 1;
-       int i = n, j = N;
-       while (j > 0)
-	   if (i == 0) { j = 0; }
-	   else if (c[i][j] == c[i-1][j]) { i--; }
-	   else { 
-	       if (out.length() != 0) out += " + ";
-	       out += d[i-1]; 
-	       j -= d[i-1]; 
-	   }
-       return out;
-  }
+    public static String pay_out(final int[][] c, final int[] d) {
+	String out = "";
+	final int n = d.length;
+	if (n == 0) return out;
+	final int N = c[0].length - 1;
+	int i = n, j = N;
+	while (j > 0)
+	    if (i == 0) { j = 0; }
+	    else if (c[i][j] == c[i-1][j]) { i--; }
+	    else { 
+		if (out.length() != 0) out += " + ";
+		out += d[i-1]; 
+		j -= d[i-1]; 
+	    }
+	return out;
+    }
+
+
+
+    public static int rec_making_change(final int N, final int[] d) {
+        ExecutionTimer.start();
+	final int n = d.length;
+	int nc = rec_making_change(d, n, N);
+	ExecutionTimer.end();
+	System.out.println(" " + N + " " + (ExecutionTimer.duration()) );
+	return nc;
+    }
+
+    public static int rec_making_change(final int[] d, int i, int j) {
+	if (j <= 0) return 0;
+	if (i <= 0) return infinity;
+	int nc1 = rec_making_change(d, i-1, j);
+	if (j < d[i-1])  return nc1;
+	return java.lang.Math.min( nc1, 1+ rec_making_change(d, i, j-d[i-1]) );
+    }
 
 
 }		

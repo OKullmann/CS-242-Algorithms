@@ -100,3 +100,60 @@ class Experiment {
 }
 
 
+
+class ExperimentA {
+
+    protected static String program = "ExperimentA";
+    protected static String err = "ERROR[" + program + "]: ";
+
+    public static void main(String[] args) {
+
+	//  this program requires one argument on the command line  
+        if (args.length != 1) {
+	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
+	    return;
+	}
+
+	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int[] d = { 1, 2, 5, 10};	
+
+	System.out.println("\n#  Recursive Making Change\n");
+
+	System.out.println("  size executionTime\n");
+	for (int i = 0; i <= N; i++) {
+	    ChangeMaking.making_change(i, d);
+	}
+    }
+}
+
+
+
+class ExperimentB {
+
+    protected static String program = "ExperimentA";
+    protected static String err = "ERROR[" + program + "]: ";
+
+    public static void main(String[] args) {
+
+	//  this program requires one argument on the command line  
+        if (args.length != 1) {
+	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
+	    return;
+	}
+
+	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int[] d = { 1, 2, 5, 10};	
+
+	System.out.println("\n#  Recursive Making Change\n");
+
+	System.out.println("  size executionTime\n");
+	for (int i = 0; i <= N; i++) {
+	    ChangeMaking.rec_making_change(i, d);
+	}
+    }
+   
+
+
+}
+
+
