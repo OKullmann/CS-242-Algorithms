@@ -67,8 +67,13 @@ class Experiment {
 	
 	if (c[n][N] != ChangeMaking.infinity) {
 	    System.out.print("Solution: ");
-	    final String out = ChangeMaking.pay_out(c,d);
-	    System.out.print(out);
+	    final int[] a = ChangeMaking.pay_out(c,d);
+	    assert(a.length == n);
+	    for (int i = 0; i < n; ++i) {
+		System.out.print("" + a[i] + "*" + d[i]);
+		if (i+1 < n) System.out.print(" + ");
+	    }
+	    System.out.println(" = " + N);
 	}
 	
 	InputStreamReader istream = new InputStreamReader(System.in);
@@ -86,9 +91,9 @@ class Experiment {
 	    for (int i = 0; i <= n; i++) {
 		if (i==0) System.out.print("  no coins: ");
 		else System.out.print(" d[" + i + "] = "
-		       +  java.lang.String.format("%2d: ", d[i-1]));
+		       + String.format("%2d: ", d[i-1]));
 		for (int j = 0; j <= N; j++) {
-		    System.out.print(java.lang.String.format("%3s ",size_out(c[i][j])));
+		    System.out.print(String.format("%3s ",size_out(c[i][j])));
 		}
 		System.out.print("\n");
 	    }
@@ -115,13 +120,17 @@ class ExperimentA {
 	}
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1, 2, 5, 10};	
+	final int[] d = { 1, 2, 5, 10 };	
 
 	System.out.println("\n#  Recursive Making Change\n");
 
 	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
+	    ExecutionTimer.start();
 	    ChangeMaking.making_change(i, d);
+	    ExecutionTimer.end();
+	    System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
+
 	}
     }
 }
@@ -142,13 +151,16 @@ class ExperimentB {
 	}
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1, 2, 5, 10};	
+	final int[] d = { 1, 2, 5, 10 };	
 
 	System.out.println("\n#  Recursive Making Change\n");
 
 	System.out.println("  size executionTime\n");
 	for (int i = 0; i <= N; i++) {
+            ExecutionTimer.start();
 	    ChangeMaking.rec_making_change(i, d);
+	    ExecutionTimer.end();
+	    System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
 	}
     }
    

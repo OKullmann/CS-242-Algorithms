@@ -1,6 +1,14 @@
-> EA=read.table("outA.txt", header=TRUE)
-> EB=read.table("outB.txt", header=TRUE)
-> z=EA$executionTime
-> plot(EB,type="l")
-> lines(z,col="red")
-> q()
+EA=read.table("outA.txt", header=TRUE)
+EB=read.table("outB.txt", header=TRUE)
+z=EA$executionTime
+plot(EB,type="l")
+lines(z,col="red")
+
+
+
+
+EB=read.table("outB.txt", header=TRUE)
+z=EB$executionTime
+x=EB$size
+y=log(z)^5
+plot(y,type="l")

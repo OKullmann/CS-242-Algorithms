@@ -9,10 +9,9 @@
 
 class ChangeMaking { 
 
-    public final static int infinity = java.lang.Integer.MAX_VALUE-10;
+    public final static int infinity = Integer.MAX_VALUE-10;
 
     public static int[][] making_change(final int N, final int[] d) {
-        ExecutionTimer.start();
 	final int n = d.length;
 	int[][] c = new int[n + 1][N + 1];
 	if (n == 0) return c;
@@ -25,39 +24,35 @@ class ChangeMaking {
 		if (j < d[i-1] || c[i][j-d[i-1]] == infinity)
 		    c[i][j] = c[i-1][j];
 		else
-		    c[i][j] = java.lang.Math.min(c[i-1][j], 1+c[i][j-d[i-1]]);
-	ExecutionTimer.end();
-	System.out.println(" " + N + " " + (ExecutionTimer.duration()) );
+		    c[i][j] = Math.min(c[i-1][j], 1+c[i][j-d[i-1]]);
 
 	return c;
     }
 
 
-    public static String pay_out(final int[][] c, final int[] d) {
-	String out = "";
+    public static int[] pay_out(final int[][] c, final int[] d) {
 	final int n = d.length;
-	if (n == 0) return out;
+	int[] a = new int[n];
+	for (int i = 0; i < n; i++) a[i] = 0;
+	if (n == 0) return a;
+
 	final int N = c[0].length - 1;
 	int i = n, j = N;
 	while (j > 0)
 	    if (i == 0) { j = 0; }
 	    else if (c[i][j] == c[i-1][j]) { i--; }
 	    else { 
-		if (out.length() != 0) out += " + ";
-		out += d[i-1]; 
+		a[i-1]++; 
 		j -= d[i-1]; 
 	    }
-	return out;
+	return a;
     }
 
 
 
     public static int rec_making_change(final int N, final int[] d) {
-        ExecutionTimer.start();
 	final int n = d.length;
 	int nc = rec_making_change(d, n, N);
-	ExecutionTimer.end();
-	System.out.println(" " + N + " " + (ExecutionTimer.duration()) );
 	return nc;
     }
 
@@ -66,7 +61,7 @@ class ChangeMaking {
 	if (i <= 0) return infinity;
 	int nc1 = rec_making_change(d, i-1, j);
 	if (j < d[i-1])  return nc1;
-	return java.lang.Math.min( nc1, 1+ rec_making_change(d, i, j-d[i-1]) );
+	return Math.min( nc1, 1+ rec_making_change(d, i, j-d[i-1]) );
     }
 
 
