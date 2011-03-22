@@ -3,18 +3,22 @@
 /*
   File:  201011/Week08/solutions/Experiment_1.java
   Descr: Experiments with Change Making
-
-  Use by
-      Experiment N d1 ... dn
-  where N is the amount to be returned, n is the number of coins and
-  d1, ..., dn are the coin values.
-
 */
 
 import java.io.* ;
 
 
-class Experiment {
+
+/*
+  The Dynamic Programming solution:
+  Use by
+      java ExperimentDP N d1 ... dn
+  where N is the amount to be returned, n is the number of coins and
+  d1, ..., dn are the coin values.
+
+*/
+
+class ExperimentDP {
 
     protected static String program = "Experiment";
     protected static String err = "ERROR[" + program + "]: ";
@@ -97,72 +101,17 @@ class Experiment {
 
 
 
-class ExperimentA {
 
-    protected static String program = "ExperimentA";
-    protected static String err = "ERROR[" + program + "]: ";
+/*
+  The top-down recursive solution:
+  Use by
+      java ExperimentRec N d1 ... dn
+  where N is the amount to be returned, n is the number of coins and
+  d1, ..., dn are the coin values.
 
-    public static void main(String[] args) {
+*/
 
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1 };	
-
-	System.out.println("\n#  Dynamic Programming Making Change\n");
-
-	System.out.println("  amount executionTime\n");
-	for (int i = 0; i <= N; i++) {
-	    ExecutionTimer.start();
-	    ChangeMaking.making_change(i, d);
-	    ExecutionTimer.end();
-	    System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
-
-	}
-    }
-}
-
-
-
-class ExperimentB {
-
-    protected static String program = "ExperimentA";
-    protected static String err = "ERROR[" + program + "]: ";
-
-    public static void main(String[] args) {
-
-	//  this program requires one argument on the command line  
-        if (args.length != 1) {
-	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
-	    return;
-	}
-
-	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1 };	
-
-	System.out.println("\n#  Recursive Making Change\n");
-
-	System.out.println("  amount executionTime\n");
-	for (int i = 0; i <= N; i++) {
-            ExecutionTimer.start();
-	    ChangeMaking.rec_making_change(i, d);
-	    ExecutionTimer.end();
-	    System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
-	}
-    }
-   
-
-
-}
-
-
-
-
-class ExperimentR {
+class ExperimentRec {
 
     protected static String program = "ExperimentD";
     protected static String err = "ERROR[" + program + "]: ";
@@ -210,3 +159,91 @@ class ExperimentR {
     }
 
 }
+
+
+
+
+/*
+  Running the dynamic programming program on various amounts
+  with a hard coded list of coin-values.
+  Use by
+      java ExperimentA N
+  which will run  ChangeMaking.making_change  for the hard-coded list
+  of coin-values on amounts 0 .. N
+
+*/
+
+class ExperimentA {
+
+    protected static String program = "ExperimentA";
+    protected static String err = "ERROR[" + program + "]: ";
+
+    public static void main(String[] args) {
+
+	//  this program requires one argument on the command line  
+        if (args.length != 1) {
+	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
+	    return;
+	}
+
+	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int[] d = { 1, 2 };	
+
+	System.out.println("\n#  Dynamic Programming Making Change\n");
+
+	System.out.println("  amount executionTime\n");
+	for (int i = 0; i <= N; i++) {
+	    ///ExecutionTimer.start();
+	    ChangeMaking.making_change(i, d);
+	    ///ExecutionTimer.end();
+	    ///System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
+
+	}
+    }
+}
+
+
+
+/*
+  Running the top-down recursive program on various amounts
+  with a hard coded list of coin-values.
+  Use by
+      java ExperimentA N
+  which will run  ChangeMaking.rec_making_change  for the hard-coded list
+  of coin-values on amounts 0 .. N
+
+*/
+
+class ExperimentB {
+
+    protected static String program = "ExperimentA";
+    protected static String err = "ERROR[" + program + "]: ";
+
+    public static void main(String[] args) {
+
+	//  this program requires one argument on the command line  
+        if (args.length != 1) {
+	    System.err.print(err + "Exactly one parameter is required, the number N of experiments.\n");
+	    return;
+	}
+
+	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int[] d = { 1, 2 };	
+
+	System.out.println("\n#  Recursive Making Change\n");
+
+	System.out.println("  amount executionTime\n");
+	for (int i = 0; i <= N; i++) {
+            ///ExecutionTimer.start();
+	    ChangeMaking.rec_making_change(i, d);
+	    ///ExecutionTimer.end();
+	    ///System.out.println(" " + i + " " + (ExecutionTimer.duration()) );
+	}
+    }
+   
+
+
+}
+
+
+

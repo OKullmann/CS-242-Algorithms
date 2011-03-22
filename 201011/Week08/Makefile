@@ -7,24 +7,18 @@ SHELL = /bin/bash
 
 ###
 
-programs = ChangeMaking.class Experiment.class
+programs = ChangeMaking.class ExperimentDP.class
 
 all : $(programs)
 
 cleanall :
-	rm $(programs)
+	rm *.class
 
 #########################
 
 ChangeMaking.class : ChangeMaking.java
 	javac $<
 
-Experiment.class : Experiment.java ChangeMaking.class
+ExperimentDP.class : Experiment.java ChangeMaking.class
 	javac $<
-
-Test.class : Test.java ArrayGenerators.class Insertion_Sort.class
-	javac $<
-
-gen : solutions/Experiment_1.java
-	solutions/gensolution Experiment
 

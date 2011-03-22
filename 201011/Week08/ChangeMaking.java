@@ -56,7 +56,7 @@ class ChangeMaking {
 	return nc;
     }
 
-    public static int rec_making_change(final int[] d, 
+    private static int rec_making_change(final int[] d, 
 					final int i, final int j) {
 	if (j <= 0) return 0;
 	if (i <= 0) return infinity;
