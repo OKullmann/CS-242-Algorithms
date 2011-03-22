@@ -1,11 +1,11 @@
 // Arnold Beckmann, 20.03.2011 (Swansea)
 
 /*
-  File:  200910/Week08/solutions/Experiment_1.java
+  File:  201011/Week08/solutions/Experiment_1.java
   Descr: Experiments with Change Making
 
   Use by
-      ChangeMaking N d1 ... dn
+      Experiment N d1 ... dn
   where N is the amount to be returned, n is the number of coins and
   d1, ..., dn are the coin values.
 
@@ -14,12 +14,10 @@
 import java.io.* ;
 
 
-
 class Experiment {
 
     protected static String program = "Experiment";
     protected static String err = "ERROR[" + program + "]: ";
-
 
     private static String size_out(final int s) {
 	String out = new String();
@@ -33,13 +31,10 @@ class Experiment {
 
     public static void main(String[] args) {
 
-	//  this program requires one argument on the command line  
         if (args.length < 1) {
 	    System.err.print(err + "At least one parameter is needed, the amount N to be returned.\n");
 	    return;
 	}
-
-
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
 	final int n = args.length - 1;
@@ -61,9 +56,8 @@ class Experiment {
 	}
 	
 	final int[][] c = ChangeMaking.making_change(N, d);
-	System.out.print("Optimal number of coins needed: "
-			 + size_out(c[n][N]));
-	System.out.print("\n");
+	System.out.println("Optimal number of coins needed: "
+			   + size_out(c[n][N]));
 	
 	if (c[n][N] != ChangeMaking.infinity) {
 	    System.out.print("Solution: ");
@@ -89,18 +83,15 @@ class Experiment {
 	}
 	if (question.equals("y"))
 	    for (int i = 0; i <= n; i++) {
-		if (i==0) System.out.print("  no coins: ");
-		else System.out.print(" d[" + i + "] = "
-		       + String.format("%2d: ", d[i-1]));
+		if (i==0) System.out.print(" no coins: ");
+		else System.out.print("d[" + i + "] ="
+				      + String.format("%3d: ", d[i-1]));
 		for (int j = 0; j <= N; j++) {
 		    System.out.print(String.format("%3s ",size_out(c[i][j])));
 		}
-		System.out.print("\n");
+		System.out.println();
 	    }
-	
     }
-   
-
 
 }
 
@@ -122,9 +113,9 @@ class ExperimentA {
 	final int N = (Integer.valueOf(args[0]) ).intValue();
 	final int[] d = { 1, 2, 5, 10 };	
 
-	System.out.println("\n#  Recursive Making Change\n");
+	System.out.println("\n#  Dynamic Programming Making Change\n");
 
-	System.out.println("  size executionTime\n");
+	System.out.println("  amount executionTime\n");
 	for (int i = 0; i <= N; i++) {
 	    ExecutionTimer.start();
 	    ChangeMaking.making_change(i, d);
@@ -155,7 +146,7 @@ class ExperimentB {
 
 	System.out.println("\n#  Recursive Making Change\n");
 
-	System.out.println("  size executionTime\n");
+	System.out.println("  amount executionTime\n");
 	for (int i = 0; i <= N; i++) {
             ExecutionTimer.start();
 	    ChangeMaking.rec_making_change(i, d);
