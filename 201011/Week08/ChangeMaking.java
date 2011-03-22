@@ -56,41 +56,14 @@ class ChangeMaking {
 	return nc;
     }
 
-    public static int rec_making_change(final int[] d, final int i, final int j) {
+    public static int rec_making_change(final int[] d, 
+					final int i, final int j) {
 	if (j <= 0) return 0;
 	if (i <= 0) return infinity;
 	final int nc1 = rec_making_change(d, i-1, j);
 	if (j < d[i-1])  return nc1;
-	return Math.min( nc1, 1+ rec_making_change(d, i, j-d[i-1]) );
-    }
-
-
-
-    public static int[] rec_making_change2(final int N, final int[] d) {
-	final int n = d.length;
-	int[] a = new int[n];
-	for (int i = 0; i < n; i++) a[i] = 0;
-	rec_making_change(d, a, n, N);
-	return a;
-    }
-
-    public static void rec_making_change(final int[] d, int[] a, final int i,
-					 final int j) {
-	if (j <= 0) return;
-	if (i <= 0) return;
-	if (j < d[i-1]) {
-	    rec_making_change(d, a, i-1, j);
-	    return;
-	}
-	final int nc1 = rec_making_change(d, i-1, j);
-	final int nc2 = 1 + rec_making_change(d, i, j-d[i-1]);
-	if (nc2 < nc1)  {
-	    rec_making_change(d, a, i, j-d[i-1]);
-	    a[i-1]++;
-	}
-	else
-	    rec_making_change(d, a, i-1, j );
-	return;
+	final int nc2 = rec_making_change(d, i, j-d[i-1]);
+	return Math.min( nc1, 1+nc2 );
     }
 
 

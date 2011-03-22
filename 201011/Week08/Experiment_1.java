@@ -111,7 +111,7 @@ class ExperimentA {
 	}
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1, 2, 5, 10 };	
+	final int[] d = { 1 };	
 
 	System.out.println("\n#  Dynamic Programming Making Change\n");
 
@@ -142,7 +142,7 @@ class ExperimentB {
 	}
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
-	final int[] d = { 1, 2, 5, 10 };	
+	final int[] d = { 1 };	
 
 	System.out.println("\n#  Recursive Making Change\n");
 
@@ -162,11 +162,10 @@ class ExperimentB {
 
 
 
-class ExperimentD {
+class ExperimentR {
 
     protected static String program = "ExperimentD";
     protected static String err = "ERROR[" + program + "]: ";
-
 
     private static String size_out(final int s) {
 	String out = new String();
@@ -180,13 +179,10 @@ class ExperimentD {
 
     public static void main(String[] args) {
 
-	//  this program requires one argument on the command line  
         if (args.length < 1) {
 	    System.err.print(err + "At least one parameter is needed, the amount N to be returned.\n");
 	    return;
 	}
-
-
 
 	final int N = (Integer.valueOf(args[0]) ).intValue();
 	final int n = args.length - 1;
@@ -207,26 +203,10 @@ class ExperimentD {
 	    d[i] = dummy;
 	}
 	
-	final int[] a = ChangeMaking.rec_making_change2(N, d);
-	int nc = 0;
-	if (a[0] == ChangeMaking.infinity)
-	    nc = ChangeMaking.infinity;
-	else
-	    for (int i = 0; i < n; i++)  nc += a[i];
-	System.out.print("Optimal number of coins needed: "
-			 + size_out(nc));
-	System.out.print("\n");
-	
-	if (nc != ChangeMaking.infinity) {
-	    System.out.print("Solution: ");
-	    assert(a.length == n);
-	    for (int i = 0; i < n; ++i) {
-		System.out.print("" + a[i] + "*" + d[i]);
-		if (i+1 < n) System.out.print(" + ");
-	    }
-	    System.out.println(" = " + N);
-	}
-	
+	final int nc = ChangeMaking.rec_making_change(N, d);
+	System.out.println("Optimal number of coins needed: "
+			   + size_out(nc));
+
     }
 
 }
