@@ -169,3 +169,73 @@ class ExperimentB {
 }
 
 
+
+
+class ExperimentD {
+
+    protected static String program = "ExperimentD";
+    protected static String err = "ERROR[" + program + "]: ";
+
+
+    private static String size_out(final int s) {
+	String out = new String();
+	if (s == ChangeMaking.infinity)
+	    out = "inf";
+	else
+	    out = "" + s;
+	return out;
+    }
+
+
+    public static void main(String[] args) {
+
+	//  this program requires one argument on the command line  
+        if (args.length < 1) {
+	    System.err.print(err + "At least one parameter is needed, the amount N to be returned.\n");
+	    return;
+	}
+
+
+
+	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int n = args.length - 1;
+	if (n == 0) {
+	    if (N == 0)
+		System.out.print("No coins needed.\n");
+	    else
+		System.out.print("Without coins no solution.\n");
+	    return;
+	}
+	int[] d = new int[n];
+	for (int i = 0; i < n; i++) {
+	    int dummy = (Integer.valueOf(args[i+1]) ).intValue();
+	    if (dummy == 0) {
+		System.err.print(err + "Coin " + (i+1) + " is zero.\n");
+		return;
+	    }
+	    d[i] = dummy;
+	}
+	
+	final int[] a = ChangeMaking.rec_making_change2(N, d);
+	int nc = 0;
+	if (a[0] == ChangeMaking.infinity)
+	    nc = ChangeMaking.infinity;
+	else
+	    for (int i = 0; i < n; i++)  nc += a[i];
+	System.out.print("Optimal number of coins needed: "
+			 + size_out(nc));
+	System.out.print("\n");
+	
+	if (nc != ChangeMaking.infinity) {
+	    System.out.print("Solution: ");
+	    assert(a.length == n);
+	    for (int i = 0; i < n; ++i) {
+		System.out.print("" + a[i] + "*" + d[i]);
+		if (i+1 < n) System.out.print(" + ");
+	    }
+	    System.out.println(" = " + N);
+	}
+	
+    }
+
+}
