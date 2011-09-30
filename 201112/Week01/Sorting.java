@@ -1,7 +1,8 @@
 // Arnold Beckmann, 19.12.2009 (Swansea)
+// Modified Oliver Kullmann, 30.9.2011 (Swansea)
 
 /*
-  File:  201011/Week01/solutions/Sorting_1.hpp
+  File:  201112/Week01/solutions/Sorting_1.hpp
   Descr: Sorting algorithms
 */
 
@@ -9,7 +10,7 @@
 class Insertion_Sort {
 
     public static void insertion_sort(long[] A) {
-	/// long start = System.nanoTime();
+	long start = System.nanoTime();
 	for (int j = 1; j < A.length; j++) {
 	    long key = A[j];
 	    int i = j;
@@ -19,9 +20,6 @@ class Insertion_Sort {
 	    }
 	    A[i] = key;
 	}
- 	/// System.out.println(" " + A.length + " " + (System.nanoTime()-start) );
-
+ 	System.out.println(" " + A.length + " " + (System.nanoTime()-start));
     }
-
 }
-
