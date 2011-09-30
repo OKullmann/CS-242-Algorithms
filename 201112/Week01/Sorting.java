@@ -2,7 +2,7 @@
 // Modified Oliver Kullmann, 30.9.2011 (Swansea)
 
 /*
-  File:  201112/Week01/solutions/Sorting_1.hpp
+  File:  201112/Week01/solutions/Sorting.hpp
   Descr: Sorting algorithms
 */
 
