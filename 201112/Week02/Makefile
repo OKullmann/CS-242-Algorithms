@@ -12,7 +12,7 @@ programs = Insertion_Sort.class ArrayGenerators.class Experiment_InsertionSort_u
 all : $(programs)
 
 cleanall :
-	rm $(programs)
+	- rm $(programs)
 
 #########################
 
