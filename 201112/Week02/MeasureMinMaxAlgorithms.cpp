@@ -64,10 +64,10 @@ namespace {
   inline value_type A(uint_type i) {
     return (i+1) * random_value;
   }
-  typedef std::pair<value_type, value_type> min_max_return_type;
+  typedef std::pair<value_type, value_type> min_max_type;
 
   //! Min-max in the naive way:
-  inline min_max_return_type naive_minmax(const uint_type N) {
+  inline min_max_type naive_minmax(const uint_type N) {
     assert(N >= 1);
     const value_type first_value = A(0);
     value_type min = first_value, max = first_value;
@@ -76,53 +76,53 @@ namespace {
       if (value < min) min = value;
       if (value > max) max = value;
     }
-    return min_max_return_type(min,max);
+    return min_max_type(min,max);
   }
   //! Min-max via divide-and-conquer:
-  inline min_max_return_type dac_minmax(const uint_type p, const uint_type q) {
+  inline min_max_type dac_minmax(const uint_type p, const uint_type q) {
     assert(p < q);
     if (p == q-1) {
       const value_type value = A(p);
-      return min_max_return_type(value, value);
+      return min_max_type(value, value);
     }
     if (p == q-2) {
       const value_type value_1 = A(p), value_2 = A(p+1);
-      if (value_1 < value_2) return min_max_return_type(value_1, value_2);
-      else return min_max_return_type(value_2, value_1);
+      if (value_1 < value_2) return min_max_type(value_1, value_2);
+      else return min_max_type(value_2, value_1);
     }
     const uint_type r = (p+q)/2;
-    const min_max_return_type mm1 = dac_minmax(p,r);
-    const min_max_return_type mm2 = dac_minmax(r,q);
-    return min_max_return_type(
+    const min_max_type mm1 = dac_minmax(p,r);
+    const min_max_type mm2 = dac_minmax(r,q);
+    return min_max_type(
       std::min(mm1.first, mm2.first),
       std::max(mm1.second, mm2.second));
   }
-  inline min_max_return_type divide_and_conquer_minmax(const uint_type N) {
+  inline min_max_type divide_and_conquer_minmax(const uint_type N) {
     assert(N >= 1);
     return dac_minmax(0, N);
   }
   //! Min-max via pairing:
-  inline min_max_return_type pairing_minmax(const uint_type N) {
+  inline min_max_type pairing_minmax(const uint_type N) {
     assert(N >= 1);
     const bool odd = N % 2;
-    min_max_return_type mm;
+    min_max_type mm;
     if (odd) {
       const value_type value_1 = A(0);
-      mm = min_max_return_type(value_1, value_1);
+      mm = min_max_type(value_1, value_1);
     }
     else {
       const value_type value_1 = A(0);
       const value_type value_2 = A(1);
-      if (value_1 < value_2) mm = min_max_return_type(value_1, value_2);
-      else mm = min_max_return_type(value_2, value_1);
+      if (value_1 < value_2) mm = min_max_type(value_1, value_2);
+      else mm = min_max_type(value_2, value_1);
     }
     for (uint_type i = odd ? 1 : 2; i < N; i+=2) {
       const value_type value_1 = A(i);
       const value_type value_2 = A(i+1);
-      const min_max_return_type mm_new = (value_1 < value_2) ?
-        min_max_return_type(value_1, value_2) :
-        min_max_return_type(value_2, value_1);
-      mm = min_max_return_type(
+      const min_max_type mm_new = (value_1 < value_2) ?
+        min_max_type(value_1, value_2) :
+        min_max_type(value_2, value_1);
+      mm = min_max_type(
         std::min(mm.first, mm_new.first),
         std::max(mm.second, mm_new.second));
     }
@@ -153,13 +153,13 @@ int main(const int argc, const char* const argv[]) {
     std::srand(seed);
     random_value = (value_type) std::rand();
     T.restart();
-    const min_max_return_type mm_naive = naive_minmax(N);
+    const min_max_type mm_naive = naive_minmax(N);
     const double elapsed_naive = T.elapsed();
     T.restart();
-    const min_max_return_type mm_dac = divide_and_conquer_minmax(N);
+    const min_max_type mm_dac = divide_and_conquer_minmax(N);
     const double elapsed_dac = T.elapsed();
     T.restart();
-    const min_max_return_type mm_pairing = pairing_minmax(N);
+    const min_max_type mm_pairing = pairing_minmax(N);
     const double elapsed_pairing = T.elapsed();
     std::cout << i << " " << elapsed_naive << " " << elapsed_dac << " " <<
      elapsed_pairing << " " << mm_naive.first << " " << mm_naive.second << "\n";
