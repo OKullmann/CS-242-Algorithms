@@ -11,7 +11,7 @@ or any later version. */
 
   <ul>
    <li> Two parameter are accepted, the size N of the array (default 10^8),
-   and the seed (default 0). </li>
+   and the seed (default 1). </li>
    <li> Runs in an endless loop. </li>
    <li> Output in R-format: header "tn tdac tp min max". </li>
    <li> For "time naive", "time divide-and-conquer", "time pairing". </li>
@@ -48,9 +48,9 @@ namespace {
   const std::string program = "MeasureMinMaxAlgorithms";
   const std::string err = "ERROR[" + program + "]: ";
 
-  const std::string version = "0.0.6";
+  const std::string version = "0.0.7";
 
-  const unsigned int seed_default = 0;
+  const unsigned int seed_default = 1;
 
   // managing the indices for the sequences:
   typedef unsigned long uint_type;
