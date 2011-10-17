@@ -12,7 +12,7 @@ programs = Recurrence.class Experiment.class
 all : $(programs)
 
 cleanall :
-	rm $(programs)
+	- rm $(programs)
 
 #########################
 
@@ -21,11 +21,6 @@ Recurrence.class : Recurrence.java
 
 Experiment.class : Experiment.java Recurrence.class
 	javac $<
-
-gen0 : cp0 Recurrence.class
-
-cp0 : Recurrence_0.java
-	cp Recurrence_0.java Recurrence.java
 
 gen1 : cp1 Recurrence.class
 
