@@ -81,15 +81,13 @@ class ExperimentDP {
 	    System.out.println("Error reading line");
 	}
 	if (question.equals("y")) {
-        System.out.print("Amount:      ");
-        for (int i = 0; i <= N; ++i) {
-          System.out.print(i + "  ");
-          if (i < 9) System.out.print(" ");
-        }
+        System.out.print("Amount:    ");
+        for (int i = 0; i <= N; ++i)
+          System.out.print(String.format("%3s ", i));
         System.out.println();
 	  for (int i = 0; i <= n; i++) {
 	    if (i==0) System.out.print("zero coins:");
-	    else System.out.print("d[" + i + "] =" + String.format("%3d: ", d[i-1]));
+	    else System.out.print("d["+i+"] =" + String.format("%3d: ", d[i-1]));
 	    for (int j = 0; j <= N; j++)
 	      System.out.print(String.format("%3s ",size_out(c[i][j])));
 	    System.out.println();
