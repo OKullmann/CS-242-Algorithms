@@ -175,7 +175,12 @@ class ExperimentA {
       System.out.println("\n#  Dynamic Programming Making Change\n");
 
       System.out.println("  amount executionTime\n");
-      for (int i = 0; i <= N; ++i) ChangeMaking.making_change(i, d);
+      for (int i = 0; i <= N; ++i) {
+        ExecutionTimer.start();
+        ChangeMaking.making_change(i, d);
+        ExecutionTimer.end();
+        System.out.println(" " + i + " " + (ExecutionTimer.duration()));
+      }
     }
 }
 
@@ -210,6 +215,11 @@ class ExperimentB {
       System.out.println("\n#  Recursive Making Change\n");
 
       System.out.println("  amount executionTime\n");
-	for (int i = 0; i <= N; ++i) ChangeMaking.rec_making_change(i, d);
+	for (int i = 0; i <= N; ++i) {
+        ExecutionTimer.start();
+        ChangeMaking.rec_making_change(i, d);
+        ExecutionTimer.end();
+        System.out.println(" " + i + " " + (ExecutionTimer.duration()));
+      }
     }
 }
