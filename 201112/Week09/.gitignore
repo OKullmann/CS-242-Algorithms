@@ -1,5 +1,3 @@
-Experiment*.class
+*.class
 Experiment.java
 out.txt
-.R*
-WEG
