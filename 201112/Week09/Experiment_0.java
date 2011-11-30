@@ -19,8 +19,8 @@ import java.io.* ;
 
 class ExperimentDP {
 
-    protected static String program = "Experiment";
-    protected static String err = "ERROR[" + program + "]: ";
+    protected static final String program = "Experiment";
+    protected static final String err = "ERROR[" + program + "]: ";
 
     private static String size_out(final int s) {
 	String out = new String();
@@ -29,7 +29,7 @@ class ExperimentDP {
 	return out;
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
       if (args.length < 1) {
 	  System.err.print(err + "At least one parameter is needed, the amount N to be returned.\n");
 	  return;
@@ -42,9 +42,9 @@ class ExperimentDP {
 	  else System.out.print("Without coins no solution.\n");
 	  return;
 	}
-	int[] d = new int[n];
-	for (int i = 0; i < n; i++) {
-	  int dummy = (Integer.valueOf(args[i+1]) ).intValue();
+	final int[] d = new int[n];
+	for (int i = 0; i < n; ++i) {
+	  final int dummy = (Integer.valueOf(args[i+1])).intValue();
 	  if (dummy == 0) {
 	    System.err.print(err + "Coin " + (i+1) + " is zero.\n");
 	    return;
@@ -83,10 +83,10 @@ class ExperimentDP {
         for (int i = 0; i <= N; ++i)
           System.out.print(String.format("%3s ", i));
         System.out.println();
-	  for (int i = 0; i <= n; i++) {
+	  for (int i = 0; i <= n; ++i) {
 	    if (i==0) System.out.print("zero coins:");
 	    else System.out.print("d["+i+"] =" + String.format("%3d: ", d[i-1]));
-	    for (int j = 0; j <= N; j++)
+	    for (int j = 0; j <= N; ++j)
 	      System.out.print(String.format("%3s ",size_out(c[i][j])));
 	    System.out.println();
 	  }
@@ -106,8 +106,8 @@ class ExperimentDP {
 
 class ExperimentRec {
 
-    protected static String program = "ExperimentD";
-    protected static String err = "ERROR[" + program + "]: ";
+    protected static final String program = "ExperimentD";
+    protected static final String err = "ERROR[" + program + "]: ";
 
     private static String size_out(final int s) {
 	String out = new String();
@@ -116,22 +116,22 @@ class ExperimentRec {
 	return out;
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
       if (args.length < 1) {
 	  System.err.print(err + "At least one parameter is needed, the amount N to be returned.\n");
 	  return;
 	}
 
-	final int N = (Integer.valueOf(args[0]) ).intValue();
+	final int N = (Integer.valueOf(args[0])).intValue();
 	final int n = args.length - 1;
 	if (n == 0) {
 	  if (N == 0) System.out.print("No coins needed.\n");
 	  else System.out.print("Without coins no solution.\n");
 	  return;
 	}
-	int[] d = new int[n];
-	for (int i = 0; i < n; i++) {
-	  int dummy = (Integer.valueOf(args[i+1]) ).intValue();
+	final int[] d = new int[n];
+	for (int i = 0; i < n; ++i) {
+	  final int dummy = (Integer.valueOf(args[i+1])).intValue();
 	  if (dummy == 0) {
 	    System.err.print(err + "Coin " + (i+1) + " is zero.\n");
 	    return;
@@ -158,10 +158,10 @@ class ExperimentRec {
 
 class ExperimentA {
 
-    protected static String program = "ExperimentA";
-    protected static String err = "ERROR[" + program + "]: ";
+    protected static final String program = "ExperimentA";
+    protected static final String err = "ERROR[" + program + "]: ";
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
       // this program requires one argument on the command line
       if (args.length != 1) {
@@ -169,13 +169,13 @@ class ExperimentA {
 	  return;
       }
 
-      final int N = (Integer.valueOf(args[0]) ).intValue();
+      final int N = (Integer.valueOf(args[0])).intValue();
       final int[] d = { 1 };
 
       System.out.println("\n#  Dynamic Programming Making Change\n");
 
       System.out.println("  amount executionTime\n");
-      for (int i = 0; i <= N; i++) ChangeMaking.making_change(i, d);
+      for (int i = 0; i <= N; ++i) ChangeMaking.making_change(i, d);
     }
 }
 
@@ -193,10 +193,10 @@ class ExperimentA {
 
 class ExperimentB {
 
-    protected static String program = "ExperimentA";
-    protected static String err = "ERROR[" + program + "]: ";
+    protected static final String program = "ExperimentA";
+    protected static final String err = "ERROR[" + program + "]: ";
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
 	// this program requires one argument on the command line
       if (args.length != 1) {
@@ -204,12 +204,12 @@ class ExperimentB {
 	  return;
 	}
 
-      final int N = (Integer.valueOf(args[0]) ).intValue();
+      final int N = (Integer.valueOf(args[0])).intValue();
       final int[] d = { 1 };
 
       System.out.println("\n#  Recursive Making Change\n");
 
       System.out.println("  amount executionTime\n");
-	for (int i = 0; i <= N; i++) ChangeMaking.rec_making_change(i, d);
+	for (int i = 0; i <= N; ++i) ChangeMaking.rec_making_change(i, d);
     }
 }
