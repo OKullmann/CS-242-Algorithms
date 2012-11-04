@@ -3,7 +3,7 @@
 class Stack {
   private final int[] stack;
   private final int N; // maximal number of elements
-  private int n; // number of currently held items
+  private int n; // number of currently held elements
 
   public Stack(final int N_) {
     // Standard exceptions raised in case N_ < 0 or N_ is too big for available memory.
@@ -71,7 +71,6 @@ class Stack {
     System.out.println(S1.equals(S2));
     S2.pop();
     System.out.println(S2.empty());
-    // S2.top();
   }
   
 }
