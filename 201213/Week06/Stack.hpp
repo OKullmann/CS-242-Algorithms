@@ -46,7 +46,7 @@ namespace Buffers {
     friend std::ostream& operator <<(std::ostream& out, const Stack& S) {
       out << "[" << S.size() << "," << S.capacity() << "," << S.max_size() << "]\n";
       for (auto x : S.stack) out << x << " ";
-      return out << "\n";
+      return out;
     }
 
   };
