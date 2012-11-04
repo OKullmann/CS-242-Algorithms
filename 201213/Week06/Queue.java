@@ -4,7 +4,8 @@ class Queue {
   private final int[] queue;
   private final int N; // maximal number of elements
   private int n; // number of currently held elements
-  private int a, b; // first and one past-the-last index of current elements
+  private int a, b; // first and one-past-the-last index of current elements;
+  // indices "wrap around".
 
   public Queue(final int N_) {
     // Standard exceptions raised in case N_ < 0 or N_ is too big for available memory.
