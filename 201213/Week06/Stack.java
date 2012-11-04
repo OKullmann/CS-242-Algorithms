@@ -71,7 +71,7 @@ class Stack {
     System.out.println(S1.equals(S2));
     S2.pop();
     System.out.println(S2.empty());
-    S2.top();
+    // S2.top();
   }
   
 }
