@@ -16,7 +16,10 @@ Optimisation_options := -O3 -DNDEBUG
 
 ###
 
-programs = Stack Stack2
+java_programs = Stack Queue
+cpp_programs = Stack2
+
+programs = $(java_programs) $(cpp_programs)
 
 all : $(programs)
 
@@ -25,7 +28,7 @@ cleanall :
 
 # ########################
 
-Stack : Stack.java
+$(java_programs) : % : %.java
 	$(JAVAC) -o $@ $(JFLAGS) --main="$@" $<
 
 Stack2 : Stack2.cpp Stack.hpp
