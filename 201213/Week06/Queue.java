@@ -65,6 +65,13 @@ class Queue {
     return result;
   }
 
+  public String show() {
+    String result = "[" + n + "," + N + ";" + a + "," + b + "]\n";
+    for (int i = a, c = 0; c < n; i = (i==N-1) ? 0:i+1, ++c)
+      result += queue[i] + " ";
+    return result;
+  }
+
 
   public static void main(final String[] args) {
     final int N = (args.length == 0) ? 10 : Integer.parseInt(args[0]);
@@ -73,7 +80,7 @@ class Queue {
     System.out.println(Q1);
     System.out.println(Q1.empty());
     Q1.push(55); Q1.push(44); Q1.push(88);
-    System.out.println(Q1);
+    System.out.println(Q1.show());
     System.out.println(Q1.empty());
     System.out.println(Q1.front());
     Q1.pop();
