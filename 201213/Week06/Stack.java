@@ -15,20 +15,24 @@ class Stack {
   public boolean empty() { return n==0; }
   public int top() {
     // Standard exception raised in case n == 0.
-    assert(n <= N);
+    assert(stack != null);
+    assert(stack.length == N);
     assert(n >= 0);
+    assert(n <= N);
     return stack[n-1];
   }
   public boolean push(final int x) {
-    assert(n <= N);
     assert(n >= 0);
+    assert(n <= N);
     if (n == N) return false;
+    assert(stack != null);
+    assert(stack.length == N);
     stack[n++] = x;
     return true;
   }
   public boolean pop() {
-    assert(n <= N);
     assert(n >= 0);
+    assert(n <= N);
     if (n == 0) return false;
     --n;
     return true;
