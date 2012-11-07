@@ -51,7 +51,7 @@ class Stack {
   public String toString() {
     String result = "[" + n + "," + N + "]\n";
     for (int i = 0; i < n-1; ++i) result += stack[i] + " ";
-    if (n > 0) result += stack[n-1] + "\n";
+    if (n > 0) result += stack[n-1];
     return result;
   }
 
