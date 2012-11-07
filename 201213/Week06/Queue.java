@@ -17,14 +17,18 @@ class Queue {
   public boolean empty() { return n==0; }
   public int front() {
     // Queue underflow in case n == 0 (not detected)
-    assert(a < N);
+    assert(queue != null);
+    assert(queue.length == N);
     assert(a >= 0);
+    assert(a < N);
     return queue[a];
   }
   public boolean push(final int x) {
-    assert(n <= N);
     assert(n >= 0);
+    assert(n <= N);
     if (n == N) return false;
+    assert(queue != null);
+    assert(queue.length == N);
     assert(b >= 0);
     assert(b < N);
     queue[b] = x;
@@ -33,13 +37,13 @@ class Queue {
     return true;
   }
   public boolean pop() {
-    assert(n <= N);
     assert(n >= 0);
+    assert(n <= N);
     if (n == 0) return false;
-    if (a == N-1) a = 0; else ++a;
-    --n;
     assert(a >= 0);
     assert(a < N);
+    if (a == N-1) a = 0; else ++a;
+    --n;
     return true;
   }
 
