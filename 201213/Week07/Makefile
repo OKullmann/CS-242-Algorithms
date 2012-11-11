@@ -16,7 +16,7 @@ Optimisation_options := -O3 -DNDEBUG
 
 ###
 
-java_programs = BinarySearch
+java_programs = BinarySearch List
 special_java_programs =
 cpp_programs =
 
