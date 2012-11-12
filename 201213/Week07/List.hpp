@@ -7,12 +7,12 @@
 #include <cstddef>
 #include <ostream>
 
-template <typename KEY = int>
+template <typename Key = int>
 class List {
   List* prev;
   List* next;
 public :
-  typedef KEY key_type;
+  typedef Key key_type;
   key_type key;
   typedef std::size_t size_type;
 
