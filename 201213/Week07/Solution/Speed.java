@@ -16,7 +16,7 @@ class Speed {
         for (int j = 0; j < M; ++j) S.pop();
       }
       assert(S.empty());
-      System.out.print(counter + ":" + (System.currentTimeMillis() - start) + " ");
+      System.out.print(counter + ":" + (System.currentTimeMillis() - start)/1000.0 + " ");
     }
   }
 }
