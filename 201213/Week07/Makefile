@@ -18,7 +18,7 @@ Optimisation_options := -O3 -DNDEBUG
 
 java_programs = BinarySearch List
 special_java_programs =
-cpp_programs =
+cpp_programs = List2
 
 programs = $(java_programs) $(special_java_programs) $(cpp_programs)
 
@@ -31,4 +31,7 @@ cleanall :
 
 $(java_programs) : % : %.java
 	$(JAVAC) -o $@ $(JFLAGS) --main="$@" $<
+
+List2 : List2.cpp List.hpp
+	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
 
