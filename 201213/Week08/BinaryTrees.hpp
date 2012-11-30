@@ -45,6 +45,8 @@ namespace BinaryTrees {
     typedef const Node* public_node_type;
 
     Tree() : root(0) {}
+    Tree(const Tree&) = delete;
+    Tree& operator =(const Tree&) = delete;
 
     int_type height() const { return height(root); }
     int_type height(const public_node_type x) const {
@@ -125,7 +127,7 @@ namespace BinaryTrees {
     for example "T.insert(10,1).insert(-11,2)". */
 
     // like inorder_walk, but now outputting all data
-    friend std::ostream& operator <<(std::ostream& out, Tree T) {
+    friend std::ostream& operator <<(std::ostream& out, const Tree& T) {
       T.inorder_walk_internal(out, T.root);
       return out;
     }
