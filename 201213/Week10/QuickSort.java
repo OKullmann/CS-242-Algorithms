@@ -23,8 +23,10 @@ class QuickSort {
     assert(p+1 < r);
     final int x = A[r-1];
     int q = p;
-    for (int j = p; j < r-1; ++j)
-      if (A[j] <= x) {final int t = A[q]; A[q++] = A[j]; A[j] = t;}
+    for (int j = p; j < r-1; ++j) {
+      final int v = A[j];
+      if (v <= x) {A[j] = A[q]; A[q++] = v;}
+    }
     A[r-1] = A[q]; A[q] = x;
     return q;
   }
