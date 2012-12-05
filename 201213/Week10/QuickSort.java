@@ -23,7 +23,7 @@ class QuickSort {
     sort(A,0,A.length);
   }
   
-  // returns q and permuted A such that A[p...q] are all <= x, A[q]=x, and A[q+1...r-1] are all > x,
+  // returns q and permuted A such that A[p...q-1] are all < x, A[q]=x, and A[q+1...r-1] are all >= x,
   // where x = A[r-1] for the *original* A:
   private static int partition(final int[] A, final int p, final int r) {
     assert(p+1 < r);
@@ -31,7 +31,7 @@ class QuickSort {
     int q = p;
     for (int j = p; j < r-1; ++j) {
       final int v = A[j];
-      if (v <= x) {A[j] = A[q]; A[q++] = v;}
+      if (v < x) {A[j] = A[q]; A[q++] = v;}
     }
     A[r-1] = A[q]; A[q] = x;
     return q;
