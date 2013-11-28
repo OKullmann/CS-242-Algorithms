@@ -21,7 +21,8 @@ class Chaining {
     return List.search(T[h(k)], k);
   }
   public void delete(final List x) {
-    List.delete(T[h(x.key)],x);
+    final int hv = h(x.key);
+    T[hv] = List.delete(T[hv],x);
     --s;
   }
   
@@ -61,6 +62,8 @@ class Chaining {
     System.out.println(C);
     System.out.println(C.size());
     C.insert(5);
+    final List f2 = C.search(12);
+    C.delete(f2);
     System.out.println(C);
     System.out.println(C.size());
   }
