@@ -16,7 +16,7 @@ class Heap {
   
   public int size() { return n; }
   public boolean set_size(final int n_) {
-    if (n_ > H.length) return false;
+    if (n_ < 0 || n_ > H.length) return false;
     n = n_;
     return true;
   }
