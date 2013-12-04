@@ -1,8 +1,11 @@
 // Oliver Kullmann, 6.12.2012 (Swansea)
 
 // Max-Heap operations
+// Run with
+// > java -ea Heap
+// to enable the assertions.
 
-import java.util.Arrays;
+import java.util.Arrays; // for clone(), equals() and sort()
 
 class Heap {
   private final int[] H;
