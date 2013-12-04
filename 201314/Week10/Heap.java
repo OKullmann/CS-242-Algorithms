@@ -96,4 +96,7 @@ class Heap {
      assert(Arrays.equals(a,c));
     }
   }
+  {
+    // here comes your code, for Part 2
+  }
 }
