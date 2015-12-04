@@ -17,6 +17,7 @@ void test_insertion(const vec_t& v) {
   {vec_t c(v); Sort::insertion0(c); assert(c == s);}
   {vec_t c(v); Sort::insertion1(c); assert(c == s);}
   {vec_t c(v); Sort::insertion2(c); assert(c == s);}
+  {vec_t c(v); Sort::insertion3(c); assert(c == s);}
   {vec_t c(v); Sort::insertion(c); assert(c == s);}
 }
 
