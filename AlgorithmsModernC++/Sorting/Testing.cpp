@@ -1,6 +1,7 @@
 // Oliver Kullmann, 3.12.2015 (Swansea)
 
 #include <vector>
+#include <algorithm>
 
 #include <cassert>
 

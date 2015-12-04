@@ -1,7 +1,6 @@
 // Oliver Kullmann, 4.12.2015 (Swansea)
 
 #include <vector>
-#include <algorithm>
 #include <iostream>
 
 #include "InsertionSort.hpp"
