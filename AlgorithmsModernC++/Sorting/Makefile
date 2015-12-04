@@ -4,7 +4,7 @@ CXX := g++
 warning_options := -Wall
 standard_options := --std=c++11
 optimisation_options := -Ofast -DNDEBUG
-add_opt_options := -funroll-loops
+add_opt_options := -fstrict-aliasing -funroll-loops
 debug_options := -g
 
 all : Testing Testing_debug Measuring
