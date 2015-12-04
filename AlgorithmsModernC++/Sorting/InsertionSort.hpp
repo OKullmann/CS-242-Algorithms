@@ -7,8 +7,9 @@
    sorted, and just needs to *insert* v[i].
 
    Version 0 below "inserts" via consecutive swaps, version 1 by shifting.
-   The best version (apparently OK's "invention") optimises this, by saving
-   on the auxiliary actions.
+   Version 2 (apparently OK's "invention") optimises this, by saving
+   on the auxiliary actions, and the final version (apparently fastest)
+   removes random access, and only exploits bidirectional iterators.
 */
 
 #ifndef INSERTIONSORT_WEUhALkpF8
@@ -19,7 +20,7 @@
 namespace Sort {
 
   template <class V>
-  void insertion0(V& v) {
+  inline void insertion0(V& v) {
     typedef typename V::size_type size_t;
     const size_t size = v.size();
     for (size_t i = 1; i < size; ++i)
@@ -40,7 +41,7 @@ namespace Sort {
   }
 
   template <class V>
-  void insertion(V& v) {
+  inline void insertion2(V& v) {
     typedef typename V::size_type size_t;
     typedef typename V::value_type val_t;
     const size_t size = v.size();
@@ -57,6 +58,28 @@ namespace Sort {
       else y = x;
     }
   }
+
+  // More general than funtion insertion, now only requiring bidirection
+  // iterators (and not the container):
+  template <class It>
+  inline void insertion(const It begin, const It end) {
+    typedef typename It::value_type val_t;
+    if (begin == end) return;
+    val_t y = *begin;
+    for (It i = begin+1; i != end; ++i) {
+      const val_t x = *i;
+      if (y > x) {
+        *i = y;
+        It j = i-1;
+        for (val_t z; j != begin and (z = *(j-1)) > x; --j) *j = z;
+        *j = x;
+      }
+      else y = x;
+    }
+  }
+
+  template <class V>
+  inline void insertion(V& v) { insertion(v.begin(), v.end()); }
 
 
 }

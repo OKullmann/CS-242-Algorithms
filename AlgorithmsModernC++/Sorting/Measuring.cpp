@@ -40,11 +40,13 @@ void run_insertion() {
   const Time_point t1 = timing();
   Sort::insertion1(v);
   const Time_point t2 = timing();
-  Sort::insertion(v);
+  Sort::insertion2(v);
   const Time_point t3 = timing();
-  Sort::insertion0(v);
+  Sort::insertion(v);
   const Time_point t4 = timing();
-  std::cout << t1-t0 << " " << t2-t1 << " " << t3-t2 << " " << t4-t3 << "\n";}
+  Sort::insertion0(v);
+  const Time_point t5 = timing();
+  std::cout <<t1-t0<<" "<<t2-t1<<" "<<t3-t2<<" "<<t4-t3<<" "<<t5-t4<<"\n";}
 
   {std::cout << "Inverse sorted:\n";
   vec_t v; v.reserve(vec_medium);
@@ -58,13 +60,17 @@ void run_insertion() {
   const Time_point t3 = timing();
   set_vector(v);
   const Time_point t4 = timing();
-  Sort::insertion(v);
+  Sort::insertion2(v);
   const Time_point t5 = timing();
   set_vector(v);
   const Time_point t6 = timing();
-  Sort::insertion0(v);
+  Sort::insertion(v);
   const Time_point t7 = timing();
-  std::cout << t1-t0 << " " << t3-t2 << " " << t5-t4 << " " << t7-t6 << "\n";}
+  set_vector(v);
+  const Time_point t8 = timing();
+  Sort::insertion0(v);
+  const Time_point t9 = timing();
+  std::cout<<t1-t0<<" "<<t3-t2<<" "<<t5-t4<<" "<<t7-t6<<" "<<t9-t8<<"\n";}
 }
 }
 
