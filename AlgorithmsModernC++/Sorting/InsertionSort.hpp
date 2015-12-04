@@ -23,8 +23,10 @@ namespace Sort {
   inline void insertion0(V& v) {
     typedef typename V::size_type size_t;
     const size_t size = v.size();
-    for (size_t i = 1; i < size; ++i)
-      for (size_t j = i; j > 0 and v[j-1] > v[j]; --j) std::swap(v[j], v[j-1]);
+    if (size <= 1) return;
+    for (size_t i = 1; i != size; ++i)
+      for (size_t j = i; j != 0 and v[j-1] > v[j]; --j)
+        std::swap(v[j], v[j-1]);
   }
 
   template <class V>
@@ -32,10 +34,11 @@ namespace Sort {
     typedef typename V::size_type size_t;
     typedef typename V::value_type val_t;
     const size_t size = v.size();
-    for (size_t i = 1; i < size; ++i) {
+    if (size <= 1) return;
+    for (size_t i = 1; i != size; ++i) {
       const val_t x = v[i];
       size_t j;
-      for (j = i; j > 0 and v[j-1] > x; --j) v[j] = v[j-1];
+      for (j = i; j != 0 and v[j-1] > x; --j) v[j] = v[j-1];
       v[j] = x;
     }
   }
@@ -47,22 +50,22 @@ namespace Sort {
     const size_t size = v.size();
     if (size <= 1) return;
     val_t y = v[0];
-    for (size_t i = 1; i < size; ++i) {
+    for (size_t i = 1; i != size; ++i) {
       const val_t x = v[i];
       if (y > x) {
         v[i] = y;
         size_t j = i-1;
-        for (val_t z; j > 0 and (z = v[j-1]) > x; --j) v[j] = z;
+        for (val_t z; j != 0 and (z = v[j-1]) > x; --j) v[j] = z;
         v[j] = x;
       }
       else y = x;
     }
   }
 
-  // More general than funtion insertion, now only requiring bidirection
-  // iterators (and not the container):
+  // Same structure as "insertion2", but now only requiring random-access
+  // iterators (not the container):
   template <class It>
-  inline void insertion(const It begin, const It end) {
+  inline void insertion3(const It begin, const It end) {
     typedef typename It::value_type val_t;
     if (begin == end) return;
     val_t y = *begin;
@@ -76,6 +79,37 @@ namespace Sort {
       }
       else y = x;
     }
+  }
+  template <class V>
+  inline void insertion3(V& v) { insertion3(v.begin(), v.end()); }
+
+  // Same structure as "insertion3", but now only requiring bidirectional
+  // iterators:
+  template <class It>
+  inline void insertion(const It begin, const It end) {
+    typedef typename It::value_type val_t;
+    if (begin == end) return;
+    It i = begin;
+    if (++i == end) return;
+    if (*begin > *i) std::swap(*i, *begin);
+    val_t y = *i;
+    if (++i == end) return;
+    do {
+      const val_t x = *i;
+      if (y > x) {
+        *i = y;
+        It j = i; --j;
+        if (j != begin) {
+          It j2 = j; --j2;
+          for (val_t z; (z = *j2) > x; --j2) {
+            *j = z;
+            if ((j = j2) == begin) break;
+          }
+        }
+        *j = x;
+      }
+      else y = x;
+    } while (++i != end);
   }
 
   template <class V>
