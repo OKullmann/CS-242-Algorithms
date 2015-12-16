@@ -30,7 +30,7 @@ namespace Sort {
   }
 
   template <class V>
-  void insertion1(V& v) {
+  inline void insertion1(V& v) {
     if (v.empty()) return;
     typedef typename V::size_type size_t;
     typedef typename V::value_type val_t;
