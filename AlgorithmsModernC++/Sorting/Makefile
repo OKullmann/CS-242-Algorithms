@@ -9,13 +9,13 @@ debug_options := -g
 
 all : Testing Testing_debug Measuring
 
-Testing: InsertionSort.hpp Testing.cpp
+Testing: Insertion.hpp Testing.cpp
 	$(CXX) -o Testing $(standard_options) $(warning_options) $(optimisation_options) $(CPPFLAGS) $(CXXFLAGS) Testing.cpp
 
-Testing_debug : InsertionSort.hpp Testing.cpp
+Testing_debug : Insertion.hpp Testing.cpp
 	$(CXX) -o Testing_debug $(standard_options) $(warning_options) $(debug_options) $(CPPFLAGS) $(CXXFLAGS) Testing.cpp
 
-Measuring : InsertionSort.hpp Measuring.cpp
+Measuring : Insertion.hpp Measuring.cpp
 	$(CXX) -o Measuring $(standard_options) $(warning_options) $(optimisation_options) $(add_opt_options) $(CPPFLAGS) $(CXXFLAGS) Measuring.cpp
 
 test : Testing Testing_debug

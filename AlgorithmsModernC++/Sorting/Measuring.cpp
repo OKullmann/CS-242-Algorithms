@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-#include "InsertionSort.hpp"
+#include "Insertion.hpp"
 
 namespace {
 

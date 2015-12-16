@@ -13,8 +13,8 @@
    only exploits bidirectional iterators.
 */
 
-#ifndef INSERTIONSORT_WEUhALkpF8
-#define INSERTIONSORT_WEUhALkpF8
+#ifndef INSERTION_WEUhALkpF8
+#define INSERTION_WEUhALkpF8
 
 #include <algorithm>
 
