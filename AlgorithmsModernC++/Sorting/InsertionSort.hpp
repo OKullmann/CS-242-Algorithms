@@ -19,6 +19,7 @@
 
 namespace Sort {
 
+  // The basic idea:
   template <class V>
   inline void insertion0(V& v) {
     if (v.empty()) return;
@@ -29,6 +30,7 @@ namespace Sort {
         std::swap(v[j], v[j-1]);
   }
 
+  // Shifting instead of swapping:
   template <class V>
   inline void insertion1(V& v) {
     if (v.empty()) return;
@@ -43,6 +45,9 @@ namespace Sort {
     }
   }
 
+  // Avoiding additional assignment in case x is already at the right place,
+  // and accessing each array cell only once, if its content hasn't been
+  // lost already:
   template <class V>
   inline void insertion2(V& v) {
     typedef typename V::size_type size_t;
@@ -63,7 +68,7 @@ namespace Sort {
   }
 
   // Same structure as "insertion2", but now only requiring random-access
-  // iterators (not the container):
+  // iterators (not the container; now as in std::sort):
   template <class It>
   inline void insertion3(const It begin, const It end) {
     typedef typename It::value_type val_t;
