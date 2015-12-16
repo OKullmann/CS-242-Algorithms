@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <ostream>
 
 #include "Insertion.hpp"
 
@@ -11,7 +12,7 @@ typedef std::vector<int> vec_t;
 
 typedef vec_t::size_type Large;
 constexpr Large vec_large = 600000000;
-constexpr Large vec_medium = 20000;
+constexpr Large vec_medium = 30000;
 
 typedef double Time_point;
 #include <sys/resource.h>
@@ -32,7 +33,8 @@ void set_vector(vec_t& v) {
 }
 
 void run_insertion() {
-  {std::cout << "Sorted:\n";
+  {std::cout << "INSERTION:\n";
+  std::cout << "Sorted: " << vec_large << "\n";
   vec_t v; v.reserve(vec_large);
   for (Large i = 0; i < vec_large; ++i) v.push_back(i);
   const Time_point t0 = timing();
@@ -49,9 +51,10 @@ void run_insertion() {
   Sort::insertion0(v);
   const Time_point t6 = timing();
   std::cout <<"0: " << t1-t0 <<"\t1: " << t2-t1 << "\t2: " << t3-t2
-    << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t0: " << t6-t5 << "\n";}
+    << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t0: " << t6-t5
+    << std::endl;}
 
-  {std::cout << "Inverse sorted:\n";
+  {std::cout << "Inverse sorted: " << vec_medium << "\n";
   vec_t v; v.reserve(vec_medium);
   set_vector(v);
   const Time_point t0 = timing();
@@ -78,7 +81,8 @@ void run_insertion() {
   Sort::insertion0(v);
   const Time_point t11 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t3-t2 << "\t2: " << t5-t4
-    << "\t3: " << t7-t6 << "\t*: " << t9-t8 << "\t0: " << t11-t10 << "\n";}
+    << "\t3: " << t7-t6 << "\t*: " << t9-t8 << "\t0: " << t11-t10
+    << std::endl;}
 }
 }
 
