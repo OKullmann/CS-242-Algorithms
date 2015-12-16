@@ -3,7 +3,7 @@
 /* Various implementations of insertion sort
    The basic idea of insertion sort of a vector v of length n is:
       incrementally sort v[1],...,v[i] for i=1,...,n.
-   Sorting of v[i],...,v[i] exploits that v[1],...,v[i-1] is already
+   Sorting of v[1],...,v[i] exploits that v[1],...,v[i-1] is already
    sorted, and just needs to *insert* v[i].
 
    Version 0 below "inserts" via consecutive swaps, version 1 by shifting.
