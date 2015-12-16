@@ -21,9 +21,9 @@ namespace Sort {
 
   template <class V>
   inline void insertion0(V& v) {
+    if (v.empty()) return;
     typedef typename V::size_type size_t;
     const size_t size = v.size();
-    if (size <= 1) return;
     for (size_t i = 1; i != size; ++i)
       for (size_t j = i; j != 0 and v[j-1] > v[j]; --j)
         std::swap(v[j], v[j-1]);
@@ -31,10 +31,10 @@ namespace Sort {
 
   template <class V>
   void insertion1(V& v) {
+    if (v.empty()) return;
     typedef typename V::size_type size_t;
     typedef typename V::value_type val_t;
     const size_t size = v.size();
-    if (size <= 1) return;
     for (size_t i = 1; i != size; ++i) {
       const val_t x = v[i];
       size_t j;
