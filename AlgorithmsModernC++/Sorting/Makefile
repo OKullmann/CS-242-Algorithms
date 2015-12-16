@@ -1,7 +1,7 @@
 .PHONY : cleanall all test measure
 
 CXX := g++
-warning_options := -Wall
+warning_options := -Wall -Wno-parentheses
 standard_options := --std=c++11
 optimisation_options := -Ofast -DNDEBUG
 add_opt_options := -fstrict-aliasing -funroll-loops
@@ -9,13 +9,13 @@ debug_options := -g
 
 all : Testing Testing_debug Measuring
 
-Testing: Insertion.hpp Testing.cpp
+Testing: Insertion.hpp Small.hpp Testing.cpp
 	$(CXX) -o Testing $(standard_options) $(warning_options) $(optimisation_options) $(CPPFLAGS) $(CXXFLAGS) Testing.cpp
 
-Testing_debug : Insertion.hpp Testing.cpp
+Testing_debug : Insertion.hpp Small.hpp Testing.cpp
 	$(CXX) -o Testing_debug $(standard_options) $(warning_options) $(debug_options) $(CPPFLAGS) $(CXXFLAGS) Testing.cpp
 
-Measuring : Insertion.hpp Measuring.cpp
+Measuring : Insertion.hpp Small.hpp Measuring.cpp
 	$(CXX) -o Measuring $(standard_options) $(warning_options) $(optimisation_options) $(add_opt_options) $(CPPFLAGS) $(CXXFLAGS) Measuring.cpp
 
 test : Testing Testing_debug
