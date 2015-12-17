@@ -68,7 +68,7 @@ namespace Sort {
   }
 
   // Same structure as "insertion2", but now only requiring random-access
-  // iterators (not the container; now as in std::sort):
+  // iterators (not the (whole) container; thus now as in std::sort):
   template <class It>
   inline void insertion3(const It begin, const It end) {
     typedef typename It::value_type val_t;
