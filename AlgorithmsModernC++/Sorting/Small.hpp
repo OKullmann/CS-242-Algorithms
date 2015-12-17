@@ -2,18 +2,17 @@
 
 /* Inplace sorting of small fixed-size ranges
 
-   More precisely, sorting the first element of a range, by comparison and
-   swapping values, where the range is given by a forward-iterator to the
+   More precisely, sorting the first elements of a range, by comparison and
+   assignments, where the range is given by a forward-iterator to the
    first element.
 
    It seems reasonable to use only checks of the form "vx > vy" with x, y one
    of a,b,..., and with x lexicographically before y, that is, checking
    "out-of-order".
 
-   TODO: Can we achieve stability, while using the minimum maximal
-   number of comparisons? We might allow equality-comparisons, and it seems
-   they are needed if minimising the number of comparisons (meaning <, <=,
-   excluding =).
+   TODO: Can we always achieve stability, while using the minimum maximal
+   number of comparisons? sort3 below is stable, and it seems by the above
+   checks "out-of-order" we guarantee stability.
 
    As the array [1,0,0] shows, when stability is required, then more
    assignments are needed in general (the stable solution performs a
@@ -38,6 +37,7 @@
 
 namespace Sort {
 
+  // Stably sorting a,..,a+1 :
   template <class It>
   inline void size2(const It a) {
     const It b = ++It(a);
@@ -45,6 +45,7 @@ namespace Sort {
     if (va > vb) {*a=vb; *b=va;}
   }
 
+  // Stably sorting a,..,a+2 :
   template <class It>
   inline void size3(const It a) {
     const It b = ++It(a);
@@ -63,10 +64,8 @@ namespace Sort {
       if (vb > vc) // 0,x<1
         if (va > vc) // 2<0<1
           {*a=vc; *b=va; *c=vb;}
-        else // 0<=2<=1
+        else // 0<=2<1
           {*b=vc; *c=vb;}
-          // this breaks stability in case vb=vc, and is furthermore
-          // unnecessary in this case
   }
 
 }
