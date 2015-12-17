@@ -4,7 +4,12 @@ CXX := g++
 warning_options := -Wall -Wno-parentheses
 standard_options := --std=c++11
 optimisation_options := -Ofast -DNDEBUG
-add_opt_options := -fstrict-aliasing -funroll-loops
+
+add_opt_options := -fstrict-aliasing -funroll-loops -fstrict-overflow -fwhole-program
+# -fwhole-program has very patchy effects (some situations get faster, some slower), but seems to help with the fastest algorithms.
+# Other options to try are
+# -funsafe-loop-optimizations -freschedule-modulo-scheduled-loops -fpeel-loops -funswitch-loops
+
 debug_options := -g
 
 all : Testing Testing_debug Measuring
