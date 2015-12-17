@@ -1,70 +1,73 @@
 // Oliver Kullmann, 16.12.2015 (Swansea)
 
-/* Inplace sorting of small fixed-size arrays
+/* Inplace sorting of small fixed-size ranges
+
+   More precisely, sorting the first element of a range, by comparison and
+   swapping values, where the range is given by a forward-iterator to the
+   first element.
+
+   It seems reasonable to use only checks of the form "vx > vy" with x, y one
+   of a,b,..., and with x lexicographically before y, that is, checking
+   "out-of-order".
+
+   TODO: Can we achieve stability, while using the minimum maximal
+   number of comparisons? We might allow equality-comparisons, and it seems
+   they are needed if minimising the number of comparisons (meaning <, <=,
+   excluding =).
 
    As the array [1,0,0] shows, when stability is required, then more
-   assignments are needed; thus the algorithms below for >= 3 elements
-   are not stable.
+   assignments are needed in general (the stable solution performs a
+   cyclic left-shift, the non-stable solution just needs to swap first
+   and last element).
 
-   TODO: Can size3 be improved? It seems the logic could be streamlined.
+   TODO: Formulate and prove some form of optimality.
+   At least the algorithm should use the minimum maximal number of comparison.
+   And assignments should be performed only if necessary -- however that might
+   need additional comparisons?
+
+   TODO: Which of <, <= is fastest?
+   Apparently, according to
+   http://stackoverflow.com/questions/12135518/is-faster-than ,
+   both should be considered as equally fast, and then we can use whatever
+   is more appropriate -- is there ever any difference?
 
 */
 
 #ifndef SMALL_fCiBIsrRrm
 #define SMALL_fCiBIsrRrm
 
-#include <algorithm>
-
 namespace Sort {
 
-  template <class V>
-  inline void size2(V& v) {
-    if (v[0] > v[1]) std::swap(v[0], v[1]);
-  }
-
-  template <class V>
-  inline void size3_(V& v) {
-    if (v[0] > v[1]) // 1<0,x
-      if (v[2] > v[0]) // 1<0<2
-        std::swap(v[0], v[1]); 
-      else // 1,x<=0
-        if (v[2] > v[1]) // 1<2<=0
-          {const auto t=v[0]; v[0]=v[1]; v[1]=v[2]; v[2]=t;}
-        else // 2<=1<0
-          std::swap(v[0], v[2]);
-    else // 0<=1,x
-      if (v[1] > v[2]) // 0,x<1
-        if (v[0] > v[2]) // 2<0<=1
-          {const auto t=v[0]; v[0]=v[2]; v[2]=v[1]; v[1]=t;}
-        else // 0<=2<=1
-          std::swap(v[1], v[2]);
-  }
-
-  // Same as size3_, but now just using forward iterators:
   template <class It>
-  inline void size3(const It begin, const It end) {
-    const It a = begin;
-    const It b = ++It(begin);
+  inline void size2(const It a) {
+    const It b = ++It(a);
+    const auto va = *a, vb = *b;
+    if (va > vb) {*a=vb; *b=va;}
+  }
+
+  template <class It>
+  inline void size3(const It a) {
+    const It b = ++It(a);
     const It c = ++It(b);
     const auto va = *a, vb = *b, vc = *c;
-    if (va > vb) // 1,0,x
-      if (vc > va) // 1,0,2
-        {*a=vb; *b=va;}
-      else // 1,x,0
-        if (vc > vb) // 1,2,0
-          {*a=vb; *b=vc; *c=va;}
-        else // 2,1,0
+    if (va > vb) // 1<0,x
+      if (va > vc) // 1,x<0
+        if (vb > vc) // 2<1<0
           {*a=vc; *c=va;}
-    else // 0,1,x
-      if (*b > *c) // 0,x,1
-        if (*a > *c) // 2,0,1
+        else // 1<=2<0
+          {*a=vb; *b=vc; *c=va;}
+          // if vb=vc, then only {*a=vc; *c=va;} is needed (breaking stability)
+      else // 1<0<=2
+        {*a=vb; *b=va;}
+    else // 0<=1,x
+      if (vb > vc) // 0,x<1
+        if (va > vc) // 2<0<1
           {*a=vc; *b=va; *c=vb;}
-        else // 0,2,1
+        else // 0<=2<=1
           {*b=vc; *c=vb;}
+          // this breaks stability in case vb=vc, and is furthermore
+          // unnecessary in this case
   }
-
-  template <class V>
-  inline void size3(V& v) { return size3(v.begin(), v.end()); }
 
 }
 

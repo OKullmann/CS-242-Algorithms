@@ -25,14 +25,13 @@ void test_insertion(const vec_t& v) {
 void test_2(const vec_t& v) {
   vec_t s(v);
   std::sort(s.begin(), s.end());
-  {vec_t c(v); Sort::size2(c); assert(c == s);}
+  {vec_t c(v); Sort::size2(c.begin()); assert(c == s);}
 }
 
 void test_3(const vec_t& v) {
   vec_t s(v);
   std::sort(s.begin(), s.end());
-  {vec_t c(v); Sort::size3_(c); assert(c == s);}
-  {vec_t c(v); Sort::size3(c); assert(c == s);}
+  {vec_t c(v); Sort::size3(c.begin()); assert(c == s);}
 }
 
 
