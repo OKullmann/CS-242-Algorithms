@@ -92,19 +92,19 @@ void run_3() {
   std::cout << "Loop: " << loop3 << "^3 = " << loop3*loop3*loop3 << "\n";
   vec_t v; v.resize(3);
   const Time_point t0 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::insertion0(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::insertion0(v);}
   const Time_point t1 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::insertion1(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::insertion1(v);}
   const Time_point t2 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::insertion2(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::insertion2(v);}
   const Time_point t3 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::insertion3(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::insertion3(v);}
   const Time_point t4 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::insertion(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::insertion(v);}
   const Time_point t5 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::size3_(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::size3_(v);}
   const Time_point t6 = timing();
-  for(int a=0; a<loop3; ++a)for(int b=0; b<loop3; ++b)for(int c=0; c<loop3; ++c) {v=vec_t({{a,b,c}}); Sort::size3(v);}
+  for(int a=0;a<loop3;++a)for(int b=0;b<loop3;++b)for(int c=0;c<loop3;++c) {v=vec_t({{a,b,c}}); Sort::size3(v);}
   const Time_point t7 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
     << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t_3_: " << t6-t5 <<
