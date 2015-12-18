@@ -25,6 +25,10 @@
    need additional comparisons?
 
    It seems size3 is considerably faster than size3_ -- why?
+   Perhaps the main point is that the empty branch for size3 happens already
+   after 2 comparisons, while for size3_ 3 comparisons are needed?!
+   One should count the number of comparisons and assignments over all
+   testcases.
 
    TODO: Which of <, <= is fastest?
    Apparently, according to
