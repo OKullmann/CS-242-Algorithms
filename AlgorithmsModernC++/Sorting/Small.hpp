@@ -24,6 +24,8 @@
    And assignments should be performed only if necessary -- however that might
    need additional comparisons?
 
+   It seems size3 is considerably faster than size3_ -- why?
+
    TODO: Which of <, <= is fastest?
    Apparently, according to
    http://stackoverflow.com/questions/12135518/is-faster-than ,
@@ -66,6 +68,24 @@ namespace Sort {
           {*a=vc; *b=va; *c=vb;}
         else // 0<=2<1
           {*b=vc; *c=vb;}
+      // else 0<=1<=2
+  }
+
+  // Minimising the two cases with 3 assignments (at the expense as needing
+  // 3 comparisons for the sorted cases, and unstability):
+  template <class It>
+  inline void size3_(const It a) {
+    const It b = ++It(a);
+    const It c = ++It(b);
+    const auto va = *a, vb = *b, vc = *c;
+    if (vb < vc) {
+      if (vc < va) {*a=vb; *b=vc; *c=va;}
+      else if (vb < va) {*a=vb; *b=va;}
+    } else
+      if (va < vb)
+        if (vc < va) {*a=vc; *b=va; *c=vb;}
+        else {*b=vc; *c=vb;}
+      else {*a=vc; *c=va;}
   }
 
 }

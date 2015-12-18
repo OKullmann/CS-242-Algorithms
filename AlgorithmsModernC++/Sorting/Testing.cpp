@@ -32,6 +32,7 @@ void test_3(const vec_t& v) {
   vec_t s(v);
   std::sort(s.begin(), s.end());
   {vec_t c(v); Sort::size3(c.begin()); assert(c == s);}
+  {vec_t c(v); Sort::size3_(c.begin()); assert(c == s);}
 }
 
 
