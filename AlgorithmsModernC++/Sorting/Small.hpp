@@ -176,6 +176,105 @@ namespace Sort {
           // a <= b <= c <= d
   }
 
+  template <class It>
+  inline void size4_(const It ia) {
+    const It ib = ++It(ia);
+    const It ic = ++It(ib);
+    const It id = ++It(ic);
+    const auto a = *ia, b = *ib, c = *ic, d = *id;
+
+    if (a > b) //  b < a; c,d
+      if (a > c) // (b,c) < a; d
+        if (b > c) // c < b < a; d
+          if (b > d) { // (c,d) < b < a
+            *ic=b; *id=a;
+            if (c > d) // d < c < b < a
+              {*ia=d; *ib=c;}
+            else // c <= d < b < a
+              {*ia=c; *ib=d;}
+          }
+          else { // c < b < a; b <= d
+            *ia=c;
+            if (a > d) // c < b <= d < a
+              {*ic=d; *id=a;}
+            else // c < b < a <= d
+              {*ic=a;}
+          }
+        else // b <= c < a; d
+          if (c > d) { // b <= c < a; d < c
+            *id=a;
+            if (b > d) // d < b <= c < a
+              {*ia=d;}
+            else // b <= d < c < a
+              {*ia=b; *ib=d;}
+          }
+          else { // b <= c < a; c <= d
+            *ia=b; *ib=c;
+            if (a > d) // b <= c <= d < a
+              {*ic=d; *id=a;}
+            else // b <= c < a <= d
+              {*ic=a;}
+          }
+      else // b < a <= c; d
+        if (a > d) { // b < a <= c; d < a
+          *ic=a; *id=c;
+          if (b > d) // d < b < a <= c
+            {*ia=d;}
+          else // b <= d < a <= c
+            {*ia=b; *ib=d;}
+        }
+        else { // b < a <= c; a <= d
+          *ia=b; *ib=a;
+          if (c > d) // b < a <= d < c
+            { *ic=d; *id=c;}
+          // b < a <= c <= d
+        }
+    else // a <= b; c,d
+      if (b > c) // a <= b; c < b; d
+        if (a > c) // c < a <= b; d
+          if (a > d) { // c < a <= b; d < a
+            *ic=a; *id=b;
+            if (c > d) // d < c < a <= b
+              {*ia=d; *ib=c;}
+            else // c <= d < a <= b
+              {*ia=c; *ib=d;}
+          }
+          else {// c < a <= (b,d)
+            *ia=c; *ib=a;
+            if (b > d) // c < a <= d < b
+              {*ic=d; *id=b;}
+            else // c < a <= b <= d
+              {*ic=b;}
+          }
+        else // a <= c < b; d
+          if (c > d) { // a <= c < b; d < c
+            *id=b;
+            if (a > d) // d < a <= c < b
+              {*ia=d; *ib=a;}
+            else // a <= d < c < b
+              {*ib=d;}
+          }
+          else { // a <= c < b; c <= d
+            *ib=c;
+            if (b > d) // a <= c <= d < b
+              {*ic=d; *id=b;}
+            else // a <= c < b <= d
+              {*ic=b;}
+          }
+      else // a <= b <= c; d
+        if (b > d) { // a <= b <= c; d < b
+          *ic=b; *id=c;
+          if (a > d) // d < a <= b <= c
+            {*ia=d; *ib=a;}
+          else // a <= d < b <= c
+            {*ib=d;}
+        }
+        else // a <= b <= c; b <= d
+          if (c > d) // a <= b <= d < c
+            {*ic=d; *id=c;}
+          // a <= b <= c <= d
+  }
+
 /*
       if (a > b) {final int t=a;a=b;b=t;}
       if (b > c) {

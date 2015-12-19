@@ -44,6 +44,7 @@ void test_4(const vec_t& v) {
   vec_t s(v);
   std::sort(s.begin(), s.end());
   {vec_t c(v); Sort::size4(c.begin()); assert(c == s);}
+  {vec_t c(v); Sort::size4_(c.begin()); assert(c == s);}
 }
 
 
