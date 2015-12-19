@@ -204,14 +204,17 @@ namespace Sort {
   // Same structure as size4, but updating the elements immediately:
   template <class It>
   inline void size4_(const It a) {
-    size3_(a);
+    size3(a);
     const It b = ++It(a);
     const It c = ++It(b);
     const It d = ++It(c);
-    if (*b > *d)
-      if (*a > *d) {const auto t=*d;*d=*c;*c=*b;*b=*a;*a=t;}
-      else {const auto t=*d;*d=*c;*c=*b;*b=t;}
-    else if (*c > *d) {const auto t=*c;*c=*d;*d=t;}
+    const auto t = *d;
+    if (*b > t) {
+      *d=*c; *c=*b;
+      if (*a > t) {*b=*a;*a=t;}
+      else {*b=t;}
+    }
+    else if (*c > t) {*d=*c;*c=t;}
   }
   /* Remark: Using size3_(a) here instead of its code currently doubles
   the run-time (gcc 4.7.x), but that should be a weakness of the compiler. */
