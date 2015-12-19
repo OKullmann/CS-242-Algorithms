@@ -148,8 +148,8 @@ void run_4() {
   for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; std::sort(v.begin(),v.end());}}}}
   const Time_point t8 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
-    << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t_3: " << t6-t5 <<
-    "\t_3_: " << t7-t6 << "\tstd: " << t8-t7 << std::endl;
+    << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t_4: " << t6-t5 <<
+    "\t_4_: " << t7-t6 << "\tstd: " << t8-t7 << std::endl;
 }
 
 }
