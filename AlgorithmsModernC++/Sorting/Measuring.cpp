@@ -1,4 +1,9 @@
 // Oliver Kullmann, 4.12.2015 (Swansea)
+/* Copyright 2015 Oliver Kullmann
+This file is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation and included in this library; either version 3 of the License, or
+any later version. */
 
 #include <vector>
 #include <iostream>
