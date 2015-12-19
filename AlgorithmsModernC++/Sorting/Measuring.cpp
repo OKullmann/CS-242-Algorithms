@@ -21,6 +21,7 @@ typedef vec_t::size_type Large;
 constexpr Large vec_large = 600000000;
 constexpr Large vec_medium = 40000;
 constexpr long loop3 = 800;
+constexpr long loop4 = 150;
 
 typedef double Time_point;
 #include <sys/resource.h>
@@ -125,9 +126,36 @@ void run_3() {
     "\t_3_: " << t7-t6 << "\tstd: " << t8-t7 << std::endl;
 }
 
+void run_4() {
+  std::cout << "4 ELEMENTS:\n";
+  std::cout << "Loop: " << loop4 << "^4 = " << loop4*loop4*loop4*loop4 << "\n";
+  vec_t v; v.resize(4);
+  const Time_point t0 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion0(v);}}}}
+  const Time_point t1 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion1(v);}}}}
+  const Time_point t2 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion2(v);}}}}
+  const Time_point t3 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion3(v);}}}}
+  const Time_point t4 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion(v);}}}}
+  const Time_point t5 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4(v.begin());}}}}
+  const Time_point t6 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4_(v.begin());}}}}
+  const Time_point t7 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; std::sort(v.begin(),v.end());}}}}
+  const Time_point t8 = timing();
+  std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
+    << "\t3: " << t4-t3 << "\t*: " << t5-t4 << "\t_3: " << t6-t5 <<
+    "\t_3_: " << t7-t6 << "\tstd: " << t8-t7 << std::endl;
+}
+
 }
 
 int main(const int argc, const char* const argv[]) {
   run_insertion();
   run_3();
+  run_4();
 }
