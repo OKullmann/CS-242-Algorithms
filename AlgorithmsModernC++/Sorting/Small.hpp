@@ -58,26 +58,30 @@ namespace Sort {
 
   // Stably sorting a,..,a+2 :
   template <class It>
-  inline void size3(const It a) {
-    const It b = ++It(a);
-    const It c = ++It(b);
-    const auto va = *a, vb = *b, vc = *c;
-    if (va > vb) // 1<0,x
-      if (va > vc) // 1,x<0
-        if (vb > vc) // 2<1<0
-          {*a=vc; *c=va;}
-        else // 1<=2<0
-          {*a=vb; *b=vc; *c=va;}
-          // if vb=vc, then only {*a=vc; *c=va;} is needed (breaking stability)
-      else // 1<0<=2
-        {*a=vb; *b=va;}
-    else // 0<=1,x
-      if (vb > vc) // 0,x<1
-        if (va > vc) // 2<0<1
-          {*a=vc; *b=va; *c=vb;}
-        else // 0<=2<1
-          {*b=vc; *c=vb;}
-      // else 0<=1<=2
+  inline void size3(const It ia) {
+    const It ib = ++It(ia);
+    const It ic = ++It(ib);
+    const auto a = *ia, b = *ib, c = *ic;
+    if (a > b) // b < a; c
+      if (a > c) { // (b,c) < a
+         *ic=a;
+        if (b > c) // c < b < a
+          {*ia=c;}
+        else // b <= c < a
+          {*ia=b; *ib=c;}
+          // if b=c, then only {*ia=c; *ic=a;} is needed (breaking stability)
+        }
+      else // b < a <= c
+        {*ia=b; *ib=a;}
+    else // a <= b; c
+      if (b > c) { // a <= b; c < b
+        *ic=b;
+        if (a > c) // c < a <= b
+          {*ia=c; *ib=a;}
+        else // a <= c <= b
+          {*ib=c;}
+      }
+      // else a <= b <= c
   }
 
   // Minimising the two cases with 3 assignments (at the expense as needing
