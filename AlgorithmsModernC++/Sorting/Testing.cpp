@@ -40,6 +40,12 @@ void test_3(const vec_t& v) {
   {vec_t c(v); Sort::size3_(c.begin()); assert(c == s);}
 }
 
+void test_4(const vec_t& v) {
+  vec_t s(v);
+  std::sort(s.begin(), s.end());
+  {vec_t c(v); Sort::size4(c.begin()); assert(c == s);}
+}
+
 
 }
 
@@ -63,4 +69,11 @@ int main(const int argc, const char* const argv[]) {
    for (int b = -2; b <= 2; ++b)
     for (int c = -2; c <= 2; ++c)
      test_3(vec_t{{a,b,c}});
+
+  test_4(vec_t{{4,3,2,1}});
+  for (int a = -2; a <= 2; ++a)
+   for (int b = -2; b <= 2; ++b)
+    for (int c = -2; c <= 2; ++c)
+     for (int d = -2; d <= 2; ++d)
+       test_4(vec_t{{a,b,c,d}});
 }
