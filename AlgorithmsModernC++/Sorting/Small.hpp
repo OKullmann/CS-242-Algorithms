@@ -5,13 +5,13 @@ terms of the GNU General Public License as published by the Free Software
 Foundation and included in this library; either version 3 of the License, or
 any later version. */
 
-/* Inplace sorting of small fixed-size ranges
+/* Inplace sorting of small fixed-size ranges a,b,...
 
    More precisely, sorting the first elements of a range, by comparison and
-   assignments, where the range is given by a forward-iterator to the
+   assignments, where the range is given by a forward-iterator ia to the
    first element.
 
-   It seems reasonable to use only checks of the form "vx > vy" with x, y one
+   It seems reasonable to use only checks of the form "x > y" with x, y one
    of a,b,..., and with x lexicographically before y, that is, checking
    "out-of-order".
 
@@ -29,9 +29,11 @@ any later version. */
    And assignments should be performed only if necessary -- however that might
    need additional comparisons?
 
-   It seems size3 is considerably faster than size3_ -- why?
+   It seems size3 is considerably faster than an alternative version which
+   minimises the two cases with 3 assignments at the expense of needing
+   3 comparisons for the sorted cases (and instability): -- why?
    Perhaps the main point is that the empty branch for size3 happens already
-   after 2 comparisons, while for size3_ 3 comparisons are needed?!
+   after 2 comparisons, while for the alternative 3 comparisons are needed?!
    One should count the number of comparisons and assignments over all
    testcases.
 
@@ -50,10 +52,10 @@ namespace Sort {
 
   // Stably sorting a,..,a+1 :
   template <class It>
-  inline void size2(const It a) {
-    const It b = ++It(a);
-    const auto va = *a, vb = *b;
-    if (va > vb) {*a=vb; *b=va;}
+  inline void size2(const It ia) {
+    const It ib = ++It(ia);
+    const auto a = *ia, b = *ib;
+    if (a > b) {*ia=b; *ib=a;}
   }
 
   // Stably sorting a,..,a+2 :
@@ -84,21 +86,19 @@ namespace Sort {
       // else a <= b <= c
   }
 
-  // Minimising the two cases with 3 assignments (at the expense as needing
-  // 3 comparisons for the sorted cases, and instability):
+  // Same structure as size3, but updating the elements immediately
+  // (this amounts here to insertion-sort):
   template <class It>
   inline void size3_(const It a) {
     const It b = ++It(a);
     const It c = ++It(b);
-    const auto va = *a, vb = *b, vc = *c;
-    if (vb < vc) {
-      if (vc < va) {*a=vb; *b=vc; *c=va;}
-      else if (vb < va) {*a=vb; *b=va;}
-    } else
-      if (va < vb)
-        if (vc < va) {*a=vc; *b=va; *c=vb;}
-        else {*b=vc; *c=vb;}
-      else {*a=vc; *c=va;}
+    auto t = *a;
+    if (t > *b) {*a=*b;*b=t;}
+    else t = *b;
+    if (t > *c) {
+      *b=*c;*c=t;
+      if (*a > *b) {t=*a;*a=*b;*b=t;}
+    }
   }
 
   // Stably sorting a,..,a+3 :
@@ -204,20 +204,17 @@ namespace Sort {
   // Same structure as size4, but updating the elements immediately:
   template <class It>
   inline void size4_(const It a) {
+    size3_(a);
     const It b = ++It(a);
     const It c = ++It(b);
     const It d = ++It(c);
-
-    if (*a > *b) {const auto t=*a;*a=*b;*b=t;}
-    if (*b > *c) {
-      {const auto t=*b;*b=*c;*c=t;}
-      if (*a > *b) {const auto t=*a;*a=*b;*b=t;}
-    }
     if (*b > *d)
       if (*a > *d) {const auto t=*d;*d=*c;*c=*b;*b=*a;*a=t;}
       else {const auto t=*d;*d=*c;*c=*b;*b=t;}
     else if (*c > *d) {const auto t=*c;*c=*d;*d=t;}
   }
+  /* Remark: Using size3_(a) here instead of its code currently doubles
+  the run-time (gcc 4.7.x), but that should be a weakness of the compiler. */
 
 
 }
