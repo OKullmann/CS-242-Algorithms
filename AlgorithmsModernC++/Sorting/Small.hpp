@@ -101,7 +101,8 @@ namespace Sort {
     }
   }
 
-  // Stably sorting a,..,a+3 :
+  // Stably sorting a,..,a+3 (sorting the first three elements as in size3,
+  // and then comparing the fourth element to the middle one):
   template <class It>
   inline void size4_(const It ia) {
     const It ib = ++It(ia);
