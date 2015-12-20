@@ -47,14 +47,15 @@ namespace Sort {
 
   template <class It>
   inline void selection_bi(It begin, It end) {
-    {const auto size = end - begin;
-     if (size <= 1) return;
-     if (size % 2 != 0) {
-       std::swap(*begin, *std::min_element(begin, end));
-       ++begin;
-     }
+    const auto size = end - begin;
+    if (size <= 1) return;
+    if (size % 2 != 0) {
+      auto min = *begin; It opt = begin;
+      for (It i = ++It(begin); i != end; ++i) if (*i < min) {min=*i; opt=i;}
+      std::swap(*(begin++), *opt);
     }
     for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j) std::swap(*i, *j);
+    if (size <= 3) return;
     bool align = true;
     It beginp1 = begin; ++beginp1;
     It endm1 = end; --endm1;
