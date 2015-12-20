@@ -13,6 +13,8 @@ any later version. */
    Sorting of v[0],...,v[i] exploits that v[0],...,v[i-1] is already
    sorted, and just needs to *insert* v[i].
 
+   See also https://en.wikipedia.org/wiki/Insertion_sort .
+
    Version 0 below "inserts" via consecutive swaps, Version 1 by shifting.
    Version 2 (apparently OK's "invention") optimises this, by saving
    on the auxiliary actions, and the final version removes random access, and
