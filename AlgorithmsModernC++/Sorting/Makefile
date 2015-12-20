@@ -20,7 +20,7 @@ Testing: Insertion.hpp Small.hpp Selection.hpp Testing.cpp
 Testing_debug : Insertion.hpp Small.hpp Selection.hpp Testing.cpp
 	$(CXX) -o Testing_debug $(standard_options) $(warning_options) $(debug_options) $(CPPFLAGS) $(CXXFLAGS) Testing.cpp
 
-Measuring : Insertion.hpp Small.hpp Measuring.cpp
+Measuring : Insertion.hpp Small.hpp Selection.hpp Measuring.cpp
 	$(CXX) -o Measuring $(standard_options) $(warning_options) $(optimisation_options) $(add_opt_options) $(CPPFLAGS) $(CXXFLAGS) Measuring.cpp
 
 test : Testing Testing_debug
