@@ -21,6 +21,7 @@ any later version. */
 
 namespace Sort {
 
+  // The simplest expression:
   template <class It>
   inline void selection0(const It begin, const It end) {
     for (It i = begin; i != end; ++i) {
@@ -30,6 +31,19 @@ namespace Sort {
   }
   template <class V>
   inline void selection0(V& v) { selection0(v.begin(), v.end()); }
+
+
+  template <class It>
+  inline void selection1(const It begin, const It end) {
+    for (It i = begin; i != end; ++i) {
+      auto min = *i; It opt = i;
+      for (It j = ++It(i); j != end; ++j)
+        if (*j < min) { min = *j; opt = j;}
+      if (opt != i) std::swap(*i,*opt);
+    }
+  }
+  template <class V>
+  inline void selection1(V& v) { selection1(v.begin(), v.end()); }
 
 }
 
