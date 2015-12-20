@@ -111,27 +111,43 @@ void run_selection() {
   const Time_point t1 = timing();
   Sort::selection1(v);
   const Time_point t2 = timing();
-  std::sort(v.begin(),v.end());
+  Sort::selection_bi(v);
   const Time_point t3 = timing();
-  std::cout << "0: " << t1-t0 << "\t1: " << t2-t1
-    << "\nstd: " << t3-t2 << std::endl;}
+  std::sort(v.begin(),v.end());
+  const Time_point t4 = timing();
+  std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\tbi: " << t3-t2
+    << "\nstd: " << t4-t3 << std::endl;}
 
   {std::cout << "Inverse sorted: " << vec_medium << "\n";
   vec_t v; v.reserve(vec_medium);
   set_vector(v);
   const Time_point t0 = timing();
-  Sort::insertion0(v);
+  Sort::selection0(v);
   const Time_point t1 = timing();
   set_vector(v);
   const Time_point t2 = timing();
-  Sort::insertion1(v);
+  Sort::selection1(v);
   const Time_point t3 = timing();
   set_vector(v);
   const Time_point t4 = timing();
-  std::sort(v.begin(),v.end());
+  Sort::selection_bi(v);
   const Time_point t5 = timing();
-  std::cout << "0: " << t1-t0 << "\t1: " << t3-t2
-    << "\nstd: " << t5-t4 << std::endl;}
+  set_vector(v);
+  const Time_point t6 = timing();
+  std::sort(v.begin(),v.end());
+  const Time_point t7 = timing();
+  std::cout << "0: " << t1-t0 << "\t1: " << t3-t2 << "\tbi: " << t5-t4
+    << "\nstd: " << t7-t6 << std::endl;}
+
+  {std::cout << "Constant: " << vec_large << "\n";
+  vec_t v(vec_large);
+  const Time_point t0 = timing();
+  Sort::selection_bi(v);
+  const Time_point t1 = timing();
+  std::sort(v.begin(),v.end());
+  const Time_point t2 = timing();
+  std::cout << "\bi: " << t1-t0
+    << "\nstd: " << t2-t1 << std::endl;}
 }
 
 void run_3() {
@@ -151,17 +167,19 @@ void run_3() {
   const Time_point t5 = timing();
   for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::selection1(v);}}}
   const Time_point t6 = timing();
-  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::size3(v.begin());}}}
+  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::selection_bi(v);}}}
   const Time_point t7 = timing();
-  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::size3_(v.begin());}}}
+  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::size3(v.begin());}}}
   const Time_point t8 = timing();
-  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; std::sort(v.begin(),v.end());}}}
+  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::size3_(v.begin());}}}
   const Time_point t9 = timing();
+  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; std::sort(v.begin(),v.end());}}}
+  const Time_point t10 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
     << "\t3: " << t4-t3 << "\t*: " << t5-t4
-    << "\n1: " << t6-t5
-    << "\n_3: " << t7-t6 << "\t_3_: " << t8-t7
-    << "\nstd: " << t9-t8 << std::endl;
+    << "\n1: " << t6-t5 << "\tbi: " << t7-t6
+    << "\n_3: " << t8-t7 << "\t_3_: " << t9-t8
+    << "\nstd: " << t10-t9 << std::endl;
 }
 
 void run_4() {
@@ -181,17 +199,19 @@ void run_4() {
   const Time_point t5 = timing();
   for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::selection1(v);}}}}
   const Time_point t6 = timing();
-  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4(v.begin());}}}}
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::selection_bi(v);}}}}
   const Time_point t7 = timing();
-  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4_(v.begin());}}}}
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4(v.begin());}}}}
   const Time_point t8 = timing();
-  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; std::sort(v.begin(),v.end());}}}}
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4_(v.begin());}}}}
   const Time_point t9 = timing();
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; std::sort(v.begin(),v.end());}}}}
+  const Time_point t10 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
     << "\t3: " << t4-t3 << "\t*: " << t5-t4
-    << "\n1: " << t6-t5
-    << "\n_4: " << t7-t6 << "\t_4_: " << t8-t7
-    << "\nstd: " << t9-t8 << std::endl;
+    << "\n1: " << t6-t5 << "\tbi: " << t7-t6
+    << "\n_4: " << t8-t7 << "\t_4_: " << t9-t8
+    << "\nstd: " << t10-t9 << std::endl;
 }
 
 }
