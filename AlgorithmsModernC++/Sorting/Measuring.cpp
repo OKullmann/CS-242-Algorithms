@@ -109,10 +109,12 @@ void run_selection() {
   const Time_point t0 = timing();
   Sort::selection0(v);
   const Time_point t1 = timing();
-  std::sort(v.begin(),v.end());
+  Sort::selection1(v);
   const Time_point t2 = timing();
-  std::cout <<"0: " << t1-t0
-    << "\nstd: " << t2-t1 << std::endl;}
+  std::sort(v.begin(),v.end());
+  const Time_point t3 = timing();
+  std::cout << "0: " << t1-t0 << "\t1: " << t2-t1
+    << "\nstd: " << t3-t2 << std::endl;}
 
   {std::cout << "Inverse sorted: " << vec_medium << "\n";
   vec_t v; v.reserve(vec_medium);
@@ -122,10 +124,14 @@ void run_selection() {
   const Time_point t1 = timing();
   set_vector(v);
   const Time_point t2 = timing();
-  std::sort(v.begin(),v.end());
+  Sort::insertion1(v);
   const Time_point t3 = timing();
-  std::cout << "0: " << t1-t0
-    << "\nstd: " << t3-t2 << std::endl;}
+  set_vector(v);
+  const Time_point t4 = timing();
+  std::sort(v.begin(),v.end());
+  const Time_point t5 = timing();
+  std::cout << "0: " << t1-t0 << "\t1: " << t3-t2
+    << "\nstd: " << t5-t4 << std::endl;}
 }
 
 void run_3() {
@@ -143,7 +149,7 @@ void run_3() {
   const Time_point t4 = timing();
   for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::insertion(v);}}}
   const Time_point t5 = timing();
-  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::selection0(v);}}}
+  for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::selection1(v);}}}
   const Time_point t6 = timing();
   for(int a=0;a<loop3;++a){v[0]=a;for(int b=0;b<loop3;++b){v[1]=b;for(int c=0;c<loop3;++c) {v[2]=c; Sort::size3(v.begin());}}}
   const Time_point t7 = timing();
@@ -153,7 +159,7 @@ void run_3() {
   const Time_point t9 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
     << "\t3: " << t4-t3 << "\t*: " << t5-t4
-    << "\n0: " << t6-t5
+    << "\n1: " << t6-t5
     << "\n_3: " << t7-t6 << "\t_3_: " << t8-t7
     << "\nstd: " << t9-t8 << std::endl;
 }
@@ -173,7 +179,7 @@ void run_4() {
   const Time_point t4 = timing();
   for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::insertion(v);}}}}
   const Time_point t5 = timing();
-  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::selection0(v);}}}}
+  for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::selection1(v);}}}}
   const Time_point t6 = timing();
   for(int a=0;a<loop4;++a){v[0]=a;for(int b=0;b<loop4;++b){v[1]=b;for(int c=0;c<loop4;++c){v[2]=c;for(int d=0;d<loop4;++d) {v[3]=d; Sort::size4(v.begin());}}}}
   const Time_point t7 = timing();
@@ -183,7 +189,7 @@ void run_4() {
   const Time_point t9 = timing();
   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
     << "\t3: " << t4-t3 << "\t*: " << t5-t4
-    << "\n0: " << t6-t5
+    << "\n1: " << t6-t5
     << "\n_4: " << t7-t6 << "\t_4_: " << t8-t7
     << "\nstd: " << t9-t8 << std::endl;
 }
