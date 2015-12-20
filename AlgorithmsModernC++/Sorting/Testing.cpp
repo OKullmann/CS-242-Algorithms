@@ -33,6 +33,7 @@ void test_selection(const vec_t& v) {
   std::sort(s.begin(), s.end());
   {vec_t c(v); Sort::selection0(c); assert(c == s);}
   {vec_t c(v); Sort::selection1(c); assert(c == s);}
+  {vec_t c(v); Sort::selection_bi(c); assert(c == s);}
 }
 
 void test_2(const vec_t& v) {
@@ -70,12 +71,25 @@ int main(const int argc, const char* const argv[]) {
       test_insertion(vec_t{{a,b,c,d}});
 
   test_selection(vec_t{{}});
-  test_selection(vec_t{{3,5,1,7,9,2}});
+  test_selection(vec_t{{0}});
+  test_selection(vec_t{{0,1}});
+  test_selection(vec_t{{2,0,1}});
+  test_selection(vec_t{{5,3,1,7,9,2}});
+  for (int a = -2; a <= 2; ++a)
+   for (int b = -2; b <= 2; ++b)
+    for (int c = -2; c <= 2; ++c)
+     test_selection(vec_t{{a,b,c}});
   for (int a = -2; a <= 2; ++a)
    for (int b = -2; b <= 2; ++b)
     for (int c = -2; c <= 2; ++c)
      for (int d = -2; d <= 2; ++d)
       test_selection(vec_t{{a,b,c,d}});
+  for (int a = -2; a <= 2; ++a)
+   for (int b = -2; b <= 2; ++b)
+    for (int c = -2; c <= 2; ++c)
+     for (int d = -2; d <= 2; ++d)
+      for (int e = -2; e <= 2; ++e)
+       test_selection(vec_t{{a,b,c,d,e}});
 
   test_2(vec_t{{2,1}});
   for (int a = -2; a <= 2; ++a)

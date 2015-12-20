@@ -32,7 +32,6 @@ namespace Sort {
   template <class V>
   inline void selection0(V& v) { selection0(v.begin(), v.end()); }
 
-
   template <class It>
   inline void selection1(const It begin, const It end) {
     for (It i = begin; i != end; ++i) {
@@ -44,6 +43,73 @@ namespace Sort {
   }
   template <class V>
   inline void selection1(V& v) { selection1(v.begin(), v.end()); }
+
+
+  template <class It>
+  inline void selection_bi(It begin, It end) {
+    {const auto size = end - begin;
+     if (size <= 1) return;
+     if (size % 2 != 0) {
+       std::swap(*begin, *std::min_element(begin, end));
+       ++begin;
+     }
+    }
+    for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j) std::swap(*i, *j);
+    bool align = true;
+    It beginp1 = begin; ++beginp1;
+    It endm1 = end; --endm1;
+    while (begin != end) {
+      if (align) {
+        It i = begin; It j = beginp1;
+        It min_i = i, max_i = j;
+        auto min = *min_i, max = *max_i;
+        i = ++j;
+        while (i != end) {
+          ++j;
+          if (*i < min) { min = *i; min_i = i; }
+          if (*j > max) { max = *j; max_i = j; }
+          i = ++j;
+        }
+        if (min == max) return;
+        if (min_i != begin) {
+          std::swap(*min_i, *begin);
+          if (*min_i > *(++It(min_i))) std::swap(*min_i, *(++It(min_i)));
+        }
+        if (max_i == begin) {max_i = min_i; ++max_i;}
+        if (max_i != endm1) {
+          std::swap(*max_i, *endm1);
+          if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
+        }
+      }
+      else {
+        if (*begin > *endm1) std::swap(*begin, *endm1);
+        It min_i = begin, max_i = endm1;
+        auto min = *min_i, max = *max_i;
+        It i = beginp1, j = i;
+        while (i != endm1) {
+          ++j;
+          if (*i < min) { min = *i; min_i = i; }
+          if (*j > max) { max = *j; max_i = j; }
+          i = ++j;
+        }
+        if (min == max) return;
+        if (min_i != begin) {
+          std::swap(*min_i, *begin);
+          if (*min_i > *(++It(min_i))) std::swap(*min_i, *(++It(min_i)));
+        }
+        if (max_i == begin) {max_i = min_i; ++max_i;}
+        if (max_i != endm1) {
+          std::swap(*max_i, *endm1);
+          if (*max_i < *(--It(max_i)))
+            std::swap(*max_i, *(--It(max_i)));
+        }
+      }
+      align = !align;
+      begin = beginp1++; end = endm1--;
+    }
+  }
+  template <class V>
+  inline void selection_bi(V& v) { selection_bi(v.begin(), v.end()); }
 
 }
 
