@@ -103,7 +103,7 @@ namespace Sort {
 
   // Stably sorting a,..,a+3 :
   template <class It>
-  inline void size4(const It ia) {
+  inline void size4_(const It ia) {
     const It ib = ++It(ia);
     const It ic = ++It(ib);
     const It id = ++It(ic);
@@ -201,9 +201,9 @@ namespace Sort {
           // a <= b <= c <= d
   }
 
-  // Same structure as size4, but updating the elements immediately:
+  // Same structure as size4_, but updating the elements immediately:
   template <class It>
-  inline void size4_(const It a) {
+  inline void size4_1(const It a) {
     size3(a);
     const It b = ++It(a);
     const It c = ++It(b);
@@ -219,10 +219,10 @@ namespace Sort {
   /* Remark: Using size3_(a) here instead of its code currently doubles
   the run-time (gcc 4.7.x), but that should be a weakness of the compiler. */
 
-  // Stably sorting a,..,a+3, using min-max-computation with additional
+  // Stably sorting a,..,a+3, using max-min-computation with additional
   // short-cut:
   template <class It>
-  inline void size4_1(const It ia) {
+  inline void size4(const It ia) {
     const It ib = ++It(ia);
     const It ic = ++It(ib);
     const It id = ++It(ic);
