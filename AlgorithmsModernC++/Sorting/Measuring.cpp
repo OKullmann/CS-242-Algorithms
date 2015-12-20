@@ -146,7 +146,7 @@ void run_selection() {
   const Time_point t1 = timing();
   std::sort(v.begin(),v.end());
   const Time_point t2 = timing();
-  std::cout << "\bi: " << t1-t0
+  std::cout << "bi: " << t1-t0
     << "\nstd: " << t2-t1 << std::endl;}
 }
 
