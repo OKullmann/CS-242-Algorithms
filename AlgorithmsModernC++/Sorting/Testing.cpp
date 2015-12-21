@@ -75,6 +75,7 @@ int main(const int argc, const char* const argv[]) {
   test_selection(vec_t{{0,1}});
   test_selection(vec_t{{2,0,1}});
   test_selection(vec_t{{5,3,1,7,9,2}});
+  test_selection(vec_t{{11,10,9,8,7,6,5,4,3,2,1,0}});
   for (int a = -2; a <= 2; ++a)
    for (int b = -2; b <= 2; ++b)
     for (int c = -2; c <= 2; ++c)
