@@ -24,13 +24,22 @@ namespace Sort {
   // The simplest expression:
   template <class It>
   inline void selection0(const It begin, const It end) {
+    for (It i = begin; i != end; ++i) std::swap(*i, *std::min_element(i, end));
+  }
+  template <class V>
+  inline void selection0(V& v) { selection0(v.begin(), v.end()); }
+
+  /* Remark: This code is four time more efficient than
+  template <class It>
+  inline void selection0(const It begin, const It end) {
     for (It i = begin; i != end; ++i) {
       const It j = std::min_element(i, end);
       if (j != i) std::swap(*i,*j);
     }
   }
-  template <class V>
-  inline void selection0(V& v) { selection0(v.begin(), v.end()); }
+  and double as efficient as selection1, for longer sequences.
+  It seems the main point is the missing case-distinction on i ! */
+
 
   template <class It>
   inline void selection1(const It begin, const It end) {
