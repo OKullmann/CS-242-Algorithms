@@ -60,7 +60,7 @@ namespace Sort {
     bool align = true;
     It beginp1 = begin; ++beginp1;
     It endm1 = end; --endm1;
-    size += 2; size /= 3;
+    size /= 4; size *= 2;
     do {
       if (align) {
         It i = begin; It j = beginp1;
