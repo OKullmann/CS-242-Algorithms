@@ -54,11 +54,13 @@ namespace Sort {
     if (size % 2 != 0) {
       for (It i=beginp1, j=beginp1; i!=end; i=++j)
         if (*i > *++j) std::swap(*i, *j);
-      auto min = *begin; It opt = begin;
-      for (It i = beginp1; i != end; ++i) if (*i < min) {min=*i; opt=i++;}
+      const auto vbegin = *begin;
+      auto min = vbegin; It opt = begin;
+      for (It i = beginp1; i != end; ++i) if (*i < min) {min=*i; opt=i; ++i;}
       if (opt != begin) {
-        std::swap(*begin, *opt);
-        if (*opt > *++It(opt)) std::swap(*opt, *++It(opt));
+        *begin = min, *opt = vbegin;
+        const It optp1 = ++It(opt); const auto voptp1 = *optp1;
+        if (vbegin > voptp1) {*opt=voptp1; *optp1=vbegin;}
       }
       begin = beginp1++;
     }
