@@ -124,8 +124,7 @@ namespace Sort {
         if (max_i == begin) {max_i = min_i; ++max_i;}
         if (max_i != endm1) {
           std::swap(*max_i, *endm1);
-          if (*max_i < *(--It(max_i)))
-            std::swap(*max_i, *(--It(max_i)));
+          if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
         }
       }
       begin = beginp1++; end = endm1--;
