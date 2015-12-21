@@ -45,9 +45,10 @@ namespace Sort {
   inline void selection1(V& v) { selection1(v.begin(), v.end()); }
 
 
+  // Selecting min-max at once, with pre-sorting pairs:
   template <class It>
   inline void selection_bi(It begin, It end) {
-    const auto size = end - begin;
+    auto size = end - begin;
     if (size <= 1) return;
     if (size % 2 != 0) {
       auto min = *begin; It opt = begin;
@@ -59,7 +60,8 @@ namespace Sort {
     bool align = true;
     It beginp1 = begin; ++beginp1;
     It endm1 = end; --endm1;
-    while (begin != end) {
+    size += 2; size /= 3;
+    do {
       if (align) {
         It i = begin; It j = beginp1;
         It min_i = i, max_i = j;
@@ -107,7 +109,7 @@ namespace Sort {
       }
       align = !align;
       begin = beginp1++; end = endm1--;
-    }
+    } while (--size != 0);
   }
   template <class V>
   inline void selection_bi(V& v) { selection_bi(v.begin(), v.end()); }
