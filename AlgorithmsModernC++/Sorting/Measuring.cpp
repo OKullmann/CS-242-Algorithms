@@ -23,6 +23,7 @@ constexpr Large vec_large = 600000000;
 constexpr Large vec_medium = 40000;
 constexpr long loop3 = 800;
 constexpr long loop4 = 150;
+constexpr long loop7 = 20;
 
 typedef double Time_point;
 #include <sys/resource.h>
@@ -214,6 +215,33 @@ void run_4() {
     << "\nstd: " << t10-t9 << std::endl;
 }
 
+void run_7() {
+  std::cout << "7 ELEMENTS:\n";
+  std::cout << "Loop: " << loop7 << "^7 = " << loop7*loop7*loop7*loop7*loop7*loop7*loop7 << "\n";
+  vec_t v; v.resize(7);
+  const Time_point t0 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::insertion0(v);}}}}}}}
+  const Time_point t1 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::insertion1(v);}}}}}}}
+  const Time_point t2 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::insertion2(v);}}}}}}}
+  const Time_point t3 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::insertion3(v);}}}}}}}
+  const Time_point t4 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::insertion(v);}}}}}}}
+  const Time_point t5 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::selection1(v);}}}}}}}
+  const Time_point t6 = timing();
+  for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; Sort::selection_bi(v);}}}}}}}
+  const Time_point t7 = timing();
+   for(int a=0;a<loop7;++a){v[0]=a;for(int b=0;b<loop7;++b){v[1]=b;for(int c=0;c<loop7;++c){v[2]=c;for(int d=0;d<loop7;++d){v[3]=d;for(int e=0;e<loop7;++e){v[4]=e;for(int f=0;f<loop7;++f){v[5]=f;for(int g=0;g<loop7;++g){v[6]=g; std::sort(v.begin(),v.end());}}}}}}}
+   const Time_point t8 = timing();
+   std::cout << "0: " << t1-t0 << "\t1: " << t2-t1 << "\t2: " << t3-t2
+    << "\t3: " << t4-t3 << "\t*: " << t5-t4
+    << "\n1: " << t6-t5 << "\tbi: " << t7-t6
+    << "\nstd: " << t8-t7 << std::endl;
+}
+
 }
 
 int main(const int argc, const char* const argv[]) {
@@ -221,4 +249,5 @@ int main(const int argc, const char* const argv[]) {
   run_selection();
   run_3();
   run_4();
+  run_7();
 }
