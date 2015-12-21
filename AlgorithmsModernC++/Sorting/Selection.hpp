@@ -50,15 +50,23 @@ namespace Sort {
   inline void selection_bi(It begin, It end) {
     auto size = end - begin;
     if (size <= 1) return;
+    It beginp1 = begin; ++beginp1;
     if (size % 2 != 0) {
+      for (It i=beginp1, j=beginp1; i!=end; i=++j)
+        if (*i > *++j) std::swap(*i, *j);
       auto min = *begin; It opt = begin;
-      for (It i = ++It(begin); i != end; ++i) if (*i < min) {min=*i; opt=i;}
-      std::swap(*(begin++), *opt);
+      for (It i = beginp1; i != end; ++i) if (*i < min) {min=*i; opt=i++;}
+      if (opt != begin) {
+        std::swap(*begin, *opt);
+        if (*opt > *++It(opt)) std::swap(*opt, *++It(opt));
+      }
+      begin = beginp1++;
     }
-    for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j) std::swap(*i, *j);
+    else
+      for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j)
+        std::swap(*i, *j);
     if (size <= 3) return;
     bool align = true;
-    It beginp1 = begin; ++beginp1;
     It endm1 = end; --endm1;
     size /= 4; size *= 2;
     do {
