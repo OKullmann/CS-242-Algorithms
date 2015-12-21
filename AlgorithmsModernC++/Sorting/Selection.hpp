@@ -12,6 +12,7 @@ any later version. */
       determine v[i] for i=1,...,n-1 as the minimum of v[i],...,v[n-1].
 
    See also https://en.wikipedia.org/wiki/Selection_sort .
+
 */
 
 #ifndef SELECTION_kZxNktA2Du
@@ -77,11 +78,10 @@ namespace Sort {
       for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j)
         std::swap(*i, *j);
     if (size <= 3) return;
-    bool align = true;
     It endm1 = end; --endm1;
     size /= 4; size *= 2;
     do {
-      if (align) {
+      {
         It i = begin; It j = beginp1;
         It min_i = i, max_i = j;
         auto min = *min_i, max = *max_i;
@@ -103,7 +103,9 @@ namespace Sort {
           if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
         }
       }
-      else {
+      begin = beginp1++; end = endm1--;
+      if (--size == 0) return;
+      {
         if (*begin > *endm1) std::swap(*begin, *endm1);
         It min_i = begin, max_i = endm1;
         auto min = *min_i, max = *max_i;
@@ -126,7 +128,6 @@ namespace Sort {
             std::swap(*max_i, *(--It(max_i)));
         }
       }
-      align = !align;
       begin = beginp1++; end = endm1--;
     } while (--size != 0);
   }
