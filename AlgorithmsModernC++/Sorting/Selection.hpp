@@ -61,9 +61,10 @@ namespace Sort {
     auto size = end - begin;
     if (size <= 1) return;
     It beginp1 = begin; ++beginp1;
-    if (size % 2 != 0) {
-      for (It i=beginp1, j=beginp1; i!=end; i=++j)
-        if (*i > *++j) std::swap(*i, *j);
+    if (size % 2 == 0)
+      for (It i=begin,j=begin; i!=end; i=++j) {if(*i>*++j) std::swap(*i, *j);}
+    else {
+      for (It i=beginp1,j=beginp1; i!=end; i=++j) if(*i>*++j) std::swap(*i,*j);
       const auto vbegin = *begin;
       auto min = vbegin; It opt = begin;
       for (It i = beginp1; i != end; ++i) if (*i < min) {min=*i; opt=i; ++i;}
@@ -74,9 +75,6 @@ namespace Sort {
       }
       begin = beginp1++;
     }
-    else
-      for (It i=begin, j=begin; i!=end; i=++j) if (*i > *++j)
-        std::swap(*i, *j);
     if (size <= 3) return;
     It endm1 = end; --endm1;
     size /= 4; size *= 2;
