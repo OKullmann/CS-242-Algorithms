@@ -95,7 +95,6 @@ namespace Sort {
           std::swap(*min_i, *begin);
           if (*min_i > *(++It(min_i))) std::swap(*min_i, *(++It(min_i)));
         }
-        if (max_i == begin) {max_i = min_i; ++max_i;}
         if (max_i != endm1) {
           std::swap(*max_i, *endm1);
           if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
