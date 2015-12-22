@@ -93,11 +93,13 @@ namespace Sort {
         if (min == max) return;
         if (min_i != begin) {
           std::swap(*min_i, *begin);
-          if (*min_i > *(++It(min_i))) std::swap(*min_i, *(++It(min_i)));
+          const It min_ip1 = ++It(min_i);
+          if (*min_i > *min_ip1) std::swap(*min_i, *min_ip1);
         }
         if (max_i != endm1) {
           std::swap(*max_i, *endm1);
-          if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
+          const It max_im1 = --It(max_i);
+          if (*max_i < *max_im1) std::swap(*max_i, *max_im1);
         }
       }
       begin = beginp1++; end = endm1--;
@@ -120,7 +122,8 @@ namespace Sort {
         }
         if (max_i != endm1) {
           std::swap(*max_i, *endm1);
-          if (*max_i < *(--It(max_i))) std::swap(*max_i, *(--It(max_i)));
+          const It max_im1 = --It(max_i);
+          if (*max_i < *max_im1) std::swap(*max_i, *max_im1);
         }
       }
       begin = beginp1++; end = endm1--;
