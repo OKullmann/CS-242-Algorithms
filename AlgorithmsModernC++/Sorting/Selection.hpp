@@ -117,7 +117,6 @@ namespace Sort {
           std::swap(*min_i, *begin);
           const It min_ip1 = ++It(min_i);
           if (*min_i > *min_ip1) std::swap(*min_i, *min_ip1);
-          if (max_i == begin) max_i = min_ip1;
         }
         if (max_i != endm1) {
           std::swap(*max_i, *endm1);
