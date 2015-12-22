@@ -77,7 +77,7 @@ namespace Sort {
     }
     if (size <= 3) return;
     It endm1 = end; --endm1;
-    size /= 4; size *= 2;
+    size /= 4;
     do {
       {
         It i = begin; It j = beginp1;
@@ -102,7 +102,6 @@ namespace Sort {
         }
       }
       begin = beginp1++; end = endm1--;
-      if (--size == 0) return;
       {
         if (*begin > *endm1) std::swap(*begin, *endm1);
         It min_i = begin, max_i = endm1;
