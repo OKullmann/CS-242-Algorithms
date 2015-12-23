@@ -97,16 +97,12 @@ namespace Sort {
     size /= 4;
     do {
       {
-        It i = begin; It j = beginp1;
         const auto first = *begin;
-        It min_i = i, max_i = j;
+        It min_i = begin, max_i = beginp1;
         auto min = first, max = *max_i;
-        i = ++j;
-        while (i != end) {
-          ++j;
+        for (It i = ++It(beginp1); i != end; ++i) {
           if (*i < min) { min = *i; min_i = i; }
-          if (*j > max) { max = *j; max_i = j; }
-          i = ++j;
+          if (*++i > max) { max = *i; max_i = i; }
         }
         if (min == max) return;
         if (min_i != begin) {
@@ -129,12 +125,9 @@ namespace Sort {
         const auto first = *begin, last = *endm1;
         It min_i = begin, max_i = endm1;
         auto min = first, max = last;
-        It i = beginp1, j = i;
-        while (i != endm1) {
-          ++j;
+        for (It i = beginp1; i != endm1; ++i) {
           if (*i < min) { min = *i; min_i = i; }
-          if (*j > max) { max = *j; max_i = j; }
-          i = ++j;
+          if (*++i > max) { max = *i; max_i = i; }
         }
         if (min == max) return;
         if (min_i != begin) {
