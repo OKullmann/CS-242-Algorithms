@@ -33,6 +33,7 @@ void test_selection(const vec_t& v) {
   std::sort(s.begin(), s.end());
   {vec_t c(v); Sort::selection0(c); assert(c == s);}
   {vec_t c(v); Sort::selection1(c); assert(c == s);}
+  {vec_t c(v); Sort::selection_bi_0(c); assert(c == s);}
   {vec_t c(v); Sort::selection_bi(c); assert(c == s);}
 }
 

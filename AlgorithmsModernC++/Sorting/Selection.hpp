@@ -19,6 +19,7 @@ any later version. */
 #define SELECTION_kZxNktA2Du
 
 #include <algorithm>
+#include <iostream>
 
 namespace Sort {
 
@@ -54,6 +55,22 @@ namespace Sort {
   template <class V>
   inline void selection1(V& v) { selection1(v.begin(), v.end()); }
 
+
+  // The most basic expression of "bi-selection":
+  template <class It>
+  inline void selection_bi_0(It begin, It end) {
+    auto size = (end - begin) / 2;
+    if (size == 0) return;
+    It endm1 = --It(end);
+    do {
+      const auto mima = std::minmax_element(begin,end);
+      std::swap(*begin, *mima.first);
+      std::swap(*endm1, (mima.second==begin) ? *mima.first : *mima.second);
+      ++begin; end = endm1--;
+    } while (--size != 0);
+  }
+  template <class V>
+  inline void selection_bi_0(V& v) { selection_bi_0(v.begin(), v.end()); }
 
   // Selecting min-max at once, with pre-sorting pairs:
   template <class It>
