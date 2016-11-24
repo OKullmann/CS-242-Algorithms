@@ -15,7 +15,7 @@ class BinarySearch {
       assert(begin >= 0);
       assert(begin < end);
       assert(end <= A.length);
-      final int mid = (begin+end)/2;
+      final int mid = begin + (end-begin)/2;
       assert(begin <= mid);
       assert(mid < end);
       if (A[mid] == x) return mid;
