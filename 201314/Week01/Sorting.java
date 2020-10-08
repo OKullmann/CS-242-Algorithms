@@ -1,11 +1,3 @@
-// Arnold Beckmann, 19.12.2009 (Swansea)
-// Modified Oliver Kullmann, 30.9.2011 (Swansea)
-
-/*
-  File:  201112/Week01/solutions/Sorting.hpp
-  Descr: Sorting algorithms
-*/
-
 class Insertion_Sort {
 
   public static void insertion_sort(final long[] A) {
