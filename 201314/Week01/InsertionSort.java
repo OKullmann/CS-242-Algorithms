@@ -1,9 +1,10 @@
 class InsertionSort {
 
   static final long repetitions = 10000;
-  public static void print_as_ms(final long n) {
+  // Input n is nanoseconds, prints as microseconds:
+  public static void print_as_mus(final long n) {
     final double d = (double) n;
-    System.out.printf(" %f", d / 100000);
+    System.out.printf(" %f", d / 1000);
   }
 
   public static void sort(final long[] A) {
@@ -59,7 +60,7 @@ class InsertionSort {
         assert(is_sorted(A));
         if (duration < min) min = duration;
       }
-      print_as_ms(min);
+      print_as_mus(min);
     }
   }
   
