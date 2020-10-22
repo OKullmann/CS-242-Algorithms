@@ -7,7 +7,7 @@ class Recurrence1 {
   }
 
   public static final long default_n = 410000000000L;
-    // rec1(default_n) == 9100131083681673202
+    // rec(default_n) == 9100131083681673202
 
   public static void main(final String[] args) {
     final long n;
