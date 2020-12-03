@@ -64,10 +64,15 @@ class Heap {
   }
 
   public String toString() {
-    String res = "(" + n + "," + H.length + "):";
-    for (int i = 0; i < n; ++i) res += " " + H[i];
-    if (n != 0) res += ";";
-    for (int i = n; i < H.length; ++i) res += " " + H[i];
+    String res = String.format("(%2d,%2d):", n, H.length);
+    for (int i = 0; i < n; ++i)
+      res += String.format(" %3d", H[i]);
+    if (n != 0) res += ";"; else res += " ";
+    if (n < H.length) {
+      res += String.format("%3d", H[n]);
+      for (int i = n+1; i < H.length; ++i)
+        res += String.format(" %3d", H[i]);
+    }
     return res;
   }
   private int counter = 0;
