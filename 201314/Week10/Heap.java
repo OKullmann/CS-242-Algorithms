@@ -4,15 +4,15 @@
 class Heap {
   private final int[] H;
   private int n;
-  
+
   public Heap(final int[] a) {
     assert(a != null);
     H = a;
     n = a.length;
   }
-  
+
   public int size() { return n; }
-  
+
   // children, left and right:
   private int ls(final int x) {
     if (! leaf(x)) return 2*x+1;
@@ -24,17 +24,17 @@ class Heap {
   }
   // parent:
   private int p(final int x) { return (x-1)/2; }
-  
+
   // the first index of a leaf:
   private int first_leaf() { return n/2; }
   private boolean leaf(final int i) { return i >= first_leaf(); }
-  
+
   public boolean heap_property() {
     for (int i = 1; i < n; ++i)
       if (H[p(i)] < H[i]) return false;
     return true;
   }
-  
+
   private void heapify(final int i) {
     if (leaf(i)) return;
     final int v = H[i];
@@ -47,13 +47,13 @@ class Heap {
       heapify(largest);
     }
   }
-  
+
   public void build_heap() {
     final int fl = first_leaf();
     for (int i = fl-1; i >= 0; --i) heapify(i);
     assert(heap_property());
   }
-  
+
   public void sort(final boolean log) {
     if (log) print();
     build_heap(); if (log) print();
@@ -62,10 +62,12 @@ class Heap {
       heapify(0); if (log) print();
     }
   }
-  
+
   public String toString() {
     String res = "(" + n + "," + H.length + "):";
-    for (int i = 0; i < H.length; ++i) res += " " + H[i];
+    for (int i = 0; i < n; ++i) res += " " + H[i];
+    if (n != 0) res += ";";
+    for (int i = n; i < H.length; ++i) res += " " + H[i];
     return res;
   }
   private int counter = 0;
@@ -73,7 +75,7 @@ class Heap {
     System.out.printf("%-5d  ", counter++);
     System.out.println(this);
   }
-  
+
   public static void main(final String[] args) {
     final int[] a = new int[args.length];
     for (int i = 0; i < args.length; ++i)
