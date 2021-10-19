@@ -23,6 +23,10 @@ class Experiments {
   public static final String err = "ERROR[" + program + "]: ";
 
   public static void main(final String[] args) {
+    assert(T1(100000) == 10739974496L);
+    assert(T2(100000) == 162402654208L);
+    assert(T3(100000) == 1999856326052864L);
+
     if (args.length != 2) {
       System.err.println(err +
         "Exactly two command-line parameters are required,\n" +
