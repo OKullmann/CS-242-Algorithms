@@ -13,8 +13,6 @@ Optimisation_options := -O3 -DNDEBUG
 
 base_dir = ../..
 
-include_option = -I$(base_dir)
-
 ###
 
 programs = BreadthFirstSearch BreadthFirstSearch_forest DepthFirstSearch_forest
@@ -27,8 +25,7 @@ cleanall :
 # ########################
 
 BreadthFirstSearch BreadthFirstSearch_forest : % : %.cpp AdjacencyList.hpp BreadthFirstSearch.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(CPPFLAGS) $(CXXFLAGS) $<
 
 DepthFirstSearch_forest : % : %.cpp AdjacencyList.hpp DepthFirstSearch.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
-
+	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(CPPFLAGS) $(CXXFLAGS) $<
