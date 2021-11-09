@@ -39,9 +39,9 @@ namespace {
 
 int main(const int argc, const char* const argv[]) {
 
-  if (argc != 2 and argc != 3) {
-    std::cerr << err << "Exactly two parameter is needed, the number N of vertices;\n"
-    " and the start vertex s.\n";
+  if (argc != 3) {
+    std::cerr << err << "Exactly two parameter are needed:\n"
+      "  the number N of vertices, and the start vertex s.\n";
     return errcode_parameter;
   }
 

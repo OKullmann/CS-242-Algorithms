@@ -45,8 +45,9 @@ namespace {
 int main(const int argc, const char* const argv[]) {
 
   if (argc != 2 and argc != 3) {
-    std::cerr << err << "At least one parameter is needed, the number N of vertices;\n"
-    " an optional second parameter indicates that the graph is undirected\n";
+    std::cerr << err << "At least one parameter is needed:\n"
+      "  the number N of vertices;\n"
+      "  an optional second parameter indicates that the graph is undirected.\n";
     return errcode_parameter;
   }
 
@@ -56,7 +57,8 @@ int main(const int argc, const char* const argv[]) {
     parameters << argv[1];
     parameters >> dummy;
     if (not parameters) {
-      std::cerr << err << "Error when reading the parameter, the number of items (which must be a non-negative integer).\n";
+      std::cerr << err << "Error when reading the parameter, the number of vertices:\n"
+        "  must be a non-negative integer.\n";
       return errcode_parameter_reading;
     }
   }
