@@ -38,7 +38,7 @@ class Chaining {
   
   public static void main(final String[] args) {
     if (args.length == 0) {
-      System.err.println("[CHAINING]: m [N] [step]");
+      System.err.println("[CHAINING]: m [N] [step] or m + >= 3 inputs");
       System.exit(1);
     }
     final int m = Integer.parseInt(args[0]);
@@ -62,13 +62,20 @@ class Chaining {
       C.delete(f2);
       System.out.println(C);
       System.out.println("****");
+
+      return;
     }
-    else {
+    else if (args.length <= 3) {
       final int N = Integer.parseInt(args[1]);
       final int step =
         args.length == 3 ? Integer.parseInt(args[2]) : 1;
       for (int i = 0; i < N; i+=step) C.insert(i);
-      System.out.println(C);
     }
+    else {
+      final int S = args.length - 1;
+      for (int i = 0; i < S; ++i)
+        C.insert(Integer.parseInt(args[i+1]));
+    }
+    System.out.println(C);
   }
 }
