@@ -100,6 +100,7 @@ int main(const int argc, const char* const argv[]) {
     used_time = std::clock() - old_time;
     std::cout << "User time usage: " << (double) used_time / eps << "s\n";
     if (p == 0) std::cout << "key not found\n";
-    else std::cout << "count = " << p->s << "\n";
+    else std::cout << "index = " << p->s << "\n";
+    std::cout << std::endl;
   }
 }
