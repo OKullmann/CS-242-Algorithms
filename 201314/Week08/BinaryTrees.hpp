@@ -141,7 +141,9 @@ namespace BinaryTrees {
       if (x == 0) return;
       inorder_walk_internal(out, x->left);
       using std::setw;
-      out << x << ": " << setw(10) << x->p << " " << setw(10) << x->left << " " << setw(10) << x->right << " " << setw(5) << x->key << " " << setw(5) << x->s << "\n";
+      out << x << ": "
+          << setw(15) << x->p << " " << setw(15) << x->left << " " << setw(15) << x->right
+          << " " << setw(5) << x->key << " " << setw(5) << x->s << "\n";
       inorder_walk_internal(out, x->right);
     }
 
