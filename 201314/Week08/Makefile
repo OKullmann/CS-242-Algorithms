@@ -11,10 +11,6 @@ Standard_options := -std=c++11 -pedantic
 Warning_options := -Wall
 Optimisation_options := -O3 -DNDEBUG
 
-base_dir = ../..
-
-include_option = -I$(base_dir)
-
 ###
 
 programs = BinaryTrees_Output BinaryTrees_Search BinaryTrees_Statistics
@@ -27,4 +23,4 @@ cleanall :
 # ########################
 
 $(programs) : % : %.cpp BinaryTrees.hpp
-	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(include_option) $(CPPFLAGS) $(CXXFLAGS) $<
+	$(CXX) -o $@ $(Standard_options) $(Warning_options) $(Optimisation_options) $(CPPFLAGS) $(CXXFLAGS) $<
